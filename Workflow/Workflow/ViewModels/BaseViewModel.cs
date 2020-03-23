@@ -4,12 +4,14 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 using Xamarin.Forms;
+using Workflow.Services;
 
 
 namespace Workflow.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        public HttpService Service = DependencyService.Get<HttpService>();
         bool isBusy = false;
         public bool IsBusy
         {

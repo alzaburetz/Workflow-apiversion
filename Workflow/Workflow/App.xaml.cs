@@ -12,8 +12,7 @@ namespace Workflow
         public App()
         {
             InitializeComponent();
-
-            DependencyService.Register<MockDataStore>();
+            DependencyService.Register<HttpService>();
             MainPage = new MainPage();
         }
 
