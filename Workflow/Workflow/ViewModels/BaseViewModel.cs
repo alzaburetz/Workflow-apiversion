@@ -11,7 +11,7 @@ namespace Workflow.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public HttpService Service = DependencyService.Get<HttpService>();
+        public HttpService HttpService = DependencyService.Get<HttpService>();
         bool isBusy = false;
         public bool IsBusy
         {
