@@ -13,7 +13,15 @@ namespace Workflow
         {
             InitializeComponent();
             DependencyService.Register<HttpService>();
-            MainPage = new MainPage();
+            try
+            {
+                var token = Application.Current.Properties["Token"];
+                MainPage = new MainPage();
+            }
+            catch
+            {
+                MainPage = new Login();
+            }
         }
 
         protected override void OnStart()
