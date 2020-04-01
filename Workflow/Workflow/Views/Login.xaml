@@ -4,12 +4,45 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:behaviors="clr-namespace:Workflow.Behaviors"
+             xmlns:controls="clr-namespace:Workflow.Controls"
              x:Class="Workflow.Views.Login">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Padding="60" Spacing="30">
+            <StackLayout Spacing="-60">
+                <Label Text="WORK"
+                       FontSize="64"
+                       FontFamily="{StaticResource Regular}"
+                       TextColor="{StaticResource DarkColor}"
+                       VerticalTextAlignment="Start"/>
+                <Label Text="FLOW"
+                       FontSize="64"
+                       FontFamily="{StaticResource Regular}"
+                       TextColor="{StaticResource MainColor}"
+                       HorizontalTextAlignment="End"/>
+            </StackLayout>
+            <Entry Placeholder="Номер телефона"
+                   PlaceholderColor="{StaticResource MainColor}"
+                   Keyboard="Telephone"
+                   x:Name="Number">
+                <Entry.Behaviors>
+                    <behaviors:MaskedBehavior Mask="X (XXX) XXX XX XX"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Entry Placeholder="Пароль"
+                   IsPassword="True"
+                   PlaceholderColor="{StaticResource MainColor}"
+                   x:Name="Password"/>
+            <Label Text="Регистрация"
+                   VerticalTextAlignment="Center"
+                   TextColor="{StaticResource MainColor}"
+                   HorizontalTextAlignment="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="GoToRegistration"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <controls:GradientButton Text="ВОЙТИ"/>
         </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>
