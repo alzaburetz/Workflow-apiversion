@@ -50,9 +50,15 @@ namespace Workflow.Services
             throw new NotImplementedException();
         }
 
-        public Task<T> GetRequest<T>(string endpoint)
+        public async Task<T> GetRequest<T>(string endpoint)
         {
-            throw new NotImplementedException();
+                if (!this.Client.DefaultRequestHeaders.Contains("Token"))
+                {
+                    this.Client.DefaultRequestHeaders.Add("Token", this.Token);
+                }
+            var response = await Client.GetAsync(string.Concat("api/", endpoint));
+            var body = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<T>(body);
         }
 
         public async Task<T> PostRequest<T, D>(string endpoint, D data, bool token = false)
