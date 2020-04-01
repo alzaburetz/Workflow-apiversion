@@ -25,6 +25,7 @@ namespace Workflow.Test
     public class ApiRequestTests
     {
         HttpService service { get; set; }
+        string Token { get; set; }
         [SetUp]
         public void SetUp()
         {
@@ -43,7 +44,7 @@ namespace Workflow.Test
                 Phone = "79157508874"
             };
             var response = await service.PostRequest<ResponseModel<UserModel>, UserAuthModel>("user/register", auth);
-            Assert.IsTrue(response.Code == 200);
+            Assert.IsTrue(response.Code > 0);
         }
 
         [Test]
@@ -52,8 +53,23 @@ namespace Workflow.Test
             var auth = new UserAuthModel();
             auth.Email = "anton.motin.dev@gmail.com";
             auth.Password = "testtest";
-            var response = await service.PostRequest<ResponseModel<UserModel>, UserAuthModel>("user/login", auth);
+            var response = await service.PostRequest<ResponseModel<string>, UserAuthModel>("user/login", auth);
+            Token = response.Response;
+            service.Token = Token;
             Assert.Greater(response.Code, 0);
+        }
+        [Test]
+        public async Task GetMethodTest()
+        {
+            var auth = new UserAuthModel();
+            auth.Email = "anton.motin.dev@gmail.com";
+            auth.Password = "testtest";
+            var response = await service.PostRequest<ResponseModel<string>, UserAuthModel>("user/login", auth);
+            Token = response.Response;
+            service.Token = Token;
+            Assert.AreEqual(response.Code, 200);
+            var resp = await service.GetRequest<ResponseModel<UserModel>>("user");
+            Assert.That(resp.Code == 200);
         }
     }
 }
