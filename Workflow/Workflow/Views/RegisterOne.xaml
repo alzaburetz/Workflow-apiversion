@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:behaviors="clr-namespace:Workflow.Behaviors"
+             xmlns:controls="clr-namespace:Workflow.Controls"
+             x:Class="Workflow.Views.RegisterOne">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter Property="PlaceholderColor" Value="{StaticResource MainColor}"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid Padding="60">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackLayout VerticalOptions="Center" 
+                         Grid.Row="1">
+                <Entry Placeholder="Номер телефона"
+                   x:Name="Number"
+                   Keyboard="Telephone">
+                    <Entry.Behaviors>
+                        <behaviors:MaskedBehavior Mask="X (XXX) XXX XX XX"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Entry Placeholder="E-Mail"
+                       Keyboard="Email"
+                       x:Name="Email"/>
+                <Entry Placeholder="Имя"
+                       Keyboard="Text"
+                       x:Name="User"/>
+                <Entry Placeholder="Пароль"
+                       IsPassword="True"
+                       x:Name="Password"/>
+            </StackLayout>
+            <controls:GradientButton Text="РЕГИСТРАЦИЯ"
+                                     Clicked="Register"
+                                     Grid.Row="2"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
