@@ -16,5 +16,15 @@ namespace Workflow.Views
         {
             InitializeComponent();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+
+        protected async void GoToRegistration(object sender, EventArgs args)
+        {
+            await Navigation.PushModalAsync(new RegisterOne(new ViewModels.RegisterOneViewModel()));
+        }
     }
 }
