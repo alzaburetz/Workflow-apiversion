@@ -8,41 +8,48 @@
              xmlns:controls="clr-namespace:Workflow.Controls"
              x:Class="Workflow.Views.Login">
     <ContentPage.Content>
-        <StackLayout Padding="60" Spacing="30">
-            <StackLayout Spacing="-60">
-                <Label Text="WORK"
+        <Grid>
+            <controls:GradientBox StartColor="{StaticResource DarkColor}"
+                                  EndColor="White"/>
+            <StackLayout Padding="60" Spacing="30">
+                <StackLayout Spacing="-60">
+                    <Label Text="WORK"
                        FontSize="64"
                        FontFamily="{StaticResource Regular}"
                        TextColor="{StaticResource DarkColor}"
                        VerticalTextAlignment="Start"/>
-                <Label Text="FLOW"
+                    <Label Text="FLOW"
                        FontSize="64"
                        FontFamily="{StaticResource Regular}"
                        TextColor="{StaticResource MainColor}"
                        HorizontalTextAlignment="End"/>
-            </StackLayout>
-            <Entry Placeholder="Номер телефона"
+                </StackLayout>
+                <Entry Placeholder="Номер телефона"
+                   HorizontalTextAlignment="End"
                    PlaceholderColor="{StaticResource MainColor}"
                    Keyboard="Telephone"
                    x:Name="Number">
-                <Entry.Behaviors>
-                    <behaviors:MaskedBehavior Mask="X (XXX) XXX XX XX"/>
-                </Entry.Behaviors>
-            </Entry>
-            <Entry Placeholder="Пароль"
+                    <Entry.Behaviors>
+                        <behaviors:MaskedBehavior Mask="X (XXX) XXX XX XX"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Entry Placeholder="Пароль"
                    IsPassword="True"
+                   HorizontalTextAlignment="Center"
                    PlaceholderColor="{StaticResource MainColor}"
                    x:Name="Password"/>
-            <Label Text="Регистрация"
+                <Label Text="Регистрация"
                    VerticalTextAlignment="Center"
                    TextColor="{StaticResource MainColor}"
                    HorizontalTextAlignment="Center">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="GoToRegistration"/>
-                </Label.GestureRecognizers>
-            </Label>
-            <controls:GradientButton Text="ВОЙТИ"/>
-        </StackLayout>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="GoToRegistration"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <controls:GradientButton Text="ВОЙТИ"/>
+            </StackLayout>
+        </Grid>
+        
 
     </ContentPage.Content>
 </ContentPage>

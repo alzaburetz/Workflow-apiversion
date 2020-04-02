@@ -21,7 +21,12 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+            <controls:GradientBox Grid.RowSpan="3"
+                                  StartColor="{StaticResource DarkColor}"
+                                  Margin="-60"
+                                  EndColor="Transparent"/>
             <StackLayout VerticalOptions="Center" 
+                         Spacing="30"
                          Grid.Row="1">
                 <Entry Placeholder="Номер телефона"
                    x:Name="Number"
