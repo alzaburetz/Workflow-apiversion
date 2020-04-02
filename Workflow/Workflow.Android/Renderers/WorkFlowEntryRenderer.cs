@@ -17,6 +17,7 @@ using Workflow.Droid.Renderers;
 using Android.Graphics.Drawables;
 using Android.Graphics;
 using Android.Text;
+using System.ComponentModel;
 
 [assembly:ExportRenderer(typeof(Entry), typeof(WorkFlowEntryRenderer))]
 namespace Workflow.Droid.Renderers
@@ -31,15 +32,11 @@ namespace Workflow.Droid.Renderers
             {
                 var gradient = new GradientDrawable(GradientDrawable.Orientation.TopBottom, new int[]
                 {
-                    Xamarin.Forms.Color.FromHex("#d6d6d6").ToAndroid(),
-                    Xamarin.Forms.Color.FromHex("#e6e6e6").ToAndroid()
+                    Xamarin.Forms.Color.Transparent.ToAndroid(),
+                    Xamarin.Forms.Color.Transparent.ToAndroid()
                 });
-                gradient.SetCornerRadius(40);
                 this.Control.SetBackgroundDrawable(gradient);
-                this.Control.SetHintTextColor(Xamarin.Forms.Color.FromHex("#237547").ToAndroid());
-                Rect rect = new Rect();
-                this.Control.GetHitRect(rect);
-                rect.Left -= 40;
+                this.Control.SetHintTextColor(Xamarin.Forms.Color.White.ToAndroid());
             }
         }
     }
