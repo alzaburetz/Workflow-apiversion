@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renderers\GradientButtonRenderer.cs" />
+    <Compile Include="Renderers\GradientBoxRenderer.cs" />
     <Compile Include="Renderers\WorkFlowEntryRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
