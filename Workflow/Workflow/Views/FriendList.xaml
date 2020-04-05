@@ -6,6 +6,12 @@
              mc:Ignorable="d"
              xmlns:controls="clr-namespace:Workflow.Controls"
              x:Class="Workflow.Views.FriendList">
+    <NavigationPage.TitleView>
+        <Label Text="Список друзей"
+               FontSize="Medium"
+               TextColor="White"
+               HorizontalTextAlignment="Center"/>
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout>
 
