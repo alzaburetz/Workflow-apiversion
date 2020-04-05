@@ -10,7 +10,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Entry">
-                <Setter Property="PlaceholderColor" Value="{StaticResource MainColor}"/>
+                <Setter Property="PlaceholderColor" Value="White"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -24,7 +24,12 @@
             <controls:GradientBox Grid.RowSpan="3"
                                   StartColor="{StaticResource DarkColor}"
                                   Margin="-60"
-                                  EndColor="Transparent"/>
+                                  EndColor="White"/>
+            <controls:GradientBox StartColor="{StaticResource DarkColor}"
+                                  Margin="-60"
+                                  Grid.RowSpan="3"
+                                  EndColor="#FF9D9D"
+                                  Opacity="0.5"/>
             <StackLayout VerticalOptions="Center" 
                          Spacing="30"
                          Grid.Row="1">
@@ -32,7 +37,7 @@
                    x:Name="Number"
                    Keyboard="Telephone">
                     <Entry.Behaviors>
-                        <behaviors:MaskedBehavior Mask="X (XXX) XXX XX XX"/>
+                        <behaviors:MaskedBehavior Mask="+7 (XXX) XXX XX XX"/>
                     </Entry.Behaviors>
                 </Entry>
                 <Entry Placeholder="E-Mail"
@@ -42,12 +47,24 @@
                        Keyboard="Text"
                        x:Name="User"/>
                 <Entry Placeholder="Пароль"
+                       Completed="Register"
                        IsPassword="True"
                        x:Name="Password"/>
             </StackLayout>
             <controls:GradientButton Text="РЕГИСТРАЦИЯ"
                                      Clicked="Register"
                                      Grid.Row="2"/>
+            <BoxView BackgroundColor="Gray"
+                     Opacity="0.4"
+                     Margin="-60"
+                     Grid.RowSpan="3"
+                     IsVisible="{Binding IsBusy}"/>
+            <ActivityIndicator Color="{StaticResource DarkColor}"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               Scale="0.2"
+                               Grid.RowSpan="3"
+                               BackgroundColor="Transparent"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
