@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace Workflow.Services
 {
@@ -76,9 +77,32 @@ namespace Workflow.Services
             return JsonConvert.DeserializeObject<T>(body);
         }
 
-        public Task<T> PutRequest<T, D>(string endpoint, D data)
+        public async Task<T> PutRequest<T, D>(string endpoint, D data)
         {
-            throw new NotImplementedException();
+                if (!this.Client.DefaultRequestHeaders.Contains("Token"))
+                {
+                    this.Client.DefaultRequestHeaders.Add("Token", this.Token);
+                }
+            var form = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+            var response = await Client.PutAsync(string.Concat("api/", endpoint), form);
+            var body = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<T>(body);
+        }
+
+        public async Task<T> UploadFile<T>(string endpoint, byte[] file, string type = "avatar")
+        {
+            if (!this.Client.DefaultRequestHeaders.Contains("Token"))
+            {
+                this.Client.DefaultRequestHeaders.Add("Token", this.Token);
+            }
+            var image = new MemoryStream(file);
+            var content = new StreamContent(image);
+            var form = new MultipartFormDataContent();
+            form.Add(content, type, "file.jpg");
+
+            var response = await Client.PostAsync(string.Concat("api/", endpoint), form);
+            var body = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<T>(body);
         }
     }
 }
