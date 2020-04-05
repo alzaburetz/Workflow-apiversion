@@ -8,7 +8,11 @@
             x:Class="Workflow.Views.MainPage">
 
     <TabbedPage.Children>
-        
+        <NavigationPage Title="Home">
+            <x:Arguments>
+                <views:FriendList Title="Home"/>
+            </x:Arguments>
+        </NavigationPage>
     </TabbedPage.Children>
     
 </TabbedPage>
