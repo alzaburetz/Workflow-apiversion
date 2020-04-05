@@ -11,32 +11,26 @@
         <Grid>
             <controls:GradientBox StartColor="{StaticResource DarkColor}"
                                   EndColor="White"/>
+            <controls:GradientBox StartColor="{StaticResource DarkColor}"
+                                  EndColor="#FF9D9D"
+                                  Opacity="0.5"/>
             <StackLayout Padding="60" Spacing="30">
-                <StackLayout Spacing="-60">
-                    <Label Text="WORK"
-                       FontSize="64"
-                       FontFamily="{StaticResource Regular}"
-                       TextColor="{StaticResource DarkColor}"
-                       VerticalTextAlignment="Start"/>
-                    <Label Text="FLOW"
-                       FontSize="64"
-                       FontFamily="{StaticResource Regular}"
-                       TextColor="{StaticResource MainColor}"
-                       HorizontalTextAlignment="End"/>
+                <StackLayout>
+                    <Image Source="logo"/>
                 </StackLayout>
                 <Entry Placeholder="Номер телефона"
                    HorizontalTextAlignment="End"
-                   PlaceholderColor="{StaticResource MainColor}"
+                   PlaceholderColor="White"
                    Keyboard="Telephone"
                    x:Name="Number">
                     <Entry.Behaviors>
-                        <behaviors:MaskedBehavior Mask="X (XXX) XXX XX XX"/>
+                        <behaviors:MaskedBehavior Mask="+7 (XXX) XXX XX XX"/>
                     </Entry.Behaviors>
                 </Entry>
                 <Entry Placeholder="Пароль"
                    IsPassword="True"
                    HorizontalTextAlignment="Center"
-                   PlaceholderColor="{StaticResource MainColor}"
+                   PlaceholderColor="White"
                    x:Name="Password"/>
                 <Label Text="Регистрация"
                    VerticalTextAlignment="Center"
@@ -46,8 +40,16 @@
                         <TapGestureRecognizer Tapped="GoToRegistration"/>
                     </Label.GestureRecognizers>
                 </Label>
-                <controls:GradientButton Text="ВОЙТИ"/>
+                <controls:GradientButton Text="ВОЙТИ"
+                                         Clicked="ExecuteLogin"/>
             </StackLayout>
+            <BoxView BackgroundColor="White"
+                     IsVisible="{Binding IsBusy}"/>
+            <ActivityIndicator Color="{StaticResource DarkColor}"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               Scale="0.2"
+                               BackgroundColor="Transparent"/>
         </Grid>
         
 
