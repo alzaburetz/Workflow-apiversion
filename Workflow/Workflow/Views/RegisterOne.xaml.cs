@@ -23,7 +23,9 @@ namespace Workflow.Views
         }
         public RegisterOne(RegisterOneViewModel viewModel):this()
         {
+            viewModel.Navigation = this.Navigation;
             BindingContext = viewModel;
+            
         }
 
         protected async void Register(object sender, EventArgs args)
@@ -40,6 +42,7 @@ namespace Workflow.Views
             var finalPhone = Regex.Replace(phone, @"\(", "");
             finalPhone = Regex.Replace(finalPhone, @"\)", "");
             finalPhone = Regex.Replace(finalPhone, @"\s+", "");
+            finalPhone = finalPhone.Replace("+7", "8");
             var user = new UserAuthModel()
             {
                 Email = Email.Text,
@@ -48,6 +51,21 @@ namespace Workflow.Views
                 Phone = finalPhone
             };
             (BindingContext as RegisterOneViewModel).RegisterStepOne.Execute(user);
+        }
+
+        private void Number_Completed(object sender, EventArgs e)
+        {
+            Email.Focus();
+        }
+
+        private void Email_Completed(object sender, EventArgs e)
+        {
+            User.Focus();
+        }
+
+        private void User_Completed(object sender, EventArgs e)
+        {
+            Password.Focus();
         }
     }
 }
