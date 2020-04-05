@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:controls="clr-namespace:Workflow.Controls"
+             xmlns:viewmodels="clr-namespace:Workflow.ViewModels"
+             xmlns:behaviours="clr-namespace:Workflow.Behaviors"
+             xmlns:cirle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             x:Class="Workflow.Views.CreateProfile">
+    <ContentPage.Content>
+        <Grid BackgroundColor="Black">
+            <controls:GradientBox StartColor="{StaticResource DarkColor}"
+                                  EndColor="White"/>
+            <controls:GradientBox StartColor="{StaticResource DarkColor}"
+                                  EndColor="#FF9D9D"
+                                  Opacity="0.5"/>
+            <StackLayout Padding="60"
+                         x:DataType="viewmodels:CreateProfileViewModel"
+                         Spacing="30">
+                <cirle:CircleImage BackgroundColor="Transparent"
+                                   Source="avatar_placeholder"
+                                   x:Name="Avatar"
+                                   Margin="100,0,100,0"
+                                   Aspect="AspectFit">
+                    <cirle:CircleImage.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TakePhoto"/>
+                    </cirle:CircleImage.GestureRecognizers>
+                </cirle:CircleImage>
+                <Entry Placeholder="Имя"
+                       Text="{Binding User.Name}"/>
+                <Entry Placeholder="Фамилия (опционально)"
+                       x:Name="Surname"/>
+                <StackLayout Spacing="-10">
+                    <Label Text="Выберите первый ближайший рабочий день:"
+                           TextColor="Black"
+                           FontSize="Caption"/>
+                    <controls:CustomDatePicker Date="{Binding Date}"
+                                               x:Name="FirstDay"
+                            Format="dd.MM.yyyy"
+                            TextColor="White"/>
+                </StackLayout>
+                <StackLayout Spacing="-10">
+                    <Label Text="Введите график: "
+                           TextColor="Black"
+                           FontSize="Caption"/>
+                    <Entry Placeholder="График (Рабочие дни/выходные)"
+                           Keyboard="Numeric"
+                           x:Name="Work"
+                           PlaceholderColor="White">
+                        <Entry.Behaviors>
+                            <behaviours:MaskedBehavior Mask="X / X"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <controls:GradientButton Text="СОЗДАТЬ ПРОФИЛЬ"
+                                         Clicked="CreateProfilePressed"/>
+            </StackLayout>
+            <!--<BoxView BackgroundColor="Gray"
+                     Opacity="0.4"
+                     IsVisible="{Binding IsBusy}"/>
+            <ActivityIndicator Color="{StaticResource DarkColor}"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               Scale="0.2"
+                               BackgroundColor="Transparent"/>-->
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
