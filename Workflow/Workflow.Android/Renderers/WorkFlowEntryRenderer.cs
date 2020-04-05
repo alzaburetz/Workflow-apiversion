@@ -30,13 +30,8 @@ namespace Workflow.Droid.Renderers
             base.OnElementChanged(e);
             if (e.NewElement != null)
             {
-                var gradient = new GradientDrawable(GradientDrawable.Orientation.TopBottom, new int[]
-                {
-                    Xamarin.Forms.Color.Transparent.ToAndroid(),
-                    Xamarin.Forms.Color.Transparent.ToAndroid()
-                });
-                this.Control.SetBackgroundDrawable(gradient);
-                this.Control.SetHintTextColor(Xamarin.Forms.Color.White.ToAndroid());
+                this.Control.SetBackgroundColor(Xamarin.Forms.Color.Transparent.ToAndroid());
+                this.Control.SetTextColor(Xamarin.Forms.Color.White.ToAndroid());
             }
         }
     }
