@@ -5,9 +5,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:models="clr-namespace:Workflow.Models"
+             xmlns:controls="clr-namespace:Workflow.Controls"
+             NavigationPage.TitleView="{StaticResource NavBar}"
              x:Class="Workflow.Views.Profile">
     <ContentPage.Content>
         <Grid Padding="20">
+            <controls:GradientBox StartColor="{StaticResource DarkColor}"
+                                  Grid.RowSpan="2"
+                                  Grid.ColumnSpan="2"
+                                  Margin="-20"
+                                  EndColor="White"/>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*" x:Name="FirstColumn"/>
                 <ColumnDefinition Width="0.5*"/>
@@ -15,10 +23,36 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="200"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <circle:CircleImage Source="{Binding User.Avatar}"
+                                Margin="20"
                                 Aspect="AspectFill"/>
+            <StackLayout Grid.Column="1"
+                         Padding="40">
+                <Label Text="{Binding User.Name}"
+                       FontSize="Large"
+                       VerticalOptions="StartAndExpand"/>
+                <Label Text="{Binding User.Surname}"
+                       FontSize="Large"
+                       VerticalOptions="StartAndExpand"/>
+            </StackLayout>
+            <StackLayout Grid.ColumnSpan="2"
+                         Grid.Row="1">
+                <Label Text="Первый рабочий день:"
+                       TextColor="{StaticResource DarkColor}"
+                       FontSize="Small"/>
+                <Label Text="{Binding User.FirstWork}"
+                       TextColor="Black"
+                       FontSize="Medium"/>
+                <BoxView HeightRequest="50"/>
+                <Label Text="График работы"
+                       TextColor="{StaticResource DarkColor}"
+                       FontSize="Small"/>
+                <Label Text="{Binding User.GraphFormatted}"
+                       TextColor="Black"
+                       FontSize="Medium"/>
+            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
