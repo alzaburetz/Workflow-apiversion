@@ -8,9 +8,14 @@
             x:Class="Workflow.Views.MainPage">
 
     <TabbedPage.Children>
-        <NavigationPage Title="Home">
+        <NavigationPage Title="Список людей">
             <x:Arguments>
-                <views:FriendList Title="Home"/>
+                <views:FriendList/>
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="Профиль">
+            <x:Arguments>
+                <views:Profile/>
             </x:Arguments>
         </NavigationPage>
     </TabbedPage.Children>
