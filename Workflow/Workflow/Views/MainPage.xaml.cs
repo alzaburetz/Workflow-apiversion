@@ -28,6 +28,13 @@ namespace Workflow.Views
         protected override void OnCurrentPageChanged()
         {
             base.OnCurrentPageChanged();
+            var i = this.Children.IndexOf(this.CurrentPage);
+            switch (i)
+            {
+                case 0: break;
+                case 1: MessagingCenter.Send<MainPage>(this, "LoadProfile");
+                    break;
+            }
         }
     }
 }
