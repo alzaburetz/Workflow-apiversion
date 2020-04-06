@@ -19,6 +19,12 @@
                 <Setter Property="BarBackgroundColor" Value="{StaticResource DarkColor}" />
                 <Setter Property="BarTextColor" Value="White" />
             </Style>
+
+            <Label x:Key="NavBar"
+                   Text="{Binding Title}"
+                   HorizontalTextAlignment="Center"
+                   TextColor="White"
+                   FontSize="Medium"/>
         </ResourceDictionary>
     </Application.Resources>
     
