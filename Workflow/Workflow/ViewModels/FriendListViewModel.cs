@@ -14,6 +14,7 @@ namespace Workflow.ViewModels
         public Command GetContacts { get; set; }
         public FriendListViewModel()
         {
+            Title = "Список людей";
             GetContacts = new Command(async () =>
             {
                 var contacts = await CrossContactService.Current.GetContactListAsync();
