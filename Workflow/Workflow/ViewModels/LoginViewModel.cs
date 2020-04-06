@@ -24,6 +24,7 @@ namespace Workflow.ViewModels
                     else
                         Application.Current.Properties["Token"] = response.Response;
                     await Application.Current.SavePropertiesAsync();
+                    HttpService.Token = response.Response;
                     Application.Current.MainPage = new Workflow.Views.MainPage();
                 }
                 else
