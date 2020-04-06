@@ -25,5 +25,7 @@ namespace Workflow.Models
         public string Phone { get; set; }
         [JsonProperty("groups")]
         public List<string> Groups { get; set; }
+        public string GraphFormatted { get; set;
+        }
     }
 }
