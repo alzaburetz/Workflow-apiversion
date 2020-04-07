@@ -11,11 +11,7 @@
              x:Class="Workflow.Views.Profile">
     <ContentPage.Content>
         <Grid Padding="20">
-            <controls:GradientBox StartColor="{StaticResource DarkColor}"
-                                  Grid.RowSpan="2"
-                                  Grid.ColumnSpan="2"
-                                  Margin="-20"
-                                  EndColor="White"/>
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*" x:Name="FirstColumn"/>
                 <ColumnDefinition Width="0.5*"/>
@@ -25,6 +21,11 @@
                 <RowDefinition Height="200"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <controls:GradientBox StartColor="{StaticResource DarkColor}"
+                                  Grid.RowSpan="2"
+                                  Grid.ColumnSpan="2"
+                                  Margin="-20"
+                                  EndColor="White"/>
             <circle:CircleImage Source="{Binding User.Avatar}"
                                 Margin="20"
                                 Aspect="AspectFill"/>

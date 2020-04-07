@@ -5,19 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:controls="clr-namespace:Workflow.Controls"
+             Title="{Binding Title}"
              x:Class="Workflow.Views.FriendList">
-    <NavigationPage.TitleView>
-        <Label Text="Список друзей"
-               FontSize="Medium"
-               TextColor="White"
-               HorizontalTextAlignment="Center"/>
-    </NavigationPage.TitleView>
+    
     <ContentPage.Content>
-        <StackLayout>
-
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid BackgroundColor="Black"
+              Padding="10">
+            <controls:GradientBox StartColor="{StaticResource DarkColor}"
+                                  EndColor="White"/>
+            <Frame CornerRadius="20"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
