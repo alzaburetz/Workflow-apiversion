@@ -12,6 +12,7 @@ namespace Workflow.Services
         HttpClient Client { get; set; }
         string Token { get; set;}
         Task<T> GetRequest<T>(string endpoint);
+        Task<T> GetRequestWithBody<T, D>(string endpoint, D data);
         Task<T> PostRequest<T, D>(string endpoint, D data, bool token);
         Task<T> PutRequest<T, D>(string endpoint, D data);
         Task<T> DeleteRequest<T>(string endpoint);
