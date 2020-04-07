@@ -104,5 +104,22 @@ namespace Workflow.Services
             var body = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(body);
         }
+
+        public async Task<T> GetRequestWithBody<T, D>(string endpoint, D data)
+        {
+            var request = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(Client.BaseAddress,string.Concat("api/",endpoint)),
+                Content = new StringContent(JsonConvert.SerializeObject(data))
+            };
+            if (!this.Client.DefaultRequestHeaders.Contains("Token"))
+            {
+                this.Client.DefaultRequestHeaders.Add("Token", this.Token);
+            }
+            var response = await Client.SendAsync(request);
+            var body = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<T>(body);
+        }
     }
 }
