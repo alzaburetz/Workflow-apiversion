@@ -27,6 +27,7 @@ namespace Workflow.ViewModels
             {
                 var resp = await HttpService.GetRequest<ResponseModel<UserModel>>("user?search=89157508874");
                 User = resp.Response;
+                User.GraphFormatted = $"{User.Workdays} / {User.Weekdays}";
             });
         }
     }
