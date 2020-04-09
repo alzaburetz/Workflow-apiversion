@@ -18,6 +18,11 @@
                 <views:Profile/>
             </x:Arguments>
         </NavigationPage>
+        <NavigationPage Title="Календарь">
+            <x:Arguments>
+                <views:CalendarPage/>
+            </x:Arguments>
+        </NavigationPage>
     </TabbedPage.Children>
     
 </TabbedPage>
