@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:converters="clr-namespace:Workflow.Converters"
              x:Class="Workflow.App">
 
     <Application.Resources>
@@ -12,6 +13,7 @@
             <Color x:Key="MainColor">#2fa362</Color>
             <Color x:Key="DarkColor">#237547</Color>
             <Color x:Key="NavigationPrimary">#2196F3</Color>
+            <converters:TimeStampToDateConverter x:Key="TimeStampConverter"/>
             <OnPlatform x:TypeArguments="x:String" x:Key="Regular">
                 <On Platform="Android">Oswald-Regular.ttf#Oswald</On>
             </OnPlatform>
