@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 
+using Workflow.ViewModels;
+
 namespace Workflow.Models
 {
-    public class UserModel
+    public class UserModel:BaseViewModel
     {
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -25,7 +27,28 @@ namespace Workflow.Models
         public string Phone { get; set; }
         [JsonProperty("groups")]
         public List<string> Groups { get; set; }
-        public string GraphFormatted { get; set;
+        string _formatted;
+        public string GraphFormatted
+        {
+            get => _formatted;
+            set
+            {
+                _formatted = value;
+                OnPropertyChanged("GraphFormatted");
+            }
+        }
+        public DateTime NextWorkDay { get; set; }
+
+        public bool WorksToday()
+        {
+            var span = TimeSpan.FromSeconds(long.Parse(FirstWork)).TotalDays;
+            return (span) % (Workdays + Weekdays) <= Workdays - 1;
+        }
+
+        public bool WorksDayOf(int day)
+        {
+            var span = TimeSpan.FromSeconds(long.Parse(FirstWork)).TotalDays + day;
+            return (span) % (Workdays + Weekdays) <= Workdays - 1;
         }
     }
 }
