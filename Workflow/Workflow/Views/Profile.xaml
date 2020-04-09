@@ -43,16 +43,16 @@
                 <Label Text="Первый рабочий день:"
                        TextColor="{StaticResource DarkColor}"
                        FontSize="Small"/>
-                <Label Text="{Binding User.FirstWork}"
+                <Label Text="{Binding User.FirstWork, Converter={StaticResource TimeStampConverter}}"
                        TextColor="Black"
-                       FontSize="Medium"/>
+                       FontSize="Large"/>
                 <BoxView HeightRequest="50"/>
-                <Label Text="График работы"
+                <Label Text="График работы: "
                        TextColor="{StaticResource DarkColor}"
                        FontSize="Small"/>
                 <Label Text="{Binding User.GraphFormatted}"
                        TextColor="Black"
-                       FontSize="Medium"/>
+                       FontSize="Large"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>
