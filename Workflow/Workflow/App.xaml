@@ -14,6 +14,8 @@
             <Color x:Key="DarkColor">#237547</Color>
             <Color x:Key="NavigationPrimary">#2196F3</Color>
             <converters:TimeStampToDateConverter x:Key="TimeStampConverter"/>
+            <converters:ThisMonthDayColorConverter x:Key="ThisMonth"/>
+            <converters:WorkDayColorConverter x:Key="DayColor"/>
             <OnPlatform x:TypeArguments="x:String" x:Key="Regular">
                 <On Platform="Android">Oswald-Regular.ttf#Oswald</On>
             </OnPlatform>
