@@ -48,7 +48,7 @@ namespace Workflow.Models
         public bool WorksDayOf(int day)
         {
             var span = TimeSpan.FromSeconds(long.Parse(FirstWork)).TotalDays + day;
-            return (span) % (Workdays + Weekdays) <= Workdays - 1;
+            return (span) % (Workdays + Weekdays) <= Workdays;
         }
     }
 }
