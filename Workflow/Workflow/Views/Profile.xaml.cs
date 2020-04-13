@@ -24,5 +24,10 @@ namespace Workflow.Views
                 viewModel.GetUserData.Execute(null);
             });
         }
+
+        protected async void EditProfile(object sender, EventArgs args)
+        {
+            await Navigation.PushAsync(new ProfileEdit(new ProfileEditViewModel(viewModel.User, this.Navigation)));
+        }
     }
 }
