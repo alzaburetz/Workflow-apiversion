@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:controls="clr-namespace:Workflow.Controls"
+             xmlns:behaviors="clr-namespace:Workflow.Behaviors"
+             xmlns:circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             x:Class="Workflow.Views.ProfileEdit">
+    <ContentPage.Content>
+        <Grid>
+            <controls:GradientBox StartColor="{StaticResource DarkColor}"
+                                  EndColor="White"/>
+            <Grid Padding="20">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*" x:Name="FirstColumn"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <controls:GradientBox StartColor="{StaticResource DarkColor}"
+                                  Grid.RowSpan="2"
+                                  Grid.ColumnSpan="2"
+                                  Margin="-20"
+                                  EndColor="White"/>
+                <circle:CircleImage Source="{Binding User.Avatar}"
+                                Margin="20"
+                                Aspect="AspectFill"/>
+                <StackLayout Grid.Column="1"
+                         Padding="40">
+                    <Label Text="{Binding User.Name}"
+                       FontSize="Large"
+                       VerticalOptions="StartAndExpand"/>
+                    <Label Text="{Binding User.Surname}"
+                       FontSize="Large"
+                       VerticalOptions="StartAndExpand"/>
+                </StackLayout>
+                <StackLayout Grid.ColumnSpan="2"
+                         Grid.Row="1">
+                    <Label Text="Первый рабочий день:"
+                       TextColor="{StaticResource DarkColor}"
+                       FontSize="Small"/>
+                    <controls:CustomDatePicker Date="{Binding User.NextWorkDay}"
+                                               x:Name="Datepicker"
+                       TextColor="Black"
+                       Format="dd.MM.yyyy"
+                       FontSize="Large">
+                    </controls:CustomDatePicker>
+                    <BoxView HeightRequest="50"/>
+                    <Label Text="График работы: "
+                       TextColor="{StaticResource DarkColor}"
+                       FontSize="Small"/>
+                    <Entry Text="{Binding User.GraphFormatted}"
+                           x:Name="Schedule"
+                           Keyboard="Numeric"
+                       TextColor="Black"
+                       FontSize="Large">
+                        <Entry.Behaviors>
+                            <behaviors:MaskedBehavior Mask="X / X"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <controls:GradientButton Text="Обновить профиль"
+                                         Clicked="EditProfile"/>
+                </StackLayout>
+            </Grid>
+            <ActivityIndicator Color="{StaticResource DarkColor}"
+                               IsEnabled="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
