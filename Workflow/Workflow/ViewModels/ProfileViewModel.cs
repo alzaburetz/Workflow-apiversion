@@ -25,9 +25,12 @@ namespace Workflow.ViewModels
             Title = "Профиль";
             GetUserData = new Command(async () =>
             {
+                IsBusy = true;
                 var resp = await HttpService.GetRequest<ResponseModel<UserModel>>("user?search=89157508874");
                 User = resp.Response;
                 User.GraphFormatted = $"{User.Workdays} / {User.Weekdays}";
+                User.NextWorkDay = DateTimeOffset.FromUnixTimeSeconds(long.Parse(User.FirstWork)).DateTime;
+                IsBusy = false;
             });
         }
     }
