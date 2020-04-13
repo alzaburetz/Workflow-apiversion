@@ -12,5 +12,6 @@ namespace Workflow.Models
         public bool Workday { get; set; }
         public int DayOfWeek { get; set; }
         public bool IsThisMonth { get; set; }
+        public int NumberOfWeek { get; set; }
     }
 }
