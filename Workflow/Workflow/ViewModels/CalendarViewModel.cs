@@ -16,6 +16,16 @@ namespace Workflow.ViewModels
         public Command GetUser { get; set; }
         public Command CalculateCalendar { get; set; }
         public UserModel User { get; set; }
+        private string month;
+        public string Month
+        {
+            get => month;
+            set
+            {
+                month = value;
+                OnPropertyChanged("Month");
+            }
+        }
         public CalendarViewModel(UserModel user = null)
         {
             User = user;
@@ -35,8 +45,6 @@ namespace Workflow.ViewModels
                     {
                         return;
                     }
-                    CalculateCalendarMethodStat();
-                    return;
                     var list = CalculateCalendarMethod();
                     foreach (CalendarModel day in list)
                     {
@@ -58,6 +66,7 @@ namespace Workflow.ViewModels
         {
             var result = new List<CalendarModel>(42);
             var today = DateTime.Now;
+            this.Month = today.ToString("MMMM");
             var firstday = new DateTime(today.Year, today.Month, 1);
             var startofweek = new DateTime(today.Year, 1, 1).AddDays(firstday.DayOfYear - (int)firstday.DayOfWeek);
             int i = 0;
@@ -66,9 +75,10 @@ namespace Workflow.ViewModels
             {
                 var calendar = new CalendarModel();
                 calendar.DayOfMonth = day.Day;
-                calendar.DayOfWeek = (int)day.DayOfWeek;
+                calendar.DayOfWeek = (int)day.DayOfWeek == 0 ? 6 : (int)day.DayOfWeek - 1;
                 calendar.IsThisMonth = day.Month == today.Month;
                 calendar.Workday = this.User.WorksDayOf(day.DayOfYear);
+                calendar.NumberOfWeek = i / 7;
                 result.Add(calendar);
                 i++;
                 day = new DateTime(day.Year, day.Month, day.Day).AddDays(1);
@@ -90,6 +100,7 @@ namespace Workflow.ViewModels
                 calendar.DayOfWeek = (int)day.DayOfWeek;
                 calendar.IsThisMonth = day.Month == today.Month;
                 calendar.Workday = this.User.WorksDayOf(day.DayOfYear);
+                calendar.NumberOfWeek = i / 7;
                 CalendarList.Add((CalendarModel)calendar as CalendarModel);
                 i++;
                 day = new DateTime(day.Year, day.Month, day.Day).AddDays(1);
