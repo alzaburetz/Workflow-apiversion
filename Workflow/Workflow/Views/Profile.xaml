@@ -9,51 +9,61 @@
              xmlns:controls="clr-namespace:Workflow.Controls"
              NavigationPage.TitleView="{StaticResource NavBar}"
              x:Class="Workflow.Views.Profile">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="edit"
+                     Clicked="EditProfile"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <Grid Padding="20">
-            
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.5*" x:Name="FirstColumn"/>
-                <ColumnDefinition Width="0.5*"/>
-            </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid Padding="20">
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="200"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <controls:GradientBox StartColor="{StaticResource DarkColor}"
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*" x:Name="FirstColumn"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <controls:GradientBox StartColor="{StaticResource DarkColor}"
                                   Grid.RowSpan="2"
                                   Grid.ColumnSpan="2"
                                   Margin="-20"
                                   EndColor="White"/>
-            <circle:CircleImage Source="{Binding User.Avatar}"
+                <circle:CircleImage Source="{Binding User.Avatar}"
                                 Margin="20"
                                 Aspect="AspectFill"/>
-            <StackLayout Grid.Column="1"
+                <StackLayout Grid.Column="1"
                          Padding="40">
-                <Label Text="{Binding User.Name}"
+                    <Label Text="{Binding User.Name}"
                        FontSize="Large"
                        VerticalOptions="StartAndExpand"/>
-                <Label Text="{Binding User.Surname}"
+                    <Label Text="{Binding User.Surname}"
                        FontSize="Large"
                        VerticalOptions="StartAndExpand"/>
-            </StackLayout>
-            <StackLayout Grid.ColumnSpan="2"
+                </StackLayout>
+                <StackLayout Grid.ColumnSpan="2"
                          Grid.Row="1">
-                <Label Text="Первый рабочий день:"
+                    <Label Text="Первый рабочий день:"
                        TextColor="{StaticResource DarkColor}"
                        FontSize="Small"/>
-                <Label Text="{Binding User.FirstWork, Converter={StaticResource TimeStampConverter}}"
+                    <Label Text="{Binding User.FirstWork, Converter={StaticResource TimeStampConverter}}"
                        TextColor="Black"
                        FontSize="Large"/>
-                <BoxView HeightRequest="50"/>
-                <Label Text="График работы: "
+                    <BoxView HeightRequest="50"/>
+                    <Label Text="График работы: "
                        TextColor="{StaticResource DarkColor}"
                        FontSize="Small"/>
-                <Label Text="{Binding User.GraphFormatted}"
+                    <Label Text="{Binding User.GraphFormatted}"
                        TextColor="Black"
                        FontSize="Large"/>
-            </StackLayout>
+                </StackLayout>
+            </Grid>
+            <ActivityIndicator Color="{StaticResource DarkColor}"
+                               IsEnabled="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"/>
         </Grid>
+       
     </ContentPage.Content>
 </ContentPage>
