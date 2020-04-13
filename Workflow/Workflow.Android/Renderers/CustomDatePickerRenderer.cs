@@ -32,7 +32,7 @@ namespace Workflow.Droid.Renderers
             {
                 this.Control.SetBackgroundColor(Xamarin.Forms.Color.Transparent.ToAndroid());
                 this.Control.SetHintTextColor(Xamarin.Forms.Color.White.ToAndroid());
-                this.Control.SetTextColor(Xamarin.Forms.Color.White.ToAndroid());
+                this.Control.SetTextColor(e.NewElement.TextColor.ToAndroid());
             }
         }
     }
