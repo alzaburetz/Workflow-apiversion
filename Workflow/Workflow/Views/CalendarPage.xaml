@@ -4,49 +4,104 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:controls="clr-namespace:Workflow.Controls"
              x:Class="Workflow.Views.CalendarPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="Medium"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <CollectionView ItemsSource="{Binding CalendarList}"
-                            VerticalOptions="Center">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical"
-                                     Span="7"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Label Text="{Binding DayOfMonth}"/>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            <Grid Padding="20"
-                  BackgroundColor="Red"
+        <Grid>
+            <controls:GradientBox StartColor="{StaticResource DarkColor}"
+                                      EndColor="White"/>
+            <StackLayout VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand">
+                <Label Text="{Binding Month}"
+                       TextColor="White"
+                       FontSize="Large"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="Center"/>
+                <Frame CornerRadius="25"
+                       Padding="15"
+                       Margin="20"
+                       BackgroundColor="White"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand">
+                    <StackLayout>
+                        <Grid
+                      HeightRequest="40">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.14*"/>
+                                <ColumnDefinition Width="0.14*"/>
+                                <ColumnDefinition Width="0.14*"/>
+                                <ColumnDefinition Width="0.14*"/>
+                                <ColumnDefinition Width="0.14*"/>
+                                <ColumnDefinition Width="0.14*"/>
+                                <ColumnDefinition Width="0.14*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="ПН"
+                           Grid.Column="0"/>
+                            <Label Text="ВТ"
+                           Grid.Column="1"/>
+                            <Label Text="СР"
+                           Grid.Column="2"/>
+                            <Label Text="ЧТ"
+                           Grid.Column="3"/>
+                            <Label Text="ПТ"
+                           Grid.Column="4"/>
+                            <Label Text="СБ"
+                           Grid.Column="5"/>
+                            <Label Text="ВС"
+                           Grid.Column="6"/>
+                        </Grid>
+                        <Grid 
                   VerticalOptions="FillAndExpand"
                   HorizontalOptions="FillAndExpand"
                   BindableLayout.ItemsSource="{Binding CalendarList}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="50"/>
-                </Grid.ColumnDefinitions>
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate>
-                        <Label Text="{Binding DayOfMonth}"/>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </Grid>
-        </StackLayout>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.14*"/>
+                                <RowDefinition Height="0.14*"/>
+                                <RowDefinition Height="0.14*"/>
+                                <RowDefinition Height="0.14*"/>
+                                <RowDefinition Height="0.14*"/>
+                                <RowDefinition Height="0.14*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.14*"/>
+                                <ColumnDefinition Width="0.14*"/>
+                                <ColumnDefinition Width="0.14*"/>
+                                <ColumnDefinition Width="0.14*"/>
+                                <ColumnDefinition Width="0.14*"/>
+                                <ColumnDefinition Width="0.14*"/>
+                                <ColumnDefinition Width="0.14*"/>
+                            </Grid.ColumnDefinitions>
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid
+                               Grid.Column="{Binding DayOfWeek}"
+                               Grid.Row="{Binding NumberOfWeek}">
+                                        <BoxView BackgroundColor="{Binding Workday, Converter={StaticResource DayColor}}"
+                                     CornerRadius="25"/>
+                                        <Label Text="{Binding DayOfMonth}"
+                                   FontSize="Medium"
+                                   TextColor="{Binding IsThisMonth, Converter={StaticResource ThisMonth}}"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+                
+            </StackLayout>
+           
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
