@@ -5,20 +5,24 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             mc:Ignorable="d"
             xmlns:views="clr-namespace:Workflow.Views"
+            SelectedTabColor="{StaticResource DarkColor}"
+            UnselectedTabColor="#333333"
             x:Class="Workflow.Views.MainPage">
-
     <TabbedPage.Children>
-        <NavigationPage Title="Список людей">
+        <NavigationPage Title="Список людей"
+                        IconImageSource="group">
             <x:Arguments>
                 <views:FriendList/>
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage Title="Профиль">
+        <NavigationPage Title="Профиль"
+                        IconImageSource="profile">
             <x:Arguments>
                 <views:Profile/>
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage Title="Календарь">
+        <NavigationPage Title="Календарь"
+                        IconImageSource="calendar">
             <x:Arguments>
                 <views:CalendarPage/>
             </x:Arguments>
