@@ -4,16 +4,33 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:models="clr-namespace:Workflow.Models"
              xmlns:controls="clr-namespace:Workflow.Controls"
              Title="{Binding Title}"
              x:Class="Workflow.Views.FriendList">
     
     <ContentPage.Content>
-        <Grid BackgroundColor="Black"
-              Padding="10">
+        <Grid Padding="10">
             <controls:GradientBox StartColor="{StaticResource DarkColor}"
+                                  Margin="-10"
                                   EndColor="White"/>
-            <Frame CornerRadius="20"/>
+            <CollectionView>
+                <d:CollectionView.ItemsSource>
+                    <x:Array x:Type="{x:Type models:UserModel}">
+                        <models:UserModel NextWorkDay="12.05.2019"
+                                          Name="Nikita"
+                                          Surname="Sedov"/>
+                    </x:Array>
+                </d:CollectionView.ItemsSource>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label d:Text="{Binding Name}"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
