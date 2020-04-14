@@ -32,6 +32,7 @@ namespace Workflow.ViewModels
             CalendarList = new ObservableCollection<CalendarModel>();
             CalculateCalendar = new Command(async () =>
             {
+                IsBusy = true;
                 CalendarList.Clear();
                 if (this.User == null)
                 {
@@ -59,6 +60,7 @@ namespace Workflow.ViewModels
                         this.CalendarList.Add(day);
                     }
                 }
+                IsBusy = false;
             });
         }
 
