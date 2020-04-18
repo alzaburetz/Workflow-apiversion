@@ -45,10 +45,21 @@ namespace Workflow.Models
             return (span) % (Workdays + Weekdays) <= Workdays - 1;
         }
 
-        public bool WorksDayOf(int day)
+        public bool WorksDayOf(DateTime day)
         {
-            var span = TimeSpan.FromSeconds(FirstWork).TotalDays + day;
-            return (span) % (Workdays + Weekdays) <= Workdays;
+            var span = (day - NextWorkDay).TotalDays;// >= 0 ? (NextWorkDay - day).TotalDays : (Workdays + Weekdays) + (NextWorkDay - day).TotalDays;
+            if (span < 0)
+            {
+                if (span <= -(Weekdays + Workdays))
+                {
+                    span = Math.Abs(span)  + Weekdays;
+                }
+                else
+                {
+                    span += (Weekdays + Workdays);
+                }
+            }
+            return (span) % (Workdays + Weekdays) <= Workdays - 1;
         }
     }
 }
