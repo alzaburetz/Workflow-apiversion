@@ -28,7 +28,8 @@
                                   Grid.ColumnSpan="2"
                                   Margin="-20"
                                   EndColor="White"/>
-                <circle:CircleImage Source="{Binding User.Avatar}"
+                <circle:CircleImage Source="{Binding User.Avatar, Converter={StaticResource Placeholder}}"
+                                    x:Name="Avatar"
                                 Margin="20"
                                 Aspect="AspectFill"/>
                 <StackLayout Grid.Column="1"
