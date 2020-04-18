@@ -79,7 +79,7 @@ namespace Workflow.ViewModels
                 calendar.DayOfMonth = day.Day;
                 calendar.DayOfWeek = (int)day.DayOfWeek == 0 ? 6 : (int)day.DayOfWeek - 1;
                 calendar.IsThisMonth = day.Month == today.Month;
-                calendar.Workday = this.User.WorksDayOf(day.DayOfYear);
+                calendar.Workday = this.User.WorksDayOf(day);
                 calendar.NumberOfWeek = i / 7;
                 result.Add(calendar);
                 i++;
@@ -101,7 +101,7 @@ namespace Workflow.ViewModels
                 calendar.DayOfMonth = day.Day;
                 calendar.DayOfWeek = (int)day.DayOfWeek;
                 calendar.IsThisMonth = day.Month == today.Month;
-                calendar.Workday = this.User.WorksDayOf(day.DayOfYear);
+                calendar.Workday = this.User.WorksDayOf(day);
                 calendar.NumberOfWeek = i / 7;
                 CalendarList.Add((CalendarModel)calendar as CalendarModel);
                 i++;
