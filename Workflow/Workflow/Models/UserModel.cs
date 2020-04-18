@@ -18,7 +18,7 @@ namespace Workflow.Models
         [JsonProperty("weekdays")]
         public int Weekdays { get; set; }
         [JsonProperty("firstwork")]
-        public string FirstWork { get; set; }
+        public long FirstWork { get; set; }
         [JsonProperty("avatar")]
         public string Avatar { get; set; }
         [JsonProperty("email")]
@@ -41,13 +41,13 @@ namespace Workflow.Models
 
         public bool WorksToday()
         {
-            var span = TimeSpan.FromSeconds(long.Parse(FirstWork)).TotalDays;
+            var span = TimeSpan.FromSeconds(FirstWork).TotalDays;
             return (span) % (Workdays + Weekdays) <= Workdays - 1;
         }
 
         public bool WorksDayOf(int day)
         {
-            var span = TimeSpan.FromSeconds(long.Parse(FirstWork)).TotalDays + day;
+            var span = TimeSpan.FromSeconds(FirstWork).TotalDays + day;
             return (span) % (Workdays + Weekdays) <= Workdays;
         }
     }
