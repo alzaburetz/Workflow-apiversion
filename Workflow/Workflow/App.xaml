@@ -16,6 +16,7 @@
             <converters:TimeStampToDateConverter x:Key="TimeStampConverter"/>
             <converters:ThisMonthDayColorConverter x:Key="ThisMonth"/>
             <converters:WorkDayColorConverter x:Key="DayColor"/>
+            <converters:AvatarPlaceholderConverter x:Key="Placeholder"/>
             <OnPlatform x:TypeArguments="x:String" x:Key="Regular">
                 <On Platform="Android">Oswald-Regular.ttf#Oswald</On>
             </OnPlatform>
