@@ -40,7 +40,7 @@ namespace Workflow.ViewModels
                     if (resp.Code == 200)
                     {
                         this.User = resp.Response;
-                        this.User.NextWorkDay = DateTimeOffset.FromUnixTimeSeconds(long.Parse(this.User.FirstWork)).UtcDateTime;
+                        this.User.NextWorkDay = DateTimeOffset.FromUnixTimeSeconds(this.User.FirstWork).UtcDateTime;
                     }
                     else
                     {

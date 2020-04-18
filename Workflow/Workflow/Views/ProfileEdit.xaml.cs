@@ -20,7 +20,7 @@ namespace Workflow.Views
             Datepicker.DateSelected += (s, e) =>
             {
                 viewModel.User.NextWorkDay = e.NewDate;
-                viewModel.User.FirstWork = new DateTimeOffset(e.NewDate).ToUnixTimeSeconds().ToString();
+                viewModel.User.FirstWork = new DateTimeOffset(e.NewDate).ToUnixTimeSeconds();
             };
         }
 

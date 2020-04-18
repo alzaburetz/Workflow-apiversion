@@ -74,7 +74,7 @@ namespace Workflow.Views
             var daytwo = days[1].TrimStart();
             viewModel.User.Workdays = int.Parse(dayone);
             viewModel.User.Weekdays = int.Parse(daytwo);
-            viewModel.User.FirstWork = (new DateTimeOffset(FirstDay.Date).ToUnixTimeSeconds()).ToString();
+            viewModel.User.FirstWork = (new DateTimeOffset(FirstDay.Date).ToUnixTimeSeconds());
             viewModel.User.Surname = Surname.Text;
 
             viewModel.UpdateUser.Execute(null);
