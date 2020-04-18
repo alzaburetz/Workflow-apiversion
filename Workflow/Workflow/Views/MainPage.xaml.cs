@@ -3,6 +3,8 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using Workflow.ViewModels;
+
 namespace Workflow.Views
 {
     // Learn more about making custom code visible in the Xamarin.Forms previewer
@@ -10,18 +12,16 @@ namespace Workflow.Views
     [DesignTimeVisible(false)]
     public partial class MainPage : TabbedPage
     {
+        MainPageViewModel viewModel { get; set; }
         public MainPage()
         {
+            BindingContext = viewModel = new MainPageViewModel();
             InitializeComponent();
             Xamarin.Forms.PlatformConfiguration.AndroidSpecific.TabbedPage.SetToolbarPlacement(this, Xamarin.Forms.PlatformConfiguration.AndroidSpecific.ToolbarPlacement.Bottom);
         }
         protected override void OnAppearing()
         {
-            var token = Application.Current.Properties["Token"];
-            if (token == null)
-            {
-
-            }
+            viewModel.CheckUser.Execute(null);
             base.OnAppearing();
         }
 
