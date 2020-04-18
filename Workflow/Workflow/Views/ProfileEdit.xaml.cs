@@ -8,6 +8,9 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Workflow.ViewModels;
 
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+
 namespace Workflow.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -42,6 +45,31 @@ namespace Workflow.Views
             else
             {
                 DisplayAlert(null, "Введите правильные данные!", "OK");
+            }
+        }
+
+        private async void TakePhoto(object sender, EventArgs args)
+        {
+            await CrossMedia.Current.Initialize();
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await Application.Current.MainPage.DisplayAlert("No Camera", ":( No camera available.", "OK");
+                return;
+            }
+            var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions()
+            {
+                AllowCropping = true,
+                PhotoSize = PhotoSize.Medium
+            });
+
+            if (photo != null)
+            {
+                viewModel.Avatar = photo;
+                Avatar.Source = ImageSource.FromStream(() =>
+                {
+                    var stream = photo.GetStream();
+                    return stream;
+                });
             }
         }
     }
