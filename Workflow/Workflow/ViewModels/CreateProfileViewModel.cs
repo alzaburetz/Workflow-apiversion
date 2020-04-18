@@ -25,6 +25,7 @@ namespace Workflow.ViewModels
 
         public CreateProfileViewModel()
         {
+            Date = DateTime.Now;
             UpdateUser = new Command(async () =>
             {
                 IsBusy = true;
