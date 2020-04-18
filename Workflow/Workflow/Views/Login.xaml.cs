@@ -11,6 +11,9 @@ using Workflow.Models;
 using Workflow.ViewModels;
 using System.Text.RegularExpressions;
 
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
+
 namespace Workflow.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -23,9 +26,10 @@ namespace Workflow.Views
             BindingContext = viewModel = new LoginViewModel();
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
+            await CrossPermissions.Current.RequestPermissionsAsync(Permission.Contacts);
         }
 
         protected async void GoToRegistration(object sender, EventArgs args)
