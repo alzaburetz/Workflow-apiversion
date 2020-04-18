@@ -34,6 +34,11 @@ namespace Workflow.ViewModels
             {
                 var resp = await HttpService.PostRequest<ResponseModel<string>, UserAuthModel>("user/login", userauth);
                 HttpService.Token = resp.Response;
+                if (!Application.Current.Properties.ContainsKey("Token"))
+                    Application.Current.Properties.Add("Token", resp.Response);
+                else
+                    Application.Current.Properties["Token"] = resp.Response;
+                await Application.Current.SavePropertiesAsync();
                 IsBusy = false;
                 await Navigation.PushModalAsync(new CreateProfile(new CreateProfileViewModel(User)));
             });
