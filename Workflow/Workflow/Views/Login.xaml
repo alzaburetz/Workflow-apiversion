@@ -21,6 +21,7 @@
                 <Entry Placeholder="Номер телефона"
                    HorizontalTextAlignment="End"
                    PlaceholderColor="White"
+                   TextColor="White"
                    Keyboard="Telephone"
                    x:Name="Number">
                     <Entry.Behaviors>
@@ -31,6 +32,7 @@
                    IsPassword="True"
                    HorizontalTextAlignment="Center"
                    PlaceholderColor="White"
+                   TextColor="White"
                    x:Name="Password"/>
                 <Label Text="Регистрация"
                    VerticalTextAlignment="Center"

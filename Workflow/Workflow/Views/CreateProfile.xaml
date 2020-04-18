@@ -29,17 +29,20 @@
                     </cirle:CircleImage.GestureRecognizers>
                 </cirle:CircleImage>
                 <Entry Placeholder="Имя"
+                       TextColor="White"
                        Text="{Binding User.Name}"/>
                 <Entry Placeholder="Фамилия (опционально)"
+                       TextColor="White"
                        x:Name="Surname"/>
                 <StackLayout Spacing="-10">
                     <Label Text="Выберите первый ближайший рабочий день:"
                            TextColor="Black"
                            FontSize="Caption"/>
-                    <controls:CustomDatePicker Date="{Binding Date}"
-                                               x:Name="FirstDay"
+                    <controls:CustomDatePicker x:Name="FirstDay"
+                                               Date="{Binding Date}"
                             Format="dd.MM.yyyy"
-                            TextColor="White"/>
+                            TextColor="White">
+                    </controls:CustomDatePicker>
                 </StackLayout>
                 <StackLayout Spacing="-10">
                     <Label Text="Введите график: "
@@ -47,6 +50,7 @@
                            FontSize="Caption"/>
                     <Entry Placeholder="График (Рабочие дни/выходные)"
                            Keyboard="Numeric"
+                           TextColor="White"
                            x:Name="Work"
                            PlaceholderColor="White">
                         <Entry.Behaviors>

@@ -35,18 +35,22 @@
                          Grid.Row="1">
                 <Entry Placeholder="Номер телефона"
                    x:Name="Number"
+                       TextColor="White"
                    Keyboard="Telephone">
                     <Entry.Behaviors>
                         <behaviors:MaskedBehavior Mask="+7 (XXX) XXX XX XX"/>
                     </Entry.Behaviors>
                 </Entry>
                 <Entry Placeholder="E-Mail"
+                       TextColor="White"
                        Keyboard="Email"
                        x:Name="Email"/>
                 <Entry Placeholder="Имя"
                        Keyboard="Text"
+                       TextColor="White"
                        x:Name="User"/>
                 <Entry Placeholder="Пароль"
+                       TextColor="White"
                        Completed="Register"
                        IsPassword="True"
                        x:Name="Password"/>
