@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:controls="clr-namespace:Workflow.Controls"
+             xmlns:behaviours="clr-namespace:Workflow.Behaviors"
+             x:Class="Workflow.Views.AddUser">
+    <ContentPage.Content>
+        <Grid BackgroundColor="Black">
+            <controls:GradientBox StartColor="{StaticResource DarkColor}"
+                                  EndColor="White"/>
+            <StackLayout Padding="60">
+                <Entry x:Name="FullName"
+                       Placeholder="Имя и фамилия"
+                       TextColor="White"
+                       Keyboard="Text"
+                       PlaceholderColor="White"/>
+                <Entry x:Name="Email"
+                       Keyboard="Email"
+                       Placeholder="E-Mail"
+                       TextColor="White"
+                       PlaceholderColor="White"/>
+                <Entry x:Name="Schedule"
+                       Placeholder="График (Рабочие / Выходные)"
+                       PlaceholderColor="White"
+                       Keyboard="Numeric"
+                       TextColor="White">
+                    <Entry.Behaviors>
+                        <behaviours:MaskedBehavior Mask="X / X"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <StackLayout Spacing="-10">
+                    <Label Text="Выберите первый ближайший рабочий день:"
+                           TextColor="{StaticResource DarkColor}"
+                           FontSize="Caption"/>
+                    <controls:CustomDatePicker x:Name="FirstDay"
+                                               Date="{Binding Date}"
+                            Format="dd.MM.yyyy"
+                            TextColor="White">
+                    </controls:CustomDatePicker>
+                </StackLayout>
+                <Entry x:Name="Phone"
+                       Placeholder="Номер телефона"
+                       PlaceholderColor="White"
+                       TextColor="White">
+                    <Entry.Behaviors>
+                        <behaviours:MaskedBehavior Mask="+7 (XXX) XXX XX XX"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <controls:GradientButton Text="Добавить пользователя"
+                                         Clicked="AddUserButton"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
