@@ -8,20 +8,17 @@
              xmlns:controls="clr-namespace:Workflow.Controls"
              Title="{Binding Title}"
              x:Class="Workflow.Views.FriendList">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="adduser"
+                     Clicked="AddUserPush"/>
+    </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
         <Grid Padding="10">
             <controls:GradientBox StartColor="{StaticResource DarkColor}"
                                   Margin="-10"
                                   EndColor="White"/>
-            <CollectionView>
-                <d:CollectionView.ItemsSource>
-                    <x:Array x:Type="{x:Type models:UserModel}">
-                        <models:UserModel NextWorkDay="12.05.2019"
-                                          Name="Nikita"
-                                          Surname="Sedov"/>
-                    </x:Array>
-                </d:CollectionView.ItemsSource>
+            <CollectionView ItemsSource="{Binding FoundUsers}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical"/>
                 </CollectionView.ItemsLayout>
