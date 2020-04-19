@@ -26,7 +26,7 @@ namespace Workflow.ViewModels
             GetUserData = new Command(async () =>
             {
                 IsBusy = true;
-                var resp = await HttpService.GetRequest<ResponseModel<UserModel>>("user?search=89157508874");
+                var resp = await HttpService.GetRequest<ResponseModel<UserModel>>("user");
                 User = resp.Response;
                 User.GraphFormatted = $"{User.Workdays} / {User.Weekdays}";
                 User.NextWorkDay = DateTimeOffset.FromUnixTimeSeconds(User.FirstWork).DateTime;
