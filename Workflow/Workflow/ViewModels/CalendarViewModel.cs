@@ -30,36 +30,17 @@ namespace Workflow.ViewModels
         {
             User = user;
             CalendarList = new ObservableCollection<CalendarModel>();
+            MessagingCenter.Subscribe<ProfileEditViewModel, UserModel>(this, "UpdateUser", (subscriber, data) => User = data);
+            MessagingCenter.Subscribe<MainPageViewModel, UserModel>(this, "SetUser", (subscriber, data) => User = data);
             CalculateCalendar = new Command(async () =>
             {
                 IsBusy = true;
                 CalendarList.Clear();
-                if (this.User == null)
-                {
-                    var resp = await HttpService.GetRequest<ResponseModel<UserModel>>("user?search=89157508874");
-                    if (resp.Code == 200)
-                    {
-                        this.User = resp.Response;
-                        this.User.NextWorkDay = DateTimeOffset.FromUnixTimeSeconds(this.User.FirstWork).UtcDateTime;
-                    }
-                    else
-                    {
-                        return;
-                    }
-                    var list = CalculateCalendarMethod();
-                    foreach (CalendarModel day in list)
-                    {
-                        CalendarList.Add(day);
-                    }
-                }
-                else
-                {
                     var list = CalculateCalendarMethod();
                     foreach (var day in list)
                     {
                         this.CalendarList.Add(day);
                     }
-                }
                 IsBusy = false;
             });
         }
