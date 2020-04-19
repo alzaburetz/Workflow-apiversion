@@ -38,11 +38,20 @@ namespace Workflow.Models
             }
         }
         public DateTime NextWorkDay { get; set; }
+        private bool workstoday;
+        public bool Workstoday
+        {
+            get => workstoday;
+            set
+            {
+                workstoday = value;
+                OnPropertyChanged("Workstoday");
+            }
+        }
 
         public bool WorksToday()
         {
-            var span = TimeSpan.FromSeconds(FirstWork).TotalDays;
-            return (span) % (Workdays + Weekdays) <= Workdays - 1;
+            return WorksDayOf(DateTime.Now);
         }
 
         public bool WorksDayOf(DateTime day)
