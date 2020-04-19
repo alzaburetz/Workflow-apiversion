@@ -36,6 +36,7 @@ namespace Workflow.ViewModels
             {
                 IsBusy = true;
                 var resp = await HttpService.PutRequest<ResponseModel<UserModel>, UserModel>("user/update", user);
+                MessagingCenter.Send<ProfileEditViewModel, UserModel>(this, "UpdateUser", resp.Response);
                 if (resp.Code == 200)
                 {
                     if (Avatar != null)
