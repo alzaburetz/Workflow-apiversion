@@ -19,12 +19,7 @@ namespace Workflow.Views
         {
             InitializeComponent();
             BindingContext = viewModel = new CalendarViewModel();
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            viewModel.CalculateCalendar.Execute(null);
+            MessagingCenter.Subscribe<MainPage>(this, "LoadCalendar", (sender) => viewModel.CalculateCalendar.Execute(null));
         }
     }
 }
