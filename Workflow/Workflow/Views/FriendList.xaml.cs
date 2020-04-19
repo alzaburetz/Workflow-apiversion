@@ -32,5 +32,10 @@ namespace Workflow.Views
                 viewModel.GetContacts.Execute(null);
             });
         }
+
+        async void AddUserPush(object sender, EventArgs args)
+        {
+            await Navigation.PushAsync(new AddUser());
+        }
     }
 }
