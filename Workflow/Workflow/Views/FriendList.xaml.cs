@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Workflow.ViewModels;
+using Workflow.Models;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -36,6 +37,12 @@ namespace Workflow.Views
         async void AddUserPush(object sender, EventArgs args)
         {
             await Navigation.PushAsync(new AddUser());
+        }
+
+        private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var user = e.CurrentSelection[0] as UserModel;
+            await Navigation.PushAsync(new CalendarPage(user));
         }
     }
 }
