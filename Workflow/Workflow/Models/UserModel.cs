@@ -59,9 +59,9 @@ namespace Workflow.Models
             var span = (day - NextWorkDay).TotalDays;// >= 0 ? (NextWorkDay - day).TotalDays : (Workdays + Weekdays) + (NextWorkDay - day).TotalDays;
             if (span < 0)
             {
-                if (span <= -(Weekdays + Workdays))
+                if (span <= -(Weekdays + Workdays + 1))
                 {
-                    span = Math.Abs(span)  + Weekdays;
+                    span = Math.Abs(span)  + Weekdays - 1;
                 }
                 else
                 {
