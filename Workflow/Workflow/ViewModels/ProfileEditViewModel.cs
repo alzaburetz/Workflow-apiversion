@@ -36,9 +36,12 @@ namespace Workflow.ViewModels
             {
                 IsBusy = true;
                 var resp = await HttpService.PutRequest<ResponseModel<UserModel>, UserModel>("user/update", user);
-                MessagingCenter.Send<ProfileEditViewModel, UserModel>(this, "UpdateUser", resp.Response);
                 if (resp.Code == 200)
                 {
+                    user.NextWorkDay = DateTimeOffset.FromUnixTimeSeconds(user.FirstWork).DateTime;
+                    user.GraphFormatted = $"{user.Workdays} / {user.Weekdays}";
+                    MessagingCenter.Send<ProfileEditViewModel, UserModel>(this, "UpdateUser", resp.Response);
+                    MessagingCenter.Send<ProfileEditViewModel, UserModel>(this, "Update", resp.Response);
                     if (Avatar != null)
                     {
                         UploadFile.Execute(null);
