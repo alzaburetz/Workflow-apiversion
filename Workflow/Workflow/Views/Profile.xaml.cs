@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using Workflow.ViewModels;
+using Workflow.Models;
 
 namespace Workflow.Views
 {
@@ -22,6 +23,10 @@ namespace Workflow.Views
             MessagingCenter.Subscribe<MainPage>(this, "LoadProfile", (obj) =>
             {
                 viewModel.GetUserData.Execute(null);
+            });
+            MessagingCenter.Subscribe<ProfileEditViewModel, UserModel>(this, "Update", (sender, user) =>
+            {
+                viewModel.User = user;
             });
         }
 
