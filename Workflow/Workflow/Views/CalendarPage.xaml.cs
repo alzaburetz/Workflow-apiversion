@@ -21,5 +21,17 @@ namespace Workflow.Views
             BindingContext = viewModel = new CalendarViewModel();
             MessagingCenter.Subscribe<MainPage>(this, "LoadCalendar", (sender) => viewModel.CalculateCalendar.Execute(null));
         }
+
+        public CalendarPage(Workflow.Models.UserModel user)
+        {
+            InitializeComponent();
+            BindingContext = viewModel = new CalendarViewModel(user);
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            viewModel.CalculateCalendar.Execute(null);
+        }
     }
 }
