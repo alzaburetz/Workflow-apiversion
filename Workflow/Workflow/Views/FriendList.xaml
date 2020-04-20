@@ -6,28 +6,95 @@
              mc:Ignorable="d"
              xmlns:models="clr-namespace:Workflow.Models"
              xmlns:controls="clr-namespace:Workflow.Controls"
+             xmlns:circleimage="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              Title="{Binding Title}"
              x:Class="Workflow.Views.FriendList">
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="adduser"
                      Clicked="AddUserPush"/>
     </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
     <ContentPage.Content>
         <Grid Padding="10">
             <controls:GradientBox StartColor="{StaticResource DarkColor}"
-                                  Margin="-10"
-                                  EndColor="White"/>
-            <CollectionView ItemsSource="{Binding FoundUsers}">
+                                  EndColor="White"
+                                  Margin="-10"/>
+            <CollectionView ItemsSource="{Binding FoundUsers}"
+                            SelectionMode="Single"
+                            SelectionChanged="CollectionView_SelectionChanged">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Label d:Text="{Binding Name}"/>
+                        <Frame CornerRadius="20"
+                               BorderColor="Blue"
+                               IsClippedToBounds="True"
+                               BackgroundColor="{Binding Workstoday, Converter={StaticResource DayColor}}"
+                               Padding="0">
+                            <Grid Padding="20"
+                                  HeightRequest="100">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.3*"/>
+                                    <ColumnDefinition Width="0.7*"/>
+                                </Grid.ColumnDefinitions>
+                                <controls:GradientBox StartColor="Black"
+                                                      Grid.ColumnSpan="2"
+                                                      Opacity="0.3"
+                                                      Margin="-20"
+                                                      EndColor="#AAAAAA"/>
+                                <circleimage:CircleImage Source="{Binding Avatar, Converter={StaticResource Placeholder}}"
+                                                         Aspect="AspectFit"/>
+                                <StackLayout Grid.Column="1"
+                                             Padding="20"
+                                             VerticalOptions="Center">
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <FormattedString.Spans>
+                                                    <Span Text="{Binding Name}"
+                                                          FontSize="Large"
+                                                          TextColor="White"/>
+                                                    <Span Text=" "
+                                                          FontSize="Large"/>
+                                                    <Span Text="{Binding Surname}"
+                                                          FontSize="Large"
+                                                          TextColor="White"/>
+                                                </FormattedString.Spans>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <FormattedString.Spans>
+                                                    <Span Text="{Binding Workdays}"/>
+                                                    <Span Text=" / "/>
+                                                    <Span Text="{Binding Weekdays}"/>
+                                                </FormattedString.Spans>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                            </Grid>
+
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <ActivityIndicator Color="{StaticResource DarkColor}"
+                                   Scale="0.2"
+                                   IsRunning="{Binding IsBusy}"
+                                   IsVisible="{Binding IsBusy}"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
