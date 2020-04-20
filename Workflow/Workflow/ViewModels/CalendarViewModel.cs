@@ -28,20 +28,30 @@ namespace Workflow.ViewModels
         }
         public CalendarViewModel(UserModel user = null)
         {
-            User = user;
+            this.User = user;
             CalendarList = new ObservableCollection<CalendarModel>();
-            MessagingCenter.Subscribe<ProfileEditViewModel, UserModel>(this, "UpdateUser", (subscriber, data) => User = data);
-            MessagingCenter.Subscribe<MainPageViewModel, UserModel>(this, "SetUser", (subscriber, data) => User = data);
+            if (user == null)
+            {
+                MessagingCenter.Subscribe<ProfileEditViewModel, UserModel>(this, "UpdateUser", (subscriber, data) => User = data);
+                MessagingCenter.Subscribe<MainPageViewModel, UserModel>(this, "SetUser", (subscriber, data) => User = data);
+            }
             CalculateCalendar = new Command(async () =>
             {
-                IsBusy = true;
-                CalendarList.Clear();
+                try
+                {
+                    IsBusy = true;
+                    CalendarList.Clear();
                     var list = CalculateCalendarMethod();
                     foreach (var day in list)
                     {
                         this.CalendarList.Add(day);
                     }
-                IsBusy = false;
+                    IsBusy = false;
+                }
+                catch
+                {
+
+                }
             });
         }
 
