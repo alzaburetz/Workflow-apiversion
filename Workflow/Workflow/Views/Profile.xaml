@@ -59,10 +59,21 @@
                        TextColor="Black"
                        FontSize="Large"/>
                 </StackLayout>
-            </Grid>
-            <ActivityIndicator Color="{StaticResource DarkColor}"
+                <Grid IsVisible="{Binding IsBusy}"
+                                  Grid.RowSpan="2"
+                                  Grid.ColumnSpan="2"
+                                  Margin="-20">
+                    <controls:GradientBox StartColor="{StaticResource DarkColor}"
+                                  EndColor="White"/>
+
+                    <ActivityIndicator Color="{StaticResource DarkColor}"
+                                       Scale="0.2"
                                IsEnabled="{Binding IsBusy}"
+                               IsRunning="{Binding IsBusy}"
                                IsVisible="{Binding IsBusy}"/>
+                </Grid>
+            </Grid>
+            
         </Grid>
        
     </ContentPage.Content>
