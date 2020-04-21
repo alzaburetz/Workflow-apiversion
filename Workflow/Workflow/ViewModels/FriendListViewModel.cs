@@ -11,6 +11,7 @@ using System.Linq;
 
 using Workflow.Models;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace Workflow.ViewModels
 {
@@ -24,24 +25,28 @@ namespace Workflow.ViewModels
             FoundUsers = new ObservableCollection<UserModel>();
             GetContacts = new Command(async () =>
             {
-                IsBusy = true;
-                FoundUsers.Clear();
-                var contacts = await CrossContactService.Current.GetContactListAsync();
-                var numbers = contacts.SelectMany(x => x.Numbers).ToList();
-                for (int i = 0; i < numbers.Count; i++)
+                await Task.Run(async () =>
                 {
-                    var number = numbers[i];
-                    numbers[i] = Regex.Replace(number.Replace("+7", "8"), @"\D", "");
-                }
-                var resp = await HttpService.PostRequest<ResponseModel<List<UserModel>>, List<string>>("user/find",numbers);
-                if (resp.Response != null)
-                foreach (var user in resp.Response)
-                {
-                    user.NextWorkDay = DateTimeOffset.FromUnixTimeSeconds(user.FirstWork).DateTime;
-                    user.Workstoday = user.WorksToday();
-                    FoundUsers.Add(user);
-                }
-                IsBusy = false;
+                    IsBusy = true;
+                    FoundUsers.Clear();
+                    var contacts = await CrossContactService.Current.GetContactListAsync();
+                    var numbers = contacts.SelectMany(x => x.Numbers).ToList();
+                    for (int i = 0; i < numbers.Count; i++)
+                    {
+                        var number = numbers[i];
+                        numbers[i] = Regex.Replace(number.Replace("+7", "8"), @"\D", "");
+                    }
+                    var resp = await HttpService.PostRequest<ResponseModel<List<UserModel>>, List<string>>("user/find", numbers);
+                    if (resp.Response != null)
+                        foreach (var user in resp.Response)
+                        {
+                            user.NextWorkDay = DateTimeOffset.FromUnixTimeSeconds(user.FirstWork).DateTime;
+                            user.Workstoday = user.WorksToday();
+                            Device.BeginInvokeOnMainThread(() => FoundUsers.Add(user));
+                        }
+                    IsBusy = false;
+                });
+                
             });
         }
     }
