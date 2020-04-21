@@ -32,12 +32,12 @@
                             SelectionMode="Single"
                             SelectionChanged="CollectionView_SelectionChanged">
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical"/>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="20"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame CornerRadius="20"
-                               BorderColor="Blue"
                                IsClippedToBounds="True"
                                BackgroundColor="{Binding Workstoday, Converter={StaticResource DayColor}}"
                                Padding="0">
