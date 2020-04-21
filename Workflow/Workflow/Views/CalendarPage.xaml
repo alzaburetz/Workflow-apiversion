@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:controls="clr-namespace:Workflow.Controls"
+             Title="{Binding Title}"
              x:Class="Workflow.Views.CalendarPage">
     <ContentPage.Resources>
         <ResourceDictionary>
