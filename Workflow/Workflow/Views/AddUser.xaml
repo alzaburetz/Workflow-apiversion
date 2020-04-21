@@ -4,54 +4,96 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:models="clr-namespace:Workflow.Models"
              xmlns:controls="clr-namespace:Workflow.Controls"
              xmlns:behaviours="clr-namespace:Workflow.Behaviors"
+             xmlns:circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              x:Class="Workflow.Views.AddUser">
     <ContentPage.Content>
         <Grid BackgroundColor="Black">
             <controls:GradientBox StartColor="{StaticResource DarkColor}"
                                   EndColor="White"/>
-            <StackLayout Padding="60">
-                <Entry x:Name="FullName"
-                       Placeholder="Имя и фамилия"
-                       TextColor="White"
-                       Keyboard="Text"
-                       PlaceholderColor="White"/>
-                <Entry x:Name="Email"
-                       Keyboard="Email"
-                       Placeholder="E-Mail"
-                       TextColor="White"
-                       PlaceholderColor="White"/>
-                <Entry x:Name="Schedule"
-                       Placeholder="График (Рабочие / Выходные)"
-                       PlaceholderColor="White"
-                       Keyboard="Numeric"
-                       TextColor="White">
-                    <Entry.Behaviors>
-                        <behaviours:MaskedBehavior Mask="X / X"/>
-                    </Entry.Behaviors>
-                </Entry>
-                <StackLayout Spacing="-10">
-                    <Label Text="Выберите первый ближайший рабочий день:"
-                           TextColor="{StaticResource DarkColor}"
-                           FontSize="Caption"/>
-                    <controls:CustomDatePicker x:Name="FirstDay"
-                                               Date="{Binding Date}"
-                            Format="dd.MM.yyyy"
-                            TextColor="White">
-                    </controls:CustomDatePicker>
-                </StackLayout>
+            <Grid Padding="60">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
                 <Entry x:Name="Phone"
+                       VerticalOptions="Start"
                        Placeholder="Номер телефона"
+                       TextChanged="Phone_TextChanged"
                        PlaceholderColor="White"
                        TextColor="White">
                     <Entry.Behaviors>
                         <behaviours:MaskedBehavior Mask="+7 (XXX) XXX XX XX"/>
                     </Entry.Behaviors>
                 </Entry>
-                <controls:GradientButton Text="Добавить пользователя"
+                <StackLayout Grid.Row="1">
+                    <Entry x:Name="FullName"
+                       Placeholder="Имя и фамилия"
+                       TextColor="White"
+                       Keyboard="Text"
+                       PlaceholderColor="White"/>
+                    <Entry x:Name="Email"
+                       Keyboard="Email"
+                       Placeholder="E-Mail"
+                       TextColor="White"
+                       PlaceholderColor="White"/>
+                    <Entry x:Name="Schedule"
+                       Placeholder="График (Рабочие / Выходные)"
+                       PlaceholderColor="White"
+                       Keyboard="Numeric"
+                       TextColor="White">
+                        <Entry.Behaviors>
+                            <behaviours:MaskedBehavior Mask="X / X"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <StackLayout Spacing="-10">
+                        <Label Text="Выберите первый ближайший рабочий день:"
+                           TextColor="{StaticResource DarkColor}"
+                           FontSize="Caption"/>
+                        <controls:CustomDatePicker x:Name="FirstDay"
+                                               Date="{Binding Date}"
+                            Format="dd.MM.yyyy"
+                            TextColor="White">
+                        </controls:CustomDatePicker>
+                    </StackLayout>
+                    <controls:GradientButton Text="Добавить пользователя"
                                          Clicked="AddUserButton"/>
-            </StackLayout>
+                </StackLayout>
+                <StackLayout Grid.Row="1"
+                             d:IsVisible="True"
+                             BackgroundColor="White"
+                             IsVisible="{Binding Searching}">
+                    <CollectionView ItemsSource="{Binding FoundContacts}"
+                                    SelectionChanged="SelectContats"
+                                    SelectionMode="Single">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical"/>
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="10"
+                                      HeightRequest="50"
+                                      ColumnSpacing="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.2*"/>
+                                        <ColumnDefinition Width="0.8*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <circle:CircleImage Source="{Binding PhotoUriThumbnail, Converter={StaticResource Placeholder}}"
+                                                        Aspect="AspectFill"/>
+                                    <Label Text="{Binding Name}"
+                                           Grid.Column="1"
+                                           FontSize="Medium"
+                                           VerticalTextAlignment="Center"/>
+
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
