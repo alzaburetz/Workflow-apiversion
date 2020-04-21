@@ -26,6 +26,7 @@ namespace Workflow.Views
             });
             MessagingCenter.Subscribe<ProfileEditViewModel, UserModel>(this, "Update", (sender, user) =>
             {
+                user.GraphFormatted = $"{user.Workdays} / {user.Weekdays}";
                 viewModel.User = user;
             });
         }
