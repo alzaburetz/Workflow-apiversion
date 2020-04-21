@@ -61,7 +61,7 @@ namespace Workflow.Models
             {
                 if (span <= -(Weekdays + Workdays + 1))
                 {
-                    span = Math.Abs(span)  + Weekdays - 1;
+                    span = Math.Abs(span) + Workdays - 1;
                 }
                 else
                 {
