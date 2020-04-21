@@ -34,11 +34,16 @@ namespace Workflow.ViewModels
             {
                 MessagingCenter.Subscribe<ProfileEditViewModel, UserModel>(this, "UpdateUser", (subscriber, data) => User = data);
                 MessagingCenter.Subscribe<MainPageViewModel, UserModel>(this, "SetUser", (subscriber, data) => User = data);
+            } 
+            else
+            {
+                Title = $"{user.Name} {user.Surname}";
             }
             CalculateCalendar = new Command(async () =>
             {
                 try
                 {
+                    User.NextWorkDay = DateTimeOffset.FromUnixTimeSeconds(User.FirstWork).DateTime;
                     IsBusy = true;
                     CalendarList.Clear();
                     var list = CalculateCalendarMethod();
