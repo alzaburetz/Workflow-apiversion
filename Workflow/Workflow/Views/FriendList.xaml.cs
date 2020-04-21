@@ -23,15 +23,13 @@ namespace Workflow.Views
         {
             InitializeComponent();
             BindingContext = viewModel = new FriendListViewModel();
+            MessagingCenter.Subscribe<MainPage>(this, "LoadFriends", (c) => viewModel.GetContacts.Execute(null));
         }
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            await CrossPermissions.Current.RequestPermissionsAsync(Permission.Contacts).ContinueWith((obj) =>
-            {
-                viewModel.GetContacts.Execute(null);
-            });
+            //
         }
 
         async void AddUserPush(object sender, EventArgs args)
@@ -41,8 +39,18 @@ namespace Workflow.Views
 
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var user = e.CurrentSelection[0] as UserModel;
-            await Navigation.PushAsync(new CalendarPage(user));
+            try
+            {
+                var user = e.CurrentSelection[0] as UserModel;
+                await Navigation.PushAsync(new CalendarPage(user));
+
+                if ((sender as CollectionView).SelectedItem != null)
+                    (sender as CollectionView).SelectedItem = null;
+            }
+            catch
+            {
+
+            }
         }
     }
 }
