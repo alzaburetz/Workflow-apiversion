@@ -31,7 +31,8 @@ namespace Workflow.Views
             var i = this.Children.IndexOf(this.CurrentPage);
             switch (i)
             {
-                case 0: break;
+                case 0: MessagingCenter.Send<MainPage>(this, "LoadFriends");
+                    break;
                 case 1: MessagingCenter.Send<MainPage>(this, "LoadProfile");
                     break;
                 case 2: MessagingCenter.Send<MainPage>(this, "LoadCalendar");
