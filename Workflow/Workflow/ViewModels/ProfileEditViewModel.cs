@@ -10,6 +10,8 @@ using Workflow.Views;
 using Plugin.Media.Abstractions;
 using Plugin.Media;
 
+using Workflow.Services;
+
 namespace Workflow.ViewModels
 {
     public class ProfileEditViewModel:BaseViewModel
@@ -38,6 +40,19 @@ namespace Workflow.ViewModels
                 var resp = await HttpService.PutRequest<ResponseModel<UserModel>, UserModel>("user/update", user);
                 if (resp.Code == 200)
                 {
+                    resp.Response.NextWorkDay = DateTimeOffset.FromUnixTimeSeconds(resp.Response.FirstWork).DateTime;
+                    var workstoday = resp.Response.WorksToday();
+                    Color color = Color.Black;
+                    if (workstoday)
+                    {
+                        color = Color.FromHex("#ff6161");
+                    }
+                    else
+                    {
+                        color = Color.FromHex("#237547");
+                    }
+                    DependencyService.Get<ISetStatusBarColor>().SetStatusBarColor(color);
+                    App.Current.Resources["DarkColor"] = color;
                     user.NextWorkDay = DateTimeOffset.FromUnixTimeSeconds(user.FirstWork).DateTime;
                     user.GraphFormatted = $"{user.Workdays} / {user.Weekdays}";
                     MessagingCenter.Send<ProfileEditViewModel, UserModel>(this, "UpdateUser", resp.Response);
