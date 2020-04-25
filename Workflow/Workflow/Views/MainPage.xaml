@@ -5,23 +5,26 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             mc:Ignorable="d"
             xmlns:views="clr-namespace:Workflow.Views"
-            SelectedTabColor="{StaticResource DarkColor}"
+            SelectedTabColor="{DynamicResource DarkColor}"
             UnselectedTabColor="#333333"
             x:Class="Workflow.Views.MainPage">
     <TabbedPage.Children>
         <NavigationPage Title="Список людей"
+                        BarBackgroundColor="{DynamicResource DarkColor}"
                         IconImageSource="group">
             <x:Arguments>
                 <views:FriendList/>
             </x:Arguments>
         </NavigationPage>
         <NavigationPage Title="Профиль"
+                        BarBackgroundColor="{DynamicResource DarkColor}"
                         IconImageSource="profile">
             <x:Arguments>
                 <views:Profile/>
             </x:Arguments>
         </NavigationPage>
         <NavigationPage Title="Календарь"
+                        BarBackgroundColor="{DynamicResource DarkColor}"
                         IconImageSource="calendar">
             <x:Arguments>
                 <views:CalendarPage/>
