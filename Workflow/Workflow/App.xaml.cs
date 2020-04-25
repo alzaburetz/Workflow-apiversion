@@ -13,6 +13,7 @@ namespace Workflow
         {
             InitializeComponent();
             DependencyService.Register<HttpService>();
+            DependencyService.Register<ISetStatusBarColor>();
             try
             {
                 var token = Application.Current.Properties["Token"];
