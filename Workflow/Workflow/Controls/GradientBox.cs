@@ -10,6 +10,7 @@ namespace Workflow.Controls
     {
         public Color StartColor { get; set; }
         public Color EndColor { get; set; }
+        public BindableProperty startColor = BindableProperty.Create("StartColor", typeof(Color), typeof(string));
         public GradientBox()
         {
             if (StartColor == null)
