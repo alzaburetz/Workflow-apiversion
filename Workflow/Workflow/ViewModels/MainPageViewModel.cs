@@ -5,6 +5,7 @@ using System.Text;
 using Xamarin.Forms;
 using Workflow.Models;
 using Workflow.Views;
+using Workflow.Services;
 
 namespace Workflow.ViewModels
 {
@@ -24,6 +25,19 @@ namespace Workflow.ViewModels
                 }
                 else
                 {
+                    User = resp.Response;
+                    var workstoday = User.WorksToday();
+                    Color color = Color.Black;
+                    if (workstoday)
+                    {
+                        color = Color.FromHex("#ff6161");
+                    }
+                    else
+                    {
+                        color = Color.FromHex("#237547");
+                    }
+                    DependencyService.Get<ISetStatusBarColor>().SetStatusBarColor(color);
+                    App.Current.Resources["DarkColor"] = color;
                     MessagingCenter.Send<MainPageViewModel, UserModel>(this, "SetUser", resp.Response);
                 }
             });
