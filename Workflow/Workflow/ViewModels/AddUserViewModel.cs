@@ -21,6 +21,7 @@ namespace Workflow.ViewModels
         IList<Contact> Contacts { get; set; }
         public UserModel NewUser { get; set; }
         readonly INavigation Navigation;
+        Entry phone { get; set; }
         public Command AddNewUserCommand { get; set; }
         public Command LoadContactsCommand { get; set; }
         public Command FilterContacts { get; set; }
@@ -46,8 +47,9 @@ namespace Workflow.ViewModels
             }
         }
 
-        public AddUserViewModel(INavigation navigation)
+        public AddUserViewModel(INavigation navigation, Entry phon)
         {
+            this.phone = phon;
             Navigation = navigation;
             Date = DateTime.Now;
             FoundContacts = new ObservableCollection<Contact>();
@@ -76,7 +78,7 @@ namespace Workflow.ViewModels
                             contact.Numbers[i] = Regex.Replace(contact.Numbers[i].Replace("+7", "8"), @"\D", "");
                         }
                     }
-                });
+                }).ContinueWith((res) => Device.BeginInvokeOnMainThread(() => phone.Text = "+7"));
             });
             AddNewUserCommand = new Command<UserModel>(async (user) =>
             {
