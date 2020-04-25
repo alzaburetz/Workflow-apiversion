@@ -19,8 +19,10 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
-            <controls:GradientBox StartColor="{StaticResource DarkColor}"
-                                      EndColor="White"/>
+            <BoxView Color="{DynamicResource DarkColor}"/>
+            <controls:GradientBox 
+                                    StartColor="Transparent"
+                                    EndColor="White"/>
             <StackLayout VerticalOptions="FillAndExpand"
                          HorizontalOptions="FillAndExpand">
                 <Label Text="{Binding Month}"
@@ -102,7 +104,17 @@
                 </Frame>
                 
             </StackLayout>
-           
+            <Grid IsVisible="{Binding IsBusy}">
+                <BoxView Color="{DynamicResource DarkColor}"/>
+                <controls:GradientBox StartColor="Transparent"
+                                  EndColor="White"/>
+
+                <ActivityIndicator Color="{DynamicResource DarkColor}"
+                                       Scale="0.2"
+                               IsEnabled="{Binding IsBusy}"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"/>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

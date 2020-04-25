@@ -25,7 +25,9 @@
     
     <ContentPage.Content>
         <Grid Padding="10">
-            <controls:GradientBox StartColor="{StaticResource DarkColor}"
+            <BoxView Color="{DynamicResource DarkColor}"
+                     Margin="-10"/>
+            <controls:GradientBox StartColor="Transparent"
                                   EndColor="White"
                                   Margin="-10"/>
             <CollectionView ItemsSource="{Binding FoundUsers}"
@@ -91,7 +93,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <ActivityIndicator Color="{StaticResource DarkColor}"
+            <ActivityIndicator Color="{DynamicResource DarkColor}"
                                    Scale="0.2"
                                    IsRunning="{Binding IsBusy}"
                                    IsVisible="{Binding IsBusy}"/>
