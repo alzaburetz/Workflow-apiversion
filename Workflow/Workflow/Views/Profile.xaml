@@ -26,7 +26,11 @@
                     <RowDefinition Height="200"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <controls:GradientBox StartColor="{StaticResource DarkColor}"
+                <BoxView Color="{DynamicResource DarkColor}"
+                                  Grid.RowSpan="2"
+                                  Grid.ColumnSpan="2"
+                          Margin="-20"/>
+                <controls:GradientBox StartColor="Transparent"
                                   Grid.RowSpan="2"
                                   Grid.ColumnSpan="2"
                                   Margin="-20"
@@ -46,14 +50,14 @@
                 <StackLayout Grid.ColumnSpan="2"
                          Grid.Row="1">
                     <Label Text="Первый рабочий день:"
-                       TextColor="{StaticResource DarkColor}"
+                       TextColor="{DynamicResource DarkColor}"
                        FontSize="Small"/>
                     <Label Text="{Binding User.FirstWork, Converter={StaticResource TimeStampConverter}}"
                        TextColor="Black"
                        FontSize="Large"/>
                     <BoxView HeightRequest="50"/>
                     <Label Text="График работы: "
-                       TextColor="{StaticResource DarkColor}"
+                       TextColor="{DynamicResource DarkColor}"
                        FontSize="Small"/>
                     <Label Text="{Binding User.GraphFormatted}"
                        TextColor="Black"
@@ -63,10 +67,11 @@
                                   Grid.RowSpan="2"
                                   Grid.ColumnSpan="2"
                                   Margin="-20">
-                    <controls:GradientBox StartColor="{StaticResource DarkColor}"
+                    <BoxView Color="{DynamicResource DarkColor}"/>
+                    <controls:GradientBox StartColor="Transparent"
                                   EndColor="White"/>
 
-                    <ActivityIndicator Color="{StaticResource DarkColor}"
+                    <ActivityIndicator Color="{DynamicResource DarkColor}"
                                        Scale="0.2"
                                IsEnabled="{Binding IsBusy}"
                                IsRunning="{Binding IsBusy}"
