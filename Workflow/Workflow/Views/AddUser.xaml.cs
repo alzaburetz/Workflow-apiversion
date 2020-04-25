@@ -23,14 +23,14 @@ namespace Workflow.Views
         public AddUser()
         {
             InitializeComponent();
-            BindingContext = viewModel = new AddUserViewModel(this.Navigation);
+            BindingContext = viewModel = new AddUserViewModel(this.Navigation, this.Phone);
         }
 
         void AddUserButton(object sender, EventArgs args)
         {
             if (FullName.Text.Length == 0 ||
                 !FullName.Text.Contains(" ") ||
-                Schedule.Text.Length < 5 ||
+                string.IsNullOrEmpty(Schedule.Text) || Schedule.Text?.Length < 5 ||
                 Phone.Text.Length < 18)
             {
                 DisplayAlert(null, "Для продолжения введите корректные данные!", "ОК");
@@ -57,7 +57,7 @@ namespace Workflow.Views
 
         private void Phone_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (e.NewTextValue.Length > e.OldTextValue?.Length)
+            if (e.NewTextValue.Length > e.OldTextValue?.Length || string.IsNullOrEmpty(e.OldTextValue))
             {
                 viewModel.FilterContacts.Execute(Regex.Replace(e.NewTextValue.Replace("+7", "8"), @"\D", ""));
             }
