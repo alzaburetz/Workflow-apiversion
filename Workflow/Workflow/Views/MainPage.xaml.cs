@@ -37,6 +37,8 @@ namespace Workflow.Views
                     break;
                 case 2: MessagingCenter.Send<MainPage>(this, "LoadCalendar");
                     break;
+                case 3: MessagingCenter.Send<MainPage>(this, "LoadGroups");
+                    break;
             }
         }
     }

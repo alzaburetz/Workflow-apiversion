@@ -18,14 +18,14 @@ namespace Workflow.Views
         public CalendarPage()
         {
             InitializeComponent();
-            BindingContext = viewModel = new CalendarViewModel();
+            BindingContext = viewModel = new CalendarViewModel(this.Navigation);
             MessagingCenter.Subscribe<MainPage>(this, "LoadCalendar", (sender) => viewModel.CalculateCalendar.Execute(null));
         }
 
         public CalendarPage(Workflow.Models.UserModel user)
         {
             InitializeComponent();
-            BindingContext = viewModel = new CalendarViewModel(user);
+            BindingContext = viewModel = new CalendarViewModel(this.Navigation, user);
         }
 
         protected override void OnAppearing()

@@ -7,11 +7,17 @@
              xmlns:circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              xmlns:models="clr-namespace:Workflow.Models"
              xmlns:controls="clr-namespace:Workflow.Controls"
+             xmlns:font="clr-namespace:FontAwesome"
              NavigationPage.TitleView="{StaticResource NavBar}"
              x:Class="Workflow.Views.Profile">
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="edit"
-                     Clicked="EditProfile"/>
+        <ToolbarItem Clicked="EditProfile">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="{x:Static font:FontAwesomeIcons.PencilAlt}"
+                                 Size="20"
+                                 FontFamily="{StaticResource FontAwesomeSolid}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>

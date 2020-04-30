@@ -7,11 +7,17 @@
              xmlns:models="clr-namespace:Workflow.Models"
              xmlns:controls="clr-namespace:Workflow.Controls"
              xmlns:circleimage="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:font="clr-namespace:FontAwesome"
              Title="{Binding Title}"
              x:Class="Workflow.Views.FriendList">
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="adduser"
-                     Clicked="AddUserPush"/>
+        <ToolbarItem Clicked="AddUserPush">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="{x:Static font:FontAwesomeIcons.UserPlus}"
+                                 Size="20"
+                                 FontFamily="{StaticResource FontAwesomeSolid}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>

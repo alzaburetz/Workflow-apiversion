@@ -5,30 +5,50 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             mc:Ignorable="d"
             xmlns:views="clr-namespace:Workflow.Views"
+            xmlns:font="clr-namespace:FontAwesome"
             SelectedTabColor="{DynamicResource DarkColor}"
             UnselectedTabColor="#333333"
             x:Class="Workflow.Views.MainPage">
     <TabbedPage.Children>
         <NavigationPage Title="Список людей"
-                        BarBackgroundColor="{DynamicResource DarkColor}"
-                        IconImageSource="group">
+                        BarBackgroundColor="{DynamicResource DarkColor}">
             <x:Arguments>
                 <views:FriendList/>
             </x:Arguments>
+            <NavigationPage.IconImageSource>
+                <FontImageSource Glyph="{x:Static font:FontAwesomeIcons.List}"
+                                 FontFamily="{StaticResource FontAwesomeSolid}"/>
+            </NavigationPage.IconImageSource>
         </NavigationPage>
         <NavigationPage Title="Профиль"
-                        BarBackgroundColor="{DynamicResource DarkColor}"
-                        IconImageSource="profile">
+                        BarBackgroundColor="{DynamicResource DarkColor}">
             <x:Arguments>
                 <views:Profile/>
             </x:Arguments>
+            <NavigationPage.IconImageSource>
+                <FontImageSource Glyph="{x:Static font:FontAwesomeIcons.User}"
+                                 FontFamily="{StaticResource FontAwesomeSolid}"/>
+            </NavigationPage.IconImageSource>
         </NavigationPage>
         <NavigationPage Title="Календарь"
-                        BarBackgroundColor="{DynamicResource DarkColor}"
-                        IconImageSource="calendar">
+                        BarBackgroundColor="{DynamicResource DarkColor}">
             <x:Arguments>
                 <views:CalendarPage/>
             </x:Arguments>
+            <NavigationPage.IconImageSource>
+                <FontImageSource Glyph="{x:Static font:FontAwesomeIcons.CalendarAlt}"
+                                 FontFamily="{StaticResource FontAwesomeSolid}"/>
+            </NavigationPage.IconImageSource>
+        </NavigationPage>
+        <NavigationPage Title="Группы"
+                        BarBackgroundColor="{DynamicResource DarkColor}">
+            <x:Arguments>
+                <views:GroupsPage/>
+            </x:Arguments>
+            <NavigationPage.IconImageSource>
+                <FontImageSource Glyph="{x:Static font:FontAwesomeIcons.UserFriends}"
+                                 FontFamily="{StaticResource FontAwesomeSolid}"/>
+            </NavigationPage.IconImageSource>
         </NavigationPage>
     </TabbedPage.Children>
     

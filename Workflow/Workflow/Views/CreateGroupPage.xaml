@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             NavigationPage.BarBackgroundColor="{DynamicResource DarkColor}"
+             xmlns:controls="clr-namespace:Workflow.Controls"
+             x:Class="Workflow.Views.CreateGroupPage">
+    <ContentPage.Content>
+        <Grid>
+            <BoxView BackgroundColor="{DynamicResource DarkColor}"/>
+            <controls:GradientBox StartColor="Transparent"
+                                  EndColor="White"/>
+            <StackLayout Padding="60">
+                <Entry Placeholder="Название группы"
+                       x:Name="GroupName"
+                       Keyboard="Text"
+                       TextColor="White"
+                       PlaceholderColor="White"/>
+                <controls:CustomEditor x:Name="Description"
+                                       Background="White"
+                                       Padding="20"
+                                       CornerRadius="20"
+                                       TextColor="Black"
+                        VerticalOptions="FillAndExpand"
+                        Keyboard="Text"
+                        Placeholder="Описание"/>
+                <controls:GradientButton Text="Создать группу"
+                                         Clicked="CreateGroup"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

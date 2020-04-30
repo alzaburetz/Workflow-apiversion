@@ -11,6 +11,23 @@
     <Application.Resources>
         <ResourceDictionary>
             <!--Global Styles-->
+            <OnPlatform x:TypeArguments="x:String"
+                        x:Key="FontAwesomeRegular">
+                <On Platform="Android"
+                    Value="FontAwesome5Regular.otf#Regular"/>
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String"
+                        x:Key="FontAwesomeBrands">
+                <On Platform="Android"
+                    Value="FontAwesome5Brands.otf#Regular"/>
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String"
+                        x:Key="FontAwesomeSolid">
+                <On Platform="Android"
+                    Value="FontAwesome5Solid.otf#Regular"/>
+            </OnPlatform>
             <Color x:Key="MainColor">#2fa362</Color>
             <Color x:Key="DarkColor">#237547</Color>
             <Color x:Key="NavigationPrimary">#2196F3</Color>
@@ -21,7 +38,7 @@
             <converters:WorkDayColorConverter x:Key="DayColor"/>
             <converters:AvatarPlaceholderConverter x:Key="Placeholder"/>
             <OnPlatform x:TypeArguments="x:String" x:Key="Regular">
-                <On Platform="Android">Oswald-Regular.ttf#Oswald</On>
+                <On Platform="Android">OswaldRegular.ttf#Oswald</On>
             </OnPlatform>
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource DarkColor}" />

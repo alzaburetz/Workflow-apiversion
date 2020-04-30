@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Text;
+
+using Newtonsoft.Json;
+
+namespace Workflow.Models
+{
+    [Serializable]
+    public class PostModel
+    {
+        [JsonProperty("id")]
+        public string ID { get; set; }
+        [JsonProperty("group_id")]
+        public string GroupID { get; set; }
+        [JsonProperty("author")]
+        public UserModel Author { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        [JsonProperty("body")]
+        public string Body { get; set; }
+        [JsonProperty("timestamp")]
+        public string Timestamp { get; set; }
+        [JsonProperty("comments")]
+        public List<Comment> Comments { get; set; }
+        [JsonProperty("comments_count")]
+        public int CommentCount { get; set; }
+        [JsonProperty("likes")]
+        public int Likes { get; set; }
+        [JsonProperty("liked")]
+        public bool Liked { get; set; }
+        [JsonProperty("tags")]
+        public List<string> Tags { get; set; }
+    }
+}

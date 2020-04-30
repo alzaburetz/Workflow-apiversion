@@ -7,14 +7,17 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 
 using Workflow.Models;
+using Workflow.Views;
 
 namespace Workflow.ViewModels
 {
     public class CalendarViewModel : BaseViewModel
     {
+        readonly INavigation Navigation;
         public ObservableCollection<CalendarModel> CalendarList { get; set; }
         public Command GetUser { get; set; }
         public Command CalculateCalendar { get; set; }
+        public Command Edit { get; set; }
         public UserModel User { get; set; }
         private string month;
         public string Month
@@ -26,9 +29,10 @@ namespace Workflow.ViewModels
                 OnPropertyChanged("Month");
             }
         }
-        public CalendarViewModel(UserModel user = null)
+        public CalendarViewModel(INavigation navigation, UserModel user = null)
         {
             this.User = user;
+            this.Navigation = navigation;
             CalendarList = new ObservableCollection<CalendarModel>();
             if (user == null)
             {
@@ -57,6 +61,10 @@ namespace Workflow.ViewModels
                 {
 
                 }
+            });
+            Edit = new Command(async () =>
+            {
+                await Navigation.PushAsync(new CalendarEdit(new CalendarEditViewModel(this.CalendarList, this.Month)));
             });
         }
 

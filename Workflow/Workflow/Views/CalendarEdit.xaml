@@ -5,18 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:controls="clr-namespace:Workflow.Controls"
-             xmlns:font="clr-namespace:FontAwesome"
-             Title="{Binding Title}"
-             x:Class="Workflow.Views.CalendarPage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding Edit}">
-            <ToolbarItem.IconImageSource>
-                <FontImageSource Glyph="{x:Static font:FontAwesomeIcons.Edit}"
-                                 Size="20"
-                                 FontFamily="{StaticResource FontAwesomeSolid}"/>
-            </ToolbarItem.IconImageSource>
-        </ToolbarItem>
-    </ContentPage.ToolbarItems>
+             x:Name="CalEdit"
+             x:Class="Workflow.Views.CalendarEdit">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Label">
@@ -106,13 +96,17 @@
                                    TextColor="{Binding IsThisMonth, Converter={StaticResource ThisMonth}}"
                                    VerticalTextAlignment="Center"
                                    HorizontalTextAlignment="Center"/>
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.InvertDay, Source={x:Reference CalEdit}}"
+                                                                  CommandParameter="{Binding .}"/>
+                                        </Grid.GestureRecognizers>
                                     </Grid>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
                         </Grid>
                     </StackLayout>
                 </Frame>
-                
+
             </StackLayout>
             <Grid IsVisible="{Binding IsBusy}">
                 <BoxView Color="{DynamicResource DarkColor}"/>

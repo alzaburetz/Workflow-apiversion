@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:controls="clr-namespace:Workflow.Controls"
+             x:Class="Workflow.Views.GroupPage">
+    <ContentPage.Content>
+        <Grid>
+            <BoxView BackgroundColor="{DynamicResource DarkColor}"/>
+            <controls:GradientBox StartColor="Transparent"
+                                  EndColor="White"/>
+            <ScrollView>
+                <StackLayout Padding="20"
+                             Spacing="10">
+                    <Frame CornerRadius="20">
+                        <StackLayout>
+                            <Label d:Text="Название группы"
+                           TextColor="Black"
+                           FontSize="Large"
+                           FontAttributes="Bold"
+                           Text="{Binding Group.Name}"/>
+
+                            <Label d:Text="is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                           BackgroundColor="White"
+                           Text="{Binding Group.Description}"/>
+                        </StackLayout>
+                    </Frame>
+                    <Label Text="Записи"
+                           Padding="20"
+                           BackgroundColor="White"
+                           Margin="-20,0,-20,0"/>
+                    <Entry BackgroundColor="White"
+                           x:Name="PostName"/>
+                    <controls:CustomEditor BackgroundColor="White"
+                                           CornerRadius="20"
+                                           Padding="40"
+                                           x:Name="Body"/>
+                    <controls:GradientButton Text="Отправить"
+                                             Clicked="CreatePost"/>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

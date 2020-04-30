@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:fontawesome="clr-namespace:FontAwesome"
+             xmlns:controls="clr-namespace:Workflow.Controls"
+             x:Class="Workflow.Views.GroupsPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="CreateGroup">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="{x:Static fontawesome:FontAwesomeIcons.Plus}"
+                                Size="24"
+                                FontFamily="{StaticResource FontAwesomeSolid}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Image>
+                <Image.Source>
+                    <FontImageSource Glyph="{x:Static fontawesome:FontAwesomeIcons.Search}"
+                                     Size="24"
+                                     FontFamily="{StaticResource FontAwesomeSolid}"/>
+                </Image.Source>
+            </Image>
+            <Entry Placeholder="Поиск группы"
+                   PlaceholderColor="White"
+                   Keyboard="Text"
+                   x:Name="Search"
+                   TextColor="White"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid>
+            <BoxView BackgroundColor="{DynamicResource DarkColor}"/>
+            <controls:GradientBox StartColor="Transparent"
+                                  EndColor="White"/>
+            <CollectionView ItemsSource="{Binding MyGroups}"
+                            SelectionChanged="OpenGroup"
+                            SelectionMode="Single" 
+                            x:Name="Groups"
+                            Margin="15">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="20"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="20"
+                               HasShadow="False">
+                            <StackLayout>
+                                <Label Text="{Binding Name}"
+                                       FontAttributes="Bold"
+                                       TextColor="Black"
+                                       FontSize="Large"/>
+                                <Label Text="{Binding Description}"
+                                       FontSize="Micro"/>
+                                <Label Text="{Binding UserCount, StringFormat='Количество учасников: {0}'}"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <ActivityIndicator Color="{DynamicResource DarkColor}"
+                               Scale="0.2"
+                               IsRunning="{Binding IsBusy}"
+                               IsEnabled="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
