@@ -5,7 +5,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:controls="clr-namespace:Workflow.Controls"
+             xmlns:converters="clr-namespace:Workflow.Converters"
+             xmlns:circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:font="clr-namespace:FontAwesome"
+             x:Name="GroupPg"
              x:Class="Workflow.Views.GroupPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:LikedConverter x:Key="Like"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
             <BoxView BackgroundColor="{DynamicResource DarkColor}"/>
@@ -31,16 +40,128 @@
                            Padding="20"
                            BackgroundColor="White"
                            Margin="-20,0,-20,0"/>
-                    <Entry BackgroundColor="White"
-                           x:Name="PostName"/>
-                    <controls:CustomEditor BackgroundColor="White"
-                                           CornerRadius="20"
+                    <Grid HeightRequest="150">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="100"/>
+                        </Grid.RowDefinitions>
+                        <BoxView BackgroundColor="White"
+                                 Margin="0,30,0,30"
+                                 Grid.RowSpan="2"/>
+                        <Entry TextColor="Black"
+                               BackgroundColor="White"
+                                FontAttributes="Bold"
+                                Placeholder="Название поста"
+                                x:Name="PostName"/>
+                        <controls:CustomEditor Background="White"
+                                               Grid.Row="1"
+                                           HeightRequest="200"
+                                           CornerRadius="50"
+                                           TextColor="Black"
                                            Padding="40"
                                            x:Name="Body"/>
+                    </Grid>
                     <controls:GradientButton Text="Отправить"
                                              Clicked="CreatePost"/>
+                    <StackLayout BindableLayout.ItemsSource="{Binding Posts}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame CornerRadius="20">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="50"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="20"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.4*"/>
+                                            <ColumnDefinition Width="0.4*"/>
+                                            <ColumnDefinition Width="0.2*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.ColumnSpan="3">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <circle:CircleImage Source="{Binding Author.Avatar, Converter={x:StaticResource Placeholder}}"
+                                                                VerticalOptions="FillAndExpand"
+                                                                HorizontalOptions="Start"
+                                                                Aspect="AspectFit"/>
+                                            <Label Grid.Column="1"
+                                                   VerticalTextAlignment="Center"
+                                                   FontSize="Medium">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <FormattedString.Spans>
+                                                            <Span Text="{Binding Author.Name}"/>
+                                                            <Span Text=" "/>
+                                                            <Span Text="{Binding Author.Surname}"/>
+                                                        </FormattedString.Spans>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </Grid>
+
+                                        <Label Text="{Binding Name}"
+                                               Grid.Row="1"
+                                               FontSize="Large"
+                                               FontAttributes="Bold"
+                                               Grid.ColumnSpan="3"/>
+                                        <Label Text="{Binding Body, Converter={StaticResource ShortText}}"
+                                               Grid.Row="2"
+                                               FontSize="Default"
+                                               Grid.ColumnSpan="3"/>
+                                        <StackLayout Orientation="Horizontal"
+                                                     
+                                                     Grid.Row="3">
+                                            <Image>
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="{x:Static font:FontAwesomeIcons.Heart}"
+                                                                     Color="{Binding Liked, Converter={x:StaticResource Like}}"
+                                                                     FontFamily="{StaticResource FontAwesomeRegular}"/>
+                                                </Image.Source>
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.LikePost, Source={x:Reference GroupPg}}"
+                                                                          CommandParameter="{Binding .}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                            <Label Text="{Binding Likes}"
+                                                   VerticalOptions="CenterAndExpand"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal"
+                                                     VerticalOptions="CenterAndExpand"
+                                                     Grid.Row="3"
+                                                     Grid.Column="1">
+                                            <Image ClassId="{Binding ID}">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="{x:Static font:FontAwesomeIcons.Comment}"
+                                                                     Color="Black"
+                                                                     FontFamily="{StaticResource FontAwesomeRegular}"/>
+                                                </Image.Source>
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="OpenPost"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                            <Label Text="{Binding CommentCount}"
+                                                   VerticalOptions="CenterAndExpand"/>
+                                        </StackLayout>
+                                        <Label Text="{Binding Timestamp, Converter={x:StaticResource TimeStampConverter}}"
+                                               FontSize="Micro"
+                                               HorizontalOptions="EndAndExpand"
+                                               Grid.Column="2"
+                                               Grid.Row="3"/>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
                 </StackLayout>
             </ScrollView>
+            <ActivityIndicator Color="{DynamicResource DarkColor}"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               IsEnabled="{Binding IsBusy}"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
