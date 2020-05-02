@@ -17,6 +17,7 @@ namespace Workflow.ViewModels
         {
             CheckUser = new Command(async () =>
             {
+                var token = DependencyService.Get<IFirebaseTokenObtainer>().GetFirebaseToken();
                 var resp = await HttpService.GetRequest<ResponseModel<UserModel>>("user");
                 resp.Response.NextWorkDay = DateTimeOffset.FromUnixTimeSeconds(resp.Response.FirstWork).UtcDateTime;
                 if (resp.Response.Workdays == 0)
@@ -39,6 +40,14 @@ namespace Workflow.ViewModels
                     DependencyService.Get<ISetStatusBarColor>().SetStatusBarColor(color);
                     App.Current.Resources["DarkColor"] = color;
                     MessagingCenter.Send<MainPageViewModel, UserModel>(this, "SetUser", resp.Response);
+                    if (User.Push != token)
+                    {
+                        User.Push = token;
+                        System.Threading.Tasks.Task.Run(async () =>
+                        {
+                            await HttpService.PutRequest<ResponseModel<UserModel>, UserModel>("user/update", this.User);
+                        });
+                    }
                 }
             });
         }
