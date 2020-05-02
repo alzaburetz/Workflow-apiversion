@@ -20,6 +20,11 @@ namespace Workflow.Views
         {
             InitializeComponent();
             BindingContext = viewModel = vm;
+            MessagingCenter.Subscribe<GroupPageViewModel>(this, "ClearEntries", (s) =>
+            {
+                PostName.Text = "";
+                Body.Text = "";
+            });
         }
 
         protected override void OnAppearing()
@@ -37,6 +42,13 @@ namespace Workflow.Views
             };
 
             viewModel.CreatePost.Execute(post);
+        }
+
+        async void OpenPost(object sender, EventArgs args)
+        {
+            var post_id = (sender as Image).ClassId;
+            var post = viewModel.Posts.First(x => x.ID == post_id);
+            await Navigation.PushAsync(new PostPage(new PostViewModel(post)));
         }
     }
 }
