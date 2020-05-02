@@ -5,10 +5,12 @@ using System.Text;
 
 using Newtonsoft.Json;
 
+using Workflow.ViewModels;
+
 namespace Workflow.Models
 {
     [Serializable]
-    public class PostModel
+    public class PostModel:ModelChanged
     {
         [JsonProperty("id")]
         public string ID { get; set; }
@@ -26,10 +28,30 @@ namespace Workflow.Models
         public List<Comment> Comments { get; set; }
         [JsonProperty("comments_count")]
         public int CommentCount { get; set; }
+        [JsonIgnore]
+        int _likes;
         [JsonProperty("likes")]
-        public int Likes { get; set; }
+        public int Likes
+        {
+            get => _likes;
+            set
+            {
+                _likes = value;
+                OnPropertyChanged("Likes");
+            }
+        }
+        [JsonIgnore]
+        bool _liked;
         [JsonProperty("liked")]
-        public bool Liked { get; set; }
+        public bool Liked
+        {
+            get => _liked;
+            set
+            {
+                _liked = value;
+                OnPropertyChanged("Liked");
+            }
+        }
         [JsonProperty("tags")]
         public List<string> Tags { get; set; }
     }
