@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "270394628656",
+    "firebase_url": "https://workflow-f69ad.firebaseio.com",
+    "project_id": "workflow-f69ad",
+    "storage_bucket": "workflow-f69ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270394628656:android:74f799be3323556deaebf5",
+        "android_client_info": {
+          "package_name": "ru.alzaburetz.workflow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "270394628656-4ri5kuhj5h2uvk2mmume2u2rblligt4n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_7gJm2pidnxGuNtitB4h_7IK_F4HGdbw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "270394628656-4ri5kuhj5h2uvk2mmume2u2rblligt4n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
