@@ -24,6 +24,7 @@ namespace Workflow.Services
                 BaseAddress = new System.Uri("https://workflow-2020.herokuapp.com/api")
             };
             this.Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            
             SerializerSettings = new JsonSerializerSettings()
             {
                 MissingMemberHandling = MissingMemberHandling.Ignore,
@@ -71,7 +72,12 @@ namespace Workflow.Services
                     this.Client.DefaultRequestHeaders.Add("Token", this.Token);
                 }
             }
-            var form = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+            var json = string.Empty;
+            if (typeof(D) == typeof(string))
+                json = (D)(object)data as string;
+            else
+                json = JsonConvert.SerializeObject(data);
+            var form = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await Client.PostAsync(string.Concat("api/",endpoint), form);
             var body = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(body);
@@ -86,6 +92,8 @@ namespace Workflow.Services
             var form = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
             var response = await Client.PutAsync(string.Concat("api/", endpoint), form);
             var body = await response.Content.ReadAsStringAsync();
+            if (typeof(T) == typeof(string))
+                return (T)(object)body;
             return JsonConvert.DeserializeObject<T>(body);
         }
 
