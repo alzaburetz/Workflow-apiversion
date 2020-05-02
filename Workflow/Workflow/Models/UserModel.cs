@@ -37,6 +37,10 @@ namespace Workflow.Models
                 OnPropertyChanged("GraphFormatted");
             }
         }
+        [JsonProperty("push_token")]
+        public string Push { get; set; }
+        [JsonProperty("schedule")]
+        public List<CalendarModel> Schedule { get; set; }
         public DateTime NextWorkDay { get; set; }
         private bool workstoday;
         public bool Workstoday
