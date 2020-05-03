@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -73,6 +74,17 @@ namespace Workflow.Models
                 }
             }
             return (span) % (Workdays + Weekdays) <= Workdays - 1;
+        }
+        public List<CalendarModel> SortCalendar()
+        {
+            List<CalendarModel> result = new List<CalendarModel>();
+            for (int i = 0; i < this.Schedule.Count; i++)
+            {
+                var day = this.Schedule[i];
+                day.NumberOfWeek = i / 7;
+                result.Add(day);
+            }
+            return result;
         }
     }
 }
