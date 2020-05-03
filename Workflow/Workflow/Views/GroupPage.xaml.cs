@@ -25,6 +25,19 @@ namespace Workflow.Views
                 PostName.Text = "";
                 Body.Text = "";
             });
+            Body.TextChanged += (sender, args) =>
+            {
+                if (!string.IsNullOrEmpty(args.NewTextValue))
+                {
+                    if (args.NewTextValue[args.NewTextValue.Length - 1] == ' ' && args.NewTextValue.Contains('#'))
+                    {
+                        int hash_index = args.NewTextValue.IndexOf('#');
+                        var tag = args.NewTextValue.Substring(hash_index);
+                        Device.BeginInvokeOnMainThread(() => viewModel.Tags.Add(tag.Trim()));
+                        Body.Text = Body.Text.Remove(hash_index);
+                    }
+                }
+            };
         }
 
         protected override void OnAppearing()
