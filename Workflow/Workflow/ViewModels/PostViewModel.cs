@@ -65,8 +65,11 @@ namespace Workflow.ViewModels
                     var resp = await HttpService.PostRequest<ResponseModel<Comment>, Comment>($"groups/{Post.GroupID}/posts/{Post.ID}/comments/add", Comment, true);
                     if (resp.Code == 200)
                     {
-                        Device.BeginInvokeOnMainThread(() => Comments.Add(resp.Response));
-                        MessagingCenter.Send<PostViewModel>(this, "ClearEntry");
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            Comments.Add(resp.Response);
+                            MessagingCenter.Send<PostViewModel>(this, "ClearEntry");
+                        });
                     }
                 });
             });
