@@ -8,6 +8,7 @@ using Xamarin.Forms;
 
 using Workflow.Models;
 using Workflow.Views;
+using System.Linq;
 
 namespace Workflow.ViewModels
 {
@@ -37,8 +38,12 @@ namespace Workflow.ViewModels
             if (user == null)
             {
                 MessagingCenter.Subscribe<ProfileEditViewModel, UserModel>(this, "UpdateUser", (subscriber, data) => User = data);
-                MessagingCenter.Subscribe<MainPageViewModel, UserModel>(this, "SetUser", (subscriber, data) => User = data);
-            } 
+                MessagingCenter.Subscribe<MainPageViewModel, UserModel>(this, "SetUser", (subscriber, data) =>
+                {
+                    User = data;
+                    this.User.Schedule = User.SortCalendar();
+                });
+            }
             else
             {
                 Title = $"{user.Name} {user.Surname}";
@@ -50,7 +55,11 @@ namespace Workflow.ViewModels
                     User.NextWorkDay = DateTimeOffset.FromUnixTimeSeconds(User.FirstWork).DateTime;
                     IsBusy = true;
                     CalendarList.Clear();
-                    var list = CalculateCalendarMethod();
+                    var list = new List<CalendarModel>();
+                    if (User.Schedule[21].Month == DateTime.Now.Month)
+                        list = User.Schedule;
+                    else
+                        list = CalculateCalendarMethod();
                     foreach (var day in list)
                     {
                         this.CalendarList.Add(day);
@@ -64,7 +73,17 @@ namespace Workflow.ViewModels
             });
             Edit = new Command(async () =>
             {
-                await Navigation.PushAsync(new CalendarEdit(new CalendarEditViewModel(this.CalendarList, this.Month)));
+                var list = new List<CalendarModel>();
+                list.AddRange(this.CalendarList.ToList());
+                await Navigation.PushAsync(new CalendarEdit(new CalendarEditViewModel(list, this.Month)));
+            });
+            MessagingCenter.Subscribe<CalendarEdit, List<CalendarModel>>(this, "UpdateCalendar", (s, calendar) =>
+            {
+                Task.Run(async () =>
+                {
+                    this.User.Schedule = calendar;
+                    var resp = await HttpService.PutRequest<ResponseModel<UserModel>, UserModel>("user/update", this.User);
+                });
             });
         }
 
