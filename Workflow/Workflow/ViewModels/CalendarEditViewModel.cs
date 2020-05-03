@@ -32,10 +32,14 @@ namespace Workflow.ViewModels
                 OnPropertyChanged("Month");
             }
         }
-        public CalendarEditViewModel(ObservableCollection<CalendarModel> calendar, string month)
+        public CalendarEditViewModel(List<CalendarModel> calendar, string month)
         {
             this.Month = month;
-            this.CalendarList = calendar;
+            this.CalendarList = new ObservableCollection<CalendarModel>();
+            foreach (var day in calendar)
+            {
+                CalendarList.Add(day);
+            }
             InvertDay = new Command<CalendarModel>((day) =>
             {
                 day.Workday = !day.Workday;
