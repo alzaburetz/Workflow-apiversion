@@ -97,7 +97,7 @@
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
                                     <Grid
-                               Grid.Column="{Binding DayOfWeek}"
+                               Grid.Column="{Binding DayOfWeek, Converter={StaticResource WeekDay}}"
                                Grid.Row="{Binding NumberOfWeek}">
                                         <BoxView BackgroundColor="{Binding Workday, Converter={StaticResource DayColor}}"
                                      CornerRadius="25"/>
