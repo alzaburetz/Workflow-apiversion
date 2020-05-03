@@ -71,7 +71,8 @@
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="50"/>
                                             <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="20"/>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
@@ -114,7 +115,7 @@
                                                Grid.ColumnSpan="3"/>
                                         <StackLayout Orientation="Horizontal"
                                                      
-                                                     Grid.Row="3">
+                                                     Grid.Row="4">
                                             <Image>
                                                 <Image.Source>
                                                     <FontImageSource Glyph="{x:Static font:FontAwesomeIcons.Heart}"
@@ -131,7 +132,7 @@
                                         </StackLayout>
                                         <StackLayout Orientation="Horizontal"
                                                      VerticalOptions="CenterAndExpand"
-                                                     Grid.Row="3"
+                                                     Grid.Row="4"
                                                      Grid.Column="1">
                                             <Image ClassId="{Binding ID}">
                                                 <Image.Source>
@@ -146,11 +147,27 @@
                                             <Label Text="{Binding CommentCount}"
                                                    VerticalOptions="CenterAndExpand"/>
                                         </StackLayout>
+                                        <FlexLayout Grid.Row="3"
+                                                    Grid.ColumnSpan="3"
+                                                    AlignItems="Stretch"
+                                                    BindableLayout.ItemsSource="{Binding Tags}">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Frame CornerRadius="20"
+                                                           Margin="5"
+                                                           BackgroundColor="LightGray"
+                                                           Padding="5">
+                                                        <Label Text="{Binding}"/>
+                                                    </Frame>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </FlexLayout>
                                         <Label Text="{Binding Timestamp, Converter={x:StaticResource TimeStampConverter}}"
                                                FontSize="Micro"
+                                               VerticalTextAlignment="Center"
                                                HorizontalOptions="EndAndExpand"
                                                Grid.Column="2"
-                                               Grid.Row="3"/>
+                                               Grid.Row="4"/>
                                     </Grid>
                                 </Frame>
                             </DataTemplate>
