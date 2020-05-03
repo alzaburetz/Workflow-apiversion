@@ -48,11 +48,27 @@
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
-                            <Label Grid.Row="1"
-                                   Grid.ColumnSpan="2"
-                                   Text="{Binding Post.Body}"
+                            <StackLayout Grid.Row="1"
+                                   Grid.ColumnSpan="2">
+                                <Label Text="{Binding Post.Body}"
                                 d:Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
+                                <FlexLayout AlignItems="Stretch"
+                                        BindableLayout.ItemsSource="{Binding Post.Tags}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame CornerRadius="20"
+                                                           Margin="5"
+                                                           BackgroundColor="LightGray"
+                                                           Padding="5">
+                                                <Label Text="{Binding}"/>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </FlexLayout>
 
+                            </StackLayout>
+                                   
+                           
                         </Grid>
                     </Frame>
                     <Label Text="Комментарии"
@@ -95,6 +111,7 @@
                                             </Label>
                                             <Label Text="{Binding Body}"
                                                VerticalOptions="Start"/>
+                                            
                                         </StackLayout>
                                     </Grid>
                                 </Frame>
