@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:controls="clr-namespace:Workflow.Controls"
+             NavigationPage.HasBackButton="False"
              x:Name="CalEdit"
              x:Class="Workflow.Views.CalendarEdit">
     <ContentPage.Resources>
@@ -18,107 +19,113 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <Grid>
-            <BoxView Color="{DynamicResource DarkColor}"/>
-            <controls:GradientBox 
+        <StackLayout>
+            <Grid>
+                <BoxView Color="{DynamicResource DarkColor}"/>
+                <controls:GradientBox 
                                     StartColor="Transparent"
                                     EndColor="White"/>
-            <StackLayout VerticalOptions="FillAndExpand"
+                <StackLayout VerticalOptions="FillAndExpand"
                          HorizontalOptions="FillAndExpand">
-                <Label Text="{Binding Month}"
+                    <Label Text="{Binding Month}"
                        TextColor="White"
                        FontSize="Large"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="Center"/>
-                <Frame CornerRadius="25"
+                    <Frame CornerRadius="25"
                        Padding="15"
                        Margin="20"
                        BackgroundColor="White"
                        VerticalOptions="CenterAndExpand"
                        HorizontalOptions="CenterAndExpand">
-                    <StackLayout>
-                        <Grid
+                        <StackLayout>
+                            <Grid
                       HeightRequest="40">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.14*"/>
-                                <ColumnDefinition Width="0.14*"/>
-                                <ColumnDefinition Width="0.14*"/>
-                                <ColumnDefinition Width="0.14*"/>
-                                <ColumnDefinition Width="0.14*"/>
-                                <ColumnDefinition Width="0.14*"/>
-                                <ColumnDefinition Width="0.14*"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Text="ПН"
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.14*"/>
+                                    <ColumnDefinition Width="0.14*"/>
+                                    <ColumnDefinition Width="0.14*"/>
+                                    <ColumnDefinition Width="0.14*"/>
+                                    <ColumnDefinition Width="0.14*"/>
+                                    <ColumnDefinition Width="0.14*"/>
+                                    <ColumnDefinition Width="0.14*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="ПН"
                            Grid.Column="0"/>
-                            <Label Text="ВТ"
+                                <Label Text="ВТ"
                            Grid.Column="1"/>
-                            <Label Text="СР"
+                                <Label Text="СР"
                            Grid.Column="2"/>
-                            <Label Text="ЧТ"
+                                <Label Text="ЧТ"
                            Grid.Column="3"/>
-                            <Label Text="ПТ"
+                                <Label Text="ПТ"
                            Grid.Column="4"/>
-                            <Label Text="СБ"
+                                <Label Text="СБ"
                            Grid.Column="5"/>
-                            <Label Text="ВС"
+                                <Label Text="ВС"
                            Grid.Column="6"/>
-                        </Grid>
-                        <Grid 
+                            </Grid>
+                            <Grid 
                   VerticalOptions="FillAndExpand"
                   HorizontalOptions="FillAndExpand"
                   BindableLayout.ItemsSource="{Binding CalendarList}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.14*"/>
-                                <RowDefinition Height="0.14*"/>
-                                <RowDefinition Height="0.14*"/>
-                                <RowDefinition Height="0.14*"/>
-                                <RowDefinition Height="0.14*"/>
-                                <RowDefinition Height="0.14*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.14*"/>
-                                <ColumnDefinition Width="0.14*"/>
-                                <ColumnDefinition Width="0.14*"/>
-                                <ColumnDefinition Width="0.14*"/>
-                                <ColumnDefinition Width="0.14*"/>
-                                <ColumnDefinition Width="0.14*"/>
-                                <ColumnDefinition Width="0.14*"/>
-                            </Grid.ColumnDefinitions>
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid
-                               Grid.Column="{Binding DayOfWeek}"
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.14*"/>
+                                    <RowDefinition Height="0.14*"/>
+                                    <RowDefinition Height="0.14*"/>
+                                    <RowDefinition Height="0.14*"/>
+                                    <RowDefinition Height="0.14*"/>
+                                    <RowDefinition Height="0.14*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.14*"/>
+                                    <ColumnDefinition Width="0.14*"/>
+                                    <ColumnDefinition Width="0.14*"/>
+                                    <ColumnDefinition Width="0.14*"/>
+                                    <ColumnDefinition Width="0.14*"/>
+                                    <ColumnDefinition Width="0.14*"/>
+                                    <ColumnDefinition Width="0.14*"/>
+                                </Grid.ColumnDefinitions>
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid
+                               Grid.Column="{Binding DayOfWeek, Converter={StaticResource WeekDay}}"
                                Grid.Row="{Binding NumberOfWeek}">
-                                        <BoxView BackgroundColor="{Binding Workday, Converter={StaticResource DayColor}}"
+                                            <BoxView BackgroundColor="{Binding Workday, Converter={StaticResource DayColor}}"
                                      CornerRadius="25"/>
-                                        <Label Text="{Binding DayOfMonth}"
+                                            <Label Text="{Binding DayOfMonth}"
                                    FontSize="Medium"
                                    TextColor="{Binding IsThisMonth, Converter={StaticResource ThisMonth}}"
                                    VerticalTextAlignment="Center"
                                    HorizontalTextAlignment="Center"/>
-                                        <Grid.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.InvertDay, Source={x:Reference CalEdit}}"
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.InvertDay, Source={x:Reference CalEdit}}"
                                                                   CommandParameter="{Binding .}"/>
-                                        </Grid.GestureRecognizers>
-                                    </Grid>
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                        </Grid>
-                    </StackLayout>
-                </Frame>
+                                            </Grid.GestureRecognizers>
+                                        </Grid>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </Grid>
+                        </StackLayout>
+                    </Frame>
 
-            </StackLayout>
-            <Grid IsVisible="{Binding IsBusy}">
-                <BoxView Color="{DynamicResource DarkColor}"/>
-                <controls:GradientBox StartColor="Transparent"
+                </StackLayout>
+                <Grid IsVisible="{Binding IsBusy}">
+                    <BoxView Color="{DynamicResource DarkColor}"/>
+                    <controls:GradientBox StartColor="Transparent"
                                   EndColor="White"/>
 
-                <ActivityIndicator Color="{DynamicResource DarkColor}"
+                    <ActivityIndicator Color="{DynamicResource DarkColor}"
                                        Scale="0.2"
                                IsEnabled="{Binding IsBusy}"
                                IsRunning="{Binding IsBusy}"
                                IsVisible="{Binding IsBusy}"/>
+                </Grid>
             </Grid>
-        </Grid>
+            <controls:GradientButton Text="Обновить календарь"
+                                     Clicked="UpdateCalendar"
+                                     Margin="40"/>
+        </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>
