@@ -15,12 +15,14 @@ namespace Workflow.ViewModels
     {
         public GroupModel Group { get; set; }
         public ObservableCollection<PostModel> Posts { get; set; }
+        public ObservableCollection<string> Tags { get; set; }
         public Command LoadPosts { get; set; }
         public Command CreatePost { get; set; }
         public Command LikePost { get; set; }
         public GroupPageViewModel(GroupModel group)
         {
             Group = group;
+            Tags = new ObservableCollection<string>();
             LikePost = new Command<PostModel>((post) =>
             {
                 post.Liked = !post.Liked;
