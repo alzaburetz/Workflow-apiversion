@@ -40,10 +40,11 @@
                            Padding="20"
                            BackgroundColor="White"
                            Margin="-20,0,-20,0"/>
-                    <Grid HeightRequest="150">
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
                             <RowDefinition Height="100"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <BoxView BackgroundColor="White"
                                  Margin="0,30,0,30"
@@ -56,10 +57,28 @@
                         <controls:CustomEditor Background="White"
                                                Grid.Row="1"
                                            HeightRequest="200"
-                                           CornerRadius="50"
                                            TextColor="Black"
-                                           Padding="40"
+                                           Padding="20"
                                            x:Name="Body"/>
+                        <FlexLayout Grid.Row="2"
+                                    JustifyContent="Start"
+                                    Direction="Row"
+                                    Wrap="Wrap"
+                                    BindableLayout.ItemsSource="{Binding Tags}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame BackgroundColor="LightGray"
+                                           Margin="2"
+                                           FlexLayout.AlignSelf="Start"
+                                           CornerRadius="15"
+                                           Padding="5">
+                                        <Label Text="{Binding .}"
+                                               VerticalTextAlignment="Center"
+                                               HorizontalTextAlignment="Center"/>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </FlexLayout>
                     </Grid>
                     <controls:GradientButton Text="Отправить"
                                              Clicked="CreatePost"/>
@@ -150,6 +169,7 @@
                                         <FlexLayout Grid.Row="3"
                                                     Grid.ColumnSpan="3"
                                                     AlignItems="Stretch"
+                                                    Wrap="Wrap"
                                                     BindableLayout.ItemsSource="{Binding Tags}">
                                             <BindableLayout.ItemTemplate>
                                                 <DataTemplate>
