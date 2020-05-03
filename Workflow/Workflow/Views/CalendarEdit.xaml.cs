@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Workflow.ViewModels;
+using Workflow.Models;
 
 namespace Workflow.Views
 {
@@ -18,6 +19,13 @@ namespace Workflow.Views
         {
             InitializeComponent();
             BindingContext = viewModel = vm;
+            var parent = this.Parent;
+        }
+
+        protected async void UpdateCalendar(object sender, EventArgs args)
+        {
+            MessagingCenter.Send<CalendarEdit, List<CalendarModel>>(this, "UpdateCalendar", viewModel.CalendarList.ToList());
+            await Navigation.PopAsync();
         }
     }
 }
