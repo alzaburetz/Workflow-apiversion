@@ -36,7 +36,7 @@ namespace Workflow.ViewModels
                         var number = numbers[i];
                         numbers[i] = Regex.Replace(number.Replace("+7", "8"), @"\D", "");
                     }
-                    var resp = await HttpService.PostRequest<ResponseModel<List<UserModel>>, List<string>>("user/find", numbers);
+                    var resp = await HttpService.PostRequest<ResponseModel<List<UserModel>>, List<string>>("user/find", numbers,true);
                     if (resp.Response != null)
                         foreach (var user in resp.Response)
                         {
