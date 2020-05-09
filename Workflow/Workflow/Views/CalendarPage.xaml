@@ -6,17 +6,9 @@
              mc:Ignorable="d"
              xmlns:controls="clr-namespace:Workflow.Controls"
              xmlns:font="clr-namespace:FontAwesome"
+             xmlns:converters="clr-namespace:Workflow.Converters"
              Title="{Binding Title}"
              x:Class="Workflow.Views.CalendarPage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding Edit}">
-            <ToolbarItem.IconImageSource>
-                <FontImageSource Glyph="{x:Static font:FontAwesomeIcons.Edit}"
-                                 Size="20"
-                                 FontFamily="{StaticResource FontAwesomeSolid}"/>
-            </ToolbarItem.IconImageSource>
-        </ToolbarItem>
-    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Label">
@@ -29,17 +21,50 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
-            <BoxView Color="{DynamicResource DarkColor}"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.9*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.8*"/>
+                <ColumnDefinition Width="0.2*"/>
+            </Grid.ColumnDefinitions>
+            <BoxView Color="{DynamicResource DarkColor}"
+                     Grid.ColumnSpan="2"
+                     Grid.RowSpan="2"/>
             <controls:GradientBox 
                                     StartColor="Transparent"
-                                    EndColor="White"/>
+                                    EndColor="White"
+                Grid.ColumnSpan="2"
+                     Grid.RowSpan="2"/>
             <StackLayout VerticalOptions="FillAndExpand"
-                         HorizontalOptions="FillAndExpand">
-                <Label Text="{Binding Month}"
+                         HorizontalOptions="FillAndExpand"
+                         Grid.ColumnSpan="2"
+                     Grid.RowSpan="2">
+                <Grid Padding="30,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.9*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="{Binding Month}"
+                           Grid.ColumnSpan="2"
+                       Padding="0"
                        TextColor="White"
                        FontSize="Large"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="Center"/>
+                    <ImageButton Grid.Column="1"
+                         IsVisible="{Binding CanEdit}"
+                         BackgroundColor="Transparent"
+                         Clicked="RotateButton"
+                    Command="{Binding Edit}">
+                        <ImageButton.Source>
+                            <FontImageSource Glyph="{x:Static font:FontAwesomeIcons.Edit}"
+                                 Size="20"
+                                 FontFamily="{StaticResource FontAwesomeSolid}"/>
+                        </ImageButton.Source>
+                    </ImageButton>
+                </Grid>
                 <Frame CornerRadius="25"
                        Padding="15"
                        Margin="20"
@@ -114,7 +139,9 @@
                 </Frame>
                 
             </StackLayout>
-            <Grid IsVisible="{Binding IsBusy}">
+            <Grid IsVisible="{Binding IsBusy}"
+                  Grid.ColumnSpan="2"
+                     Grid.RowSpan="2">
                 <BoxView Color="{DynamicResource DarkColor}"/>
                 <controls:GradientBox StartColor="Transparent"
                                   EndColor="White"/>
@@ -125,6 +152,7 @@
                                IsRunning="{Binding IsBusy}"
                                IsVisible="{Binding IsBusy}"/>
             </Grid>
+            
         </Grid>
     </ContentPage.Content>
 </ContentPage>
