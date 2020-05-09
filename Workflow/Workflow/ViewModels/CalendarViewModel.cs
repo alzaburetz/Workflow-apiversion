@@ -30,6 +30,16 @@ namespace Workflow.ViewModels
                 OnPropertyChanged("Month");
             }
         }
+        private bool _canEdit;
+        public bool CanEdit
+        {
+            get => _canEdit;
+            set
+            {
+                _canEdit = value;
+                OnPropertyChanged("CanEdit");
+            }
+        }
         public CalendarViewModel(INavigation navigation, UserModel user = null)
         {
             this.User = user;
@@ -54,15 +64,20 @@ namespace Workflow.ViewModels
                 {
                     User.NextWorkDay = DateTimeOffset.FromUnixTimeSeconds(User.FirstWork).DateTime;
                     IsBusy = true;
+                    CanEdit = Application.Current.Properties["email"].ToString() == User.Email;
                     CalendarList.Clear();
+                    this.Month = DateTime.Now.ToString("MMMM");
                     var list = new List<CalendarModel>();
+                    this.User.Schedule = User.SortCalendar();
                     if (User.Schedule[21].Month == DateTime.Now.Month)
                         list = User.Schedule;
                     else
                         list = CalculateCalendarMethod();
                     foreach (var day in list)
                     {
-                        this.CalendarList.Add(day);
+                        var d = new CalendarModel();
+                        d = day.Clone() as CalendarModel;
+                        this.CalendarList.Add(d.Clone() as CalendarModel);
                     }
                     IsBusy = false;
                 }
@@ -73,15 +88,19 @@ namespace Workflow.ViewModels
             });
             Edit = new Command(async () =>
             {
-                var list = new List<CalendarModel>();
-                list.AddRange(this.CalendarList.ToList());
-                await Navigation.PushAsync(new CalendarEdit(new CalendarEditViewModel(list, this.Month)));
+                List<CalendarModel> calendar = new List<CalendarModel>();
+                foreach (var day in CalendarList)
+                {
+                    calendar.Add(day.Clone() as CalendarModel);
+                }
+                await Navigation.PushAsync(new CalendarEdit(new CalendarEditViewModel(calendar, this.Month, this.Navigation)));
             });
-            MessagingCenter.Subscribe<CalendarEdit, List<CalendarModel>>(this, "UpdateCalendar", (s, calendar) =>
+
+            MessagingCenter.Subscribe<CalendarEditViewModel, List<CalendarModel>>(this, "UpdateCalendar", (sender, calendar) =>
             {
+                this.User.Schedule = calendar;
                 Task.Run(async () =>
                 {
-                    this.User.Schedule = calendar;
                     var resp = await HttpService.PutRequest<ResponseModel<UserModel>, UserModel>("user/update", this.User);
                 });
             });
