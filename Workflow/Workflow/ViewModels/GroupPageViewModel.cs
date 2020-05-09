@@ -8,6 +8,7 @@ using Xamarin.Forms;
 
 using System.Threading.Tasks;
 using System.Security;
+using System.Linq;
 
 namespace Workflow.ViewModels
 {
@@ -60,6 +61,10 @@ namespace Workflow.ViewModels
 
             CreatePost = new Command<PostModel>(async (p) =>
             {
+                if (Tags.Count > 0)
+                {
+                    p.Tags.AddRange(Tags.ToList());
+                }
                 var resp = await HttpService.PostRequest<ResponseModel<PostModel>, PostModel>($"groups/{Group.ID}/posts/add", p, true);
                 if (resp.Code == 200)
                 {
