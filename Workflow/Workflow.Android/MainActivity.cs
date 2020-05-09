@@ -22,6 +22,7 @@ namespace Workflow.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+            global::Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Plugin.Media.CrossMedia.Current.Initialize();
@@ -47,7 +48,7 @@ namespace Workflow.Droid
                 return;
             }
 
-            var channel = new NotificationChannel("workflow",
+            var channel = new NotificationChannel("work_flow",
                                                   "Work Flow",
                                                   NotificationImportance.Default)
             {
