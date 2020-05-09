@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:controls="clr-namespace:Workflow.Controls"
-             NavigationPage.HasBackButton="False"
              x:Name="CalEdit"
              x:Class="Workflow.Views.CalendarEdit">
     <ContentPage.Resources>
@@ -21,6 +20,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Grid>
+                
                 <BoxView Color="{DynamicResource DarkColor}"/>
                 <controls:GradientBox 
                                     StartColor="Transparent"
@@ -68,7 +68,7 @@
                             <Grid 
                   VerticalOptions="FillAndExpand"
                   HorizontalOptions="FillAndExpand"
-                  BindableLayout.ItemsSource="{Binding CalendarList}">
+                  BindableLayout.ItemsSource="{Binding CalendarListEdit}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="0.14*"/>
                                     <RowDefinition Height="0.14*"/>
@@ -123,7 +123,7 @@
                 </Grid>
             </Grid>
             <controls:GradientButton Text="Обновить календарь"
-                                     Clicked="UpdateCalendar"
+                                     Command="{Binding UpdateCalendar}"
                                      Margin="40"/>
         </StackLayout>
         
