@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace Workflow.Models
 {
-    public class CalendarModel:BaseViewModel
+    public class CalendarModel:BaseViewModel, ICloneable
     {
         [JsonProperty("day")]
         public int DayOfMonth { get; set; }
@@ -31,5 +31,10 @@ namespace Workflow.Models
         public string Note { get; set; }
         public bool IsThisMonth { get; set; }
         public int NumberOfWeek { get; set; }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }
