@@ -39,6 +39,7 @@
             <converters:AvatarPlaceholderConverter x:Key="Placeholder"/>
             <converters:PostBodyShortener x:Key="ShortText"/>
             <converters:WeekDayConverter x:Key="WeekDay"/>
+            <converters:BoolInverter x:Key="InvertBool"/>
             <OnPlatform x:TypeArguments="x:String" x:Key="Regular">
                 <On Platform="Android">OswaldRegular.ttf#Oswald</On>
             </OnPlatform>
