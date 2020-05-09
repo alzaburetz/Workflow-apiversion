@@ -54,6 +54,7 @@
                        VerticalOptions="StartAndExpand"/>
                 </StackLayout>
                 <StackLayout Grid.ColumnSpan="2"
+                             IsVisible="False"
                          Grid.Row="1">
                     <Label Text="Первый рабочий день:"
                        TextColor="{DynamicResource DarkColor}"
