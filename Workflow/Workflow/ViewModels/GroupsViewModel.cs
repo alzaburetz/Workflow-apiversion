@@ -54,6 +54,7 @@ namespace Workflow.ViewModels
                     var groups = await HttpService.GetRequest<ResponseModel<List<GroupModel>>>("groups/get");
                     if (groups.Code == 200)
                     {
+                        if (groups.Response != null)
                         foreach (var group in groups.Response)
                         {
                             Device.BeginInvokeOnMainThread(() => MyGroups.Add(group));
