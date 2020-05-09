@@ -101,6 +101,9 @@
                                             <Grid.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding Path=BindingContext.InvertDay, Source={x:Reference CalEdit}}"
                                                                   CommandParameter="{Binding .}"/>
+                                                <SwipeGestureRecognizer Command="{Binding Path=BindingContext.AddNote, Source={x:Reference CalEdit}}"
+                                                                        CommandParameter="{Binding .}"
+                                                                        Direction="Up"/>
                                             </Grid.GestureRecognizers>
                                         </Grid>
                                     </DataTemplate>
