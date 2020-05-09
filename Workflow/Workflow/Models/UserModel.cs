@@ -8,7 +8,7 @@ using Workflow.ViewModels;
 
 namespace Workflow.Models
 {
-    public class UserModel:BaseViewModel
+    public class UserModel:BaseViewModel, ICloneable
     {
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -77,14 +77,21 @@ namespace Workflow.Models
         }
         public List<CalendarModel> SortCalendar()
         {
+            var month = DateTime.Now.Month;
             List<CalendarModel> result = new List<CalendarModel>();
             for (int i = 0; i < this.Schedule.Count; i++)
             {
                 var day = this.Schedule[i];
                 day.NumberOfWeek = i / 7;
+                day.IsThisMonth = day.Month == month;
                 result.Add(day);
             }
             return result;
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }
