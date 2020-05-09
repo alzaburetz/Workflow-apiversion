@@ -19,7 +19,6 @@
                     <Image Source="logo"/>
                 </StackLayout>
                 <Entry Placeholder="Номер телефона"
-                   HorizontalTextAlignment="End"
                    PlaceholderColor="White"
                    TextColor="White"
                    Keyboard="Telephone"
@@ -30,7 +29,6 @@
                 </Entry>
                 <Entry Placeholder="Пароль"
                    IsPassword="True"
-                   HorizontalTextAlignment="Center"
                    PlaceholderColor="White"
                    TextColor="White"
                    x:Name="Password"/>
