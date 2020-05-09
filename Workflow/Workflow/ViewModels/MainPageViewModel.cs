@@ -20,14 +20,19 @@ namespace Workflow.ViewModels
                 var token = DependencyService.Get<IFirebaseTokenObtainer>().GetFirebaseToken();
                 var resp = await HttpService.GetRequest<ResponseModel<UserModel>>("user");
                 resp.Response.NextWorkDay = DateTimeOffset.FromUnixTimeSeconds(resp.Response.FirstWork).UtcDateTime;
-                if (resp.Response.Workdays == 0)
+                if (resp.Response.Workdays == 0 && !string.IsNullOrEmpty(resp.Response.Email))
                 {
                     Application.Current.MainPage = new CreateProfile(new CreateProfileViewModel(resp.Response));
+                }
+                else if (string.IsNullOrEmpty(resp.Response.Email))
+                {
+                    Application.Current.MainPage = new Login();
                 }
                 else
                 {
                     User = resp.Response;
-                    var workstoday = User.WorksToday();
+                    var now = DateTime.Now;
+                    var workstoday = User.Schedule.Find(x => x.Month == now.Month && x.DayOfMonth == now.Day).Workday;
                     Color color = Color.Black;
                     if (workstoday)
                     {
@@ -40,6 +45,14 @@ namespace Workflow.ViewModels
                     DependencyService.Get<ISetStatusBarColor>().SetStatusBarColor(color);
                     App.Current.Resources["DarkColor"] = color;
                     MessagingCenter.Send<MainPageViewModel, UserModel>(this, "SetUser", resp.Response);
+                    if (Application.Current.Properties.ContainsKey("email"))
+                    {
+                        Application.Current.Properties["email"] = User.Email;
+                    }
+                    else
+                    {
+                        Application.Current.Properties.Add("email", User.Email);
+                    }
                     if (User.Push != token)
                     {
                         User.Push = token;
