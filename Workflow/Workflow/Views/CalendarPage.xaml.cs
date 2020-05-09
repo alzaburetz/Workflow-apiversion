@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using Workflow.ViewModels;
+using Workflow.Models;
 
 namespace Workflow.Views
 {
@@ -32,6 +33,12 @@ namespace Workflow.Views
         {
             base.OnAppearing();
             viewModel.CalculateCalendar.Execute(null);
+        }
+
+        private async void RotateButton(object sender, EventArgs args)
+        {
+            await (sender as ImageButton).RotateTo(359, 100);
+            await (sender as ImageButton).RotateTo(0, 50);
         }
     }
 }
