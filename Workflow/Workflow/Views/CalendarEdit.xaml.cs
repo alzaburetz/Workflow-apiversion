@@ -19,12 +19,17 @@ namespace Workflow.Views
         {
             InitializeComponent();
             BindingContext = viewModel = vm;
-            var parent = this.Parent;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            viewModel.LoadCalendar.Execute(null);
         }
 
         protected async void UpdateCalendar(object sender, EventArgs args)
         {
-            MessagingCenter.Send<CalendarEdit, List<CalendarModel>>(this, "UpdateCalendar", viewModel.CalendarList.ToList());
+            MessagingCenter.Send<CalendarEdit, List<CalendarModel>>(this, "UpdateCalendar", viewModel.CalendarListEdit.ToList());
             await Navigation.PopAsync();
         }
     }
