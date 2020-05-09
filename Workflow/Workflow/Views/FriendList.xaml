@@ -20,6 +20,13 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
+    <NavigationPage.TitleView>
+        <Label Text="Cписок людей"
+               FontSize="Medium"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"/>
+    </NavigationPage.TitleView>
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Label">
