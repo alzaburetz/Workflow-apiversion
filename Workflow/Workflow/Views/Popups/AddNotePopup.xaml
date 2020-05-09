@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             popup:Padding="50"
+             xmlns:controls="clr-namespace:Workflow.Controls"
+             x:Class="Workflow.Views.Popups.AddNotePopup">
+    <Frame CornerRadius="20"
+           VerticalOptions="Center"
+           Padding="20">
+        <StackLayout>
+            <Label Text="{Binding Date, Converter={StaticResource TimeStampConverter}}"/>
+            <controls:CustomEditor Background="White"
+                                   x:Name="Note"
+                                   HeightRequest="100"
+                                   TextColor="Black"
+                                   Placeholder="Введите заметку..."
+                                   Text="{Binding Day.Note}"/>
+            <StackLayout Orientation="Horizontal">
+                <controls:GradientButton Command="{Binding AddNote}"
+                                         HorizontalOptions="FillAndExpand"
+                                     CommandParameter="{Binding Path=Text, Source={x:Reference Note}}"
+                                     Text="OK"/>
+                <controls:GradientButton Command="{Binding ClearNote}"
+                                         HorizontalOptions="FillAndExpand"
+                                         Text="Oтмена"/>
+            </StackLayout>
+            
+        </StackLayout>
+        
+    </Frame>
+</popup:PopupPage>
