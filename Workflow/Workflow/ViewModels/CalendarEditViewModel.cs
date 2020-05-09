@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rg.Plugins.Popup.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Dynamic;
@@ -7,6 +8,10 @@ using System.Threading.Tasks;
 using Workflow.Models;
 using Xamarin.Forms;
 
+using Rg.Plugins.Popup.Pages;
+using Workflow.Views.Popups;
+using Workflow.ViewModels.PopupViewModels;
+
 namespace Workflow.ViewModels
 {
     public class CalendarEditViewModel:BaseViewModel
@@ -14,6 +19,7 @@ namespace Workflow.ViewModels
         public Command InvertDay { get; set; }
         public Command LoadCalendar { get; set; }
         public Command UpdateCalendar { get; set; }
+        public Command AddNote { get; set; }
         readonly INavigation Navigation;
         string _month;
         public ObservableCollection<CalendarModel> CalendarListEdit { get; set; }
@@ -56,6 +62,11 @@ namespace Workflow.ViewModels
                 }
                 MessagingCenter.Send<CalendarEditViewModel, List<CalendarModel>>(this, "UpdateCalendar", calendr);
                 await Navigation.PopAsync();
+            });
+
+            AddNote = new Command<CalendarModel>(async (day) =>
+            {
+                await Navigation.PushPopupAsync(new AddNotePopup(new AddNotePopupViewModel(day, this.Navigation)));
             });
         }
     }
