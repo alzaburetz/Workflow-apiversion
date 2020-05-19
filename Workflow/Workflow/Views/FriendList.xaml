@@ -43,69 +43,74 @@
             <controls:GradientBox StartColor="Transparent"
                                   EndColor="White"
                                   Margin="-10"/>
-            <CollectionView ItemsSource="{Binding FoundUsers}"
+            <RefreshView RefreshColor="{DynamicResource DarkColor}"
+                         IsRefreshing="{Binding Refreshing}"
+                         Command="{Binding Update}">
+                <CollectionView ItemsSource="{Binding FoundUsers}"
                             SelectionMode="Single"
                             SelectionChanged="CollectionView_SelectionChanged">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical"
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
                                        ItemSpacing="20"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame CornerRadius="20"
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="20"
                                IsClippedToBounds="True"
                                BackgroundColor="{Binding Workstoday, Converter={StaticResource DayColor}}"
                                Padding="0">
-                            <Grid Padding="20"
+                                <Grid Padding="20"
                                   HeightRequest="100">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.3*"/>
-                                    <ColumnDefinition Width="0.7*"/>
-                                </Grid.ColumnDefinitions>
-                                <controls:GradientBox StartColor="Black"
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.3*"/>
+                                        <ColumnDefinition Width="0.7*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <controls:GradientBox StartColor="Black"
                                                       Grid.ColumnSpan="2"
                                                       Opacity="0.3"
                                                       Margin="-20"
                                                       EndColor="#AAAAAA"/>
-                                <circleimage:CircleImage Source="{Binding Avatar, Converter={StaticResource Placeholder}}"
+                                    <circleimage:CircleImage Source="{Binding Avatar, Converter={StaticResource Placeholder}}"
                                                          Aspect="AspectFit"/>
-                                <StackLayout Grid.Column="1"
+                                    <StackLayout Grid.Column="1"
                                              Padding="20"
                                              VerticalOptions="Center">
-                                    <Label>
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <FormattedString.Spans>
-                                                    <Span Text="{Binding Name}"
+                                        <Label>
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <FormattedString.Spans>
+                                                        <Span Text="{Binding Name}"
                                                           FontSize="Large"
                                                           TextColor="White"/>
-                                                    <Span Text=" "
+                                                        <Span Text=" "
                                                           FontSize="Large"/>
-                                                    <Span Text="{Binding Surname}"
+                                                        <Span Text="{Binding Surname}"
                                                           FontSize="Large"
                                                           TextColor="White"/>
-                                                </FormattedString.Spans>
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                    <Label>
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <FormattedString.Spans>
-                                                    <Span Text="{Binding Workdays}"/>
-                                                    <Span Text=" / "/>
-                                                    <Span Text="{Binding Weekdays}"/>
-                                                </FormattedString.Spans>
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                </StackLayout>
-                            </Grid>
+                                                    </FormattedString.Spans>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label>
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <FormattedString.Spans>
+                                                        <Span Text="{Binding Workdays}"/>
+                                                        <Span Text=" / "/>
+                                                        <Span Text="{Binding Weekdays}"/>
+                                                    </FormattedString.Spans>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                </Grid>
 
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+            
             <ActivityIndicator Color="{DynamicResource DarkColor}"
                                    Scale="0.2"
                                    IsRunning="{Binding IsBusy}"
