@@ -32,18 +32,22 @@ namespace Workflow.ViewModels
                 {
                     User = resp.Response;
                     var now = DateTime.Now;
-                    var workstoday = User.Schedule.Find(x => x.Month == now.Month && x.DayOfMonth == now.Day).Workday;
-                    Color color = Color.Black;
-                    if (workstoday)
+                    try
                     {
-                        color = Color.FromHex("#ff6161");
+                        var workstoday = User.Schedule.Find(x => x.Month == now.Month && x.DayOfMonth == now.Day).Workday;
+                        Color color = Color.Black;
+                        if (workstoday)
+                        {
+                            color = Color.FromHex("#ff6161");
+                        }
+                        else
+                        {
+                            color = Color.FromHex("#237547");
+                        }
+                        DependencyService.Get<ISetStatusBarColor>().SetStatusBarColor(color);
+                        App.Current.Resources["DarkColor"] = color;
                     }
-                    else
-                    {
-                        color = Color.FromHex("#237547");
-                    }
-                    DependencyService.Get<ISetStatusBarColor>().SetStatusBarColor(color);
-                    App.Current.Resources["DarkColor"] = color;
+                    catch { }
                     MessagingCenter.Send<MainPageViewModel, UserModel>(this, "SetUser", resp.Response);
                     if (Application.Current.Properties.ContainsKey("email"))
                     {
