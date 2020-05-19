@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 
 using Workflow.Models;
+using Workflow.Services;
 using Workflow.Views;
 using System.Linq;
 
@@ -102,6 +103,24 @@ namespace Workflow.ViewModels
                 Task.Run(async () =>
                 {
                     var resp = await HttpService.PutRequest<ResponseModel<UserModel>, UserModel>("user/update", this.User);
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        CalculateCalendar.Execute(null);
+                        this.User = resp.Response;
+                        var now = DateTime.Now;
+                        var workstoday = User.Schedule.Find(x => x.Month == now.Month && x.DayOfMonth == now.Day).Workday;
+                        Color color = Color.Black;
+                        if (workstoday)
+                        {
+                            color = Color.FromHex("#ff6161");
+                        }
+                        else
+                        {
+                            color = Color.FromHex("#237547");
+                        }
+                        DependencyService.Get<ISetStatusBarColor>().SetStatusBarColor(color);
+                        App.Current.Resources["DarkColor"] = color;
+                    });
                 });
             });
         }
