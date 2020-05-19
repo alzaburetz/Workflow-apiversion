@@ -17,12 +17,28 @@ namespace Workflow.ViewModels
 {
     public class FriendListViewModel:BaseViewModel
     {
+        bool _refreshing;
+        public bool Refreshing
+        {
+            get => _refreshing;
+            set
+            {
+                _refreshing = value;
+                OnPropertyChanged("Refreshing");
+            }
+        }
         public Command GetContacts { get; set; }
+        public Command Update { get; set; }
         public ObservableCollection<UserModel> FoundUsers { get; set; }
         public FriendListViewModel()
         {
             Title = "Список людей";
             FoundUsers = new ObservableCollection<UserModel>();
+            Update = new Command(() =>
+            {
+                Refreshing = true;
+                GetContacts.Execute(null);
+            });
             GetContacts = new Command(async () =>
             {
                 await Task.Run(async () =>
@@ -45,6 +61,7 @@ namespace Workflow.ViewModels
                             Device.BeginInvokeOnMainThread(() => FoundUsers.Add(user));
                         }
                     IsBusy = false;
+                    Refreshing = false;
                 });
                 
             });
