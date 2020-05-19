@@ -8,6 +8,7 @@
              xmlns:font="clr-namespace:FontAwesome"
              xmlns:converters="clr-namespace:Workflow.Converters"
              Title="{Binding Title}"
+             x:Name="clndr"
              x:Class="Workflow.Views.CalendarPage">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -98,7 +99,7 @@
                             <Label Text="ВС"
                            Grid.Column="6"/>
                         </Grid>
-                        <Grid 
+                        <Grid Padding="5"
                   VerticalOptions="FillAndExpand"
                   HorizontalOptions="FillAndExpand"
                   BindableLayout.ItemsSource="{Binding CalendarList}">
@@ -121,16 +122,23 @@
                             </Grid.ColumnDefinitions>
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid
-                               Grid.Column="{Binding DayOfWeek, Converter={StaticResource WeekDay}}"
-                               Grid.Row="{Binding NumberOfWeek}">
+                                    <Grid Grid.Column="{Binding DayOfWeek, Converter={StaticResource WeekDay}}"
+                                          Grid.Row="{Binding NumberOfWeek}">
+                                        <BoxView Margin="-2"
+                                               BackgroundColor="Blue"
+                                               IsVisible="{Binding Note, Converter={StaticResource HasNote}}"
+                                               CornerRadius="25"/>
                                         <BoxView BackgroundColor="{Binding Workday, Converter={StaticResource DayColor}}"
-                                     CornerRadius="25"/>
+                                               CornerRadius="25"/>
                                         <Label Text="{Binding DayOfMonth}"
                                    FontSize="Medium"
                                    TextColor="{Binding IsThisMonth, Converter={StaticResource ThisMonth}}"
                                    VerticalTextAlignment="Center"
                                    HorizontalTextAlignment="Center"/>
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.OpenNote, Source={x:Reference clndr}}"
+                                                                  CommandParameter="{Binding .}"/>
+                                        </Grid.GestureRecognizers>
                                     </Grid>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
