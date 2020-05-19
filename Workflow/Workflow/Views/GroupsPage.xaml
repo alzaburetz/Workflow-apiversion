@@ -29,6 +29,8 @@
                    PlaceholderColor="White"
                    Keyboard="Text"
                    x:Name="Search"
+                   ReturnCommand="{Binding SearchGroups}"
+                   ReturnCommandParameter="{Binding Path=Text, Source={x:Reference Search}}"
                    TextColor="White"/>
         </StackLayout>
     </NavigationPage.TitleView>
