@@ -16,8 +16,10 @@ namespace Workflow.ViewModels
     {
         public Command LoadUserGroups { get; set; }
         public Command LoadAllGroups { get; set; }
+        public Command SearchGroups { get; set; }
         public ObservableCollection<GroupModel> AllGroups { get; set; }
         public ObservableCollection<GroupModel> MyGroups { get; set; }
+        
         public GroupsViewModel()
         {
             AllGroups = new ObservableCollection<GroupModel>();
@@ -66,6 +68,32 @@ namespace Workflow.ViewModels
                         {
                             Application.Current.MainPage.DisplayAlert("Ошибка", ListStringifyer.StringifyList(groups.Errors), "OK");
                         });
+                    }
+                    IsBusy = false;
+                });
+            });
+
+            SearchGroups = new Command<string>((query) =>
+            {
+                if (string.IsNullOrEmpty(query))
+                {
+                    LoadUserGroups.Execute(null);
+                    return;
+                }
+                IsBusy = true;
+                Task.Run(async () =>
+                {
+                    var search = await HttpService.GetRequest<ResponseModel<List<GroupModel>>>($"groups?search={query}");
+                    MyGroups.Clear();
+                    if (search.Code == 200)
+                    {
+                        if (search.Response != null)
+                        {
+                            foreach (var group in search.Response)
+                            {
+                                Device.BeginInvokeOnMainThread(() => MyGroups.Add(group));
+                            }
+                        }
                     }
                     IsBusy = false;
                 });
