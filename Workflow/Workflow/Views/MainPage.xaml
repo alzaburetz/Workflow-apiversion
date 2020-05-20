@@ -10,8 +10,7 @@
             UnselectedTabColor="#333333"
             x:Class="Workflow.Views.MainPage">
     <TabbedPage.Children>
-        <NavigationPage Title="Список людей"
-                        BarBackgroundColor="{DynamicResource DarkColor}">
+        <NavigationPage BarBackgroundColor="{DynamicResource DarkColor}">
             <x:Arguments>
                 <views:FriendList/>
             </x:Arguments>
@@ -20,8 +19,7 @@
                                  FontFamily="{StaticResource FontAwesomeSolid}"/>
             </NavigationPage.IconImageSource>
         </NavigationPage>
-        <NavigationPage Title="Профиль"
-                        BarBackgroundColor="{DynamicResource DarkColor}">
+        <NavigationPage BarBackgroundColor="{DynamicResource DarkColor}">
             <x:Arguments>
                 <views:Profile/>
             </x:Arguments>
@@ -30,8 +28,7 @@
                                  FontFamily="{StaticResource FontAwesomeSolid}"/>
             </NavigationPage.IconImageSource>
         </NavigationPage>
-        <NavigationPage Title="Календарь"
-                        BarBackgroundColor="{DynamicResource DarkColor}">
+        <NavigationPage BarBackgroundColor="{DynamicResource DarkColor}">
             <x:Arguments>
                 <views:CalendarPage/>
             </x:Arguments>
@@ -40,8 +37,7 @@
                                  FontFamily="{StaticResource FontAwesomeSolid}"/>
             </NavigationPage.IconImageSource>
         </NavigationPage>
-        <NavigationPage Title="Группы"
-                        BarBackgroundColor="{DynamicResource DarkColor}">
+        <NavigationPage BarBackgroundColor="{DynamicResource DarkColor}">
             <x:Arguments>
                 <views:GroupsPage/>
             </x:Arguments>
