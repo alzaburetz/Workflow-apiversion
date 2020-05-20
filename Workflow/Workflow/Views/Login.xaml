@@ -40,6 +40,8 @@
                         <TapGestureRecognizer Tapped="GoToRegistration"/>
                     </Label.GestureRecognizers>
                 </Label>
+                <Button Text="Gooogelle"
+                        Clicked="Button_Clicked"/>
                 <controls:GradientButton Text="ВОЙТИ"
                                          Clicked="ExecuteLogin"/>
             </StackLayout>
