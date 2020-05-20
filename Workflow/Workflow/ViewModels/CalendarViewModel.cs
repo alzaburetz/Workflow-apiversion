@@ -11,6 +11,9 @@ using Workflow.Services;
 using Workflow.Views;
 using System.Linq;
 
+using Rg.Plugins.Popup.Extensions;
+using Workflow.Views.Popups;
+
 namespace Workflow.ViewModels
 {
     public class CalendarViewModel : BaseViewModel
@@ -20,6 +23,7 @@ namespace Workflow.ViewModels
         public Command GetUser { get; set; }
         public Command CalculateCalendar { get; set; }
         public Command Edit { get; set; }
+        public Command OpenNote { get; set; }
         public UserModel User { get; set; }
         private string month;
         public string Month
@@ -97,12 +101,23 @@ namespace Workflow.ViewModels
                 await Navigation.PushAsync(new CalendarEdit(new CalendarEditViewModel(calendar, this.Month, this.Navigation)));
             });
 
+            OpenNote = new Command<CalendarModel>(async (day) =>
+            {
+                if (!string.IsNullOrEmpty(day.Note))
+                {
+                    var date = new DateTime(DateTime.Now.Year, day.Month, day.DayOfMonth).ToString("dd.MM.yyyy");
+                    await Navigation.PushPopupAsync(new NotePopup(date, day.Note));
+                }
+                
+            });
+
             MessagingCenter.Subscribe<CalendarEditViewModel, List<CalendarModel>>(this, "UpdateCalendar", (sender, calendar) =>
             {
                 this.User.Schedule = calendar;
                 Task.Run(async () =>
                 {
                     var resp = await HttpService.PutRequest<ResponseModel<UserModel>, UserModel>("user/update", this.User);
+                    if (resp.Code == 200)
                     Device.BeginInvokeOnMainThread(() =>
                     {
                         CalculateCalendar.Execute(null);
