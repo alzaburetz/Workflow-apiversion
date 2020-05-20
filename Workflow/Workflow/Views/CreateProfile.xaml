@@ -33,6 +33,7 @@
                        Text="{Binding User.Name}"/>
                 <Entry Placeholder="Фамилия (опционально)"
                        TextColor="White"
+                       Text="{Binding User.Surname}"
                        x:Name="Surname"/>
                 <StackLayout Spacing="-10">
                     <Label Text="Выберите первый ближайший рабочий день:"
@@ -61,14 +62,13 @@
                 <controls:GradientButton Text="СОЗДАТЬ ПРОФИЛЬ"
                                          Clicked="CreateProfilePressed"/>
             </StackLayout>
-            <!--<BoxView BackgroundColor="Gray"
-                     Opacity="0.4"
+            <BoxView BackgroundColor="White"
                      IsVisible="{Binding IsBusy}"/>
             <ActivityIndicator Color="{StaticResource DarkColor}"
                                IsRunning="{Binding IsBusy}"
                                IsVisible="{Binding IsBusy}"
                                Scale="0.2"
-                               BackgroundColor="Transparent"/>-->
+                               BackgroundColor="Transparent"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
