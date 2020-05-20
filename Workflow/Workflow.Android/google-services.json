@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:270394628656:android:74f799be3323556deaebf5",
+        "mobilesdk_app_id": "1:270394628656:android:2d509aedbf71ab64eaebf5",
         "android_client_info": {
           "package_name": "ru.alzaburetz.workflow"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "270394628656-j488tbif2ur38r6ufious2e01fjfe0nj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.alzaburetz.workflow",
+            "certificate_hash": "a8ff4196cab6ac858ce06e57b6255db7a2e21223"
+          }
+        },
         {
           "client_id": "270394628656-4ri5kuhj5h2uvk2mmume2u2rblligt4n.apps.googleusercontent.com",
           "client_type": 3
