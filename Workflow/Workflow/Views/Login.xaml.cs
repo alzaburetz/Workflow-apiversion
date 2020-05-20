@@ -13,6 +13,8 @@ using System.Text.RegularExpressions;
 
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using Workflow.Services;
+
 
 namespace Workflow.Views
 {
@@ -23,7 +25,7 @@ namespace Workflow.Views
         public Login()
         {
             InitializeComponent();
-            BindingContext = viewModel = new LoginViewModel();
+            BindingContext = viewModel = new LoginViewModel(this.Navigation);
         }
 
         protected async override void OnAppearing()
@@ -55,6 +57,11 @@ namespace Workflow.Views
                 Password = Password.Text
             };
             viewModel.Login.Execute(user);
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            await DependencyService.Get<IFirebaseAuth>().Authenticate();
         }
     }
 }
