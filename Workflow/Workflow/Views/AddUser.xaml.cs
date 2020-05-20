@@ -57,7 +57,7 @@ namespace Workflow.Views
 
         private void Phone_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (e.NewTextValue.Length > e.OldTextValue?.Length || string.IsNullOrEmpty(e.OldTextValue))
+            if (!string.IsNullOrEmpty(e.OldTextValue) && !string.IsNullOrEmpty(e.NewTextValue))
             {
                 viewModel.FilterContacts.Execute(Regex.Replace(e.NewTextValue.Replace("+7", "8"), @"\D", ""));
             }
