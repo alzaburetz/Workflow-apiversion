@@ -14,6 +14,8 @@ namespace Workflow.Models
         public string Phone { get; set; }
         [JsonProperty("name")]
         public string Name { get; set; }
+        [JsonProperty("surname")]
+        public string Surname { get; set; }
         [JsonProperty("password")]
         public string Password { get; set; }
     }
