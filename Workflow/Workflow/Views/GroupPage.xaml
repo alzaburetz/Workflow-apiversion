@@ -36,6 +36,8 @@
                            Text="{Binding Group.Description}"/>
                         </StackLayout>
                     </Frame>
+                    <controls:GradientButton Text="{Binding EnterGroupText}"
+                            Command="{Binding EnterOrLeaveGroup}"/>
                     <Label Text="Записи"
                            Padding="20"
                            BackgroundColor="White"
