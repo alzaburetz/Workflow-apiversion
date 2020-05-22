@@ -20,7 +20,35 @@ namespace Workflow.ViewModels
         public Command LoadPosts { get; set; }
         public Command CreatePost { get; set; }
         public Command LikePost { get; set; }
-        public GroupPageViewModel(GroupModel group)
+        public Command EnterOrLeaveGroup { get; set; }
+        string _entergrouptext;
+        public string EnterGroupText
+        {
+            get => _entergrouptext;
+            set
+            {
+                _entergrouptext = value;
+                OnPropertyChanged(nameof(EnterGroupText));
+            }
+        }
+        bool _canEnter;
+        bool CanEnter
+        {
+            get => _canEnter;
+            set
+            {
+                _canEnter = value;
+                if (_canEnter)
+                {
+                    EnterGroupText = "Войти в группу";
+                }
+                else
+                {
+                    EnterGroupText = "Выйти из группы";
+                }
+            }
+        }
+        public GroupPageViewModel(GroupModel group, UserModel User)
         {
             Group = group;
             Tags = new ObservableCollection<string>();
@@ -58,7 +86,10 @@ namespace Workflow.ViewModels
                 });
                 IsBusy = false;
             });
-
+            if (User.Groups != null)
+            {
+                CanEnter = !User.Groups.Contains(Group.ID);
+            }
             CreatePost = new Command<PostModel>(async (p) =>
             {
                 if (Tags.Count > 0)
@@ -73,6 +104,23 @@ namespace Workflow.ViewModels
                     Posts.Insert(0, resp.Response);
                     MessagingCenter.Send<GroupPageViewModel>(this, "ClearEntries");
                 }
+            });
+            EnterOrLeaveGroup = new Command(() =>
+            {
+                IsBusy = true;
+                Task.Run(async () =>
+                {
+                    if (CanEnter)
+                    {
+                        await HttpService.PostRequest<ResponseModel<string>, Object>($"groups/{Group.ID}/enter", null, true);
+                    }
+                    else
+                    {
+                        var resp = await HttpService.PostRequest<ResponseModel<string>, Object>($"groups/{Group.ID}/exit", null, true);
+                    }
+                    CanEnter = !CanEnter;
+                    IsBusy = false;
+                });
             });
         }
     }
