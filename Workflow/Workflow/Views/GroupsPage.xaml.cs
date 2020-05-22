@@ -16,6 +16,7 @@ namespace Workflow.Views
     public partial class GroupsPage : ContentPage
     {
         GroupsViewModel viewModel { get; set; }
+        UserModel User { get; set; }
         public GroupsPage()
         {
             InitializeComponent();
@@ -23,6 +24,10 @@ namespace Workflow.Views
             MessagingCenter.Subscribe<MainPage>(this, "LoadGroups", (sender) =>
             {
                 viewModel.LoadUserGroups.Execute(null);
+            });
+            MessagingCenter.Subscribe<MainPageViewModel, UserModel>(this, "SetUser", (sender, user) =>
+            {
+                User = user;
             });
         }
 
@@ -33,7 +38,15 @@ namespace Workflow.Views
 
         async void OpenGroup(object sender, SelectionChangedEventArgs args)
         {
-            await Navigation.PushAsync(new GroupPage(new GroupPageViewModel(args.CurrentSelection[0] as GroupModel)));
+            try
+            {
+                await Navigation.PushAsync(new GroupPage(new GroupPageViewModel(args.CurrentSelection[0] as GroupModel, User)));
+                ((CollectionView)sender).SelectedItem = null;
+            }
+            catch
+            {
+
+            }
         }
     }
 }
