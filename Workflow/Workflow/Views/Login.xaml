@@ -6,6 +6,7 @@
              mc:Ignorable="d"
              xmlns:behaviors="clr-namespace:Workflow.Behaviors"
              xmlns:controls="clr-namespace:Workflow.Controls"
+             xmlns:font="clr-namespace:FontAwesome"
              x:Class="Workflow.Views.Login">
     <ContentPage.Content>
         <Grid>
@@ -18,7 +19,34 @@
                 <StackLayout>
                     <Image Source="logo"/>
                 </StackLayout>
+                <Frame BackgroundColor="LightBlue"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       CornerRadius="20"
+                       Padding="10">
+                    <Label FontSize="Medium"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalTextAlignment="End"
+                           HorizontalTextAlignment="Center"
+                           VerticalOptions="FillAndExpand">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span Text="{x:Static font:FontAwesomeIcons.Google}"
+                                          FontSize="Large"
+                                          FontFamily="{StaticResource FontAwesomeBrands}"/>
+                                    <Span Text="  Войти с помощью Google"
+                                          />
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Button_Clicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
                 <Entry Placeholder="Номер телефона"
+                       IsVisible="False"
                    PlaceholderColor="White"
                    TextColor="White"
                    Keyboard="Telephone"
@@ -28,11 +56,13 @@
                     </Entry.Behaviors>
                 </Entry>
                 <Entry Placeholder="Пароль"
+                       IsVisible="False"
                    IsPassword="True"
                    PlaceholderColor="White"
                    TextColor="White"
                    x:Name="Password"/>
                 <Label Text="Регистрация"
+                       IsVisible="False"
                    VerticalTextAlignment="Center"
                    TextColor="{StaticResource MainColor}"
                    HorizontalTextAlignment="Center">
@@ -41,8 +71,10 @@
                     </Label.GestureRecognizers>
                 </Label>
                 <Button Text="Gooogelle"
+                        IsVisible="False"
                         Clicked="Button_Clicked"/>
                 <controls:GradientButton Text="ВОЙТИ"
+                                         IsVisible="False"
                                          Clicked="ExecuteLogin"/>
             </StackLayout>
             <BoxView BackgroundColor="White"
