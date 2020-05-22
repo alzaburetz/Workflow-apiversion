@@ -53,11 +53,12 @@ namespace Workflow.ViewModels
                         numbers[i] = Regex.Replace(number.Replace("+7", "8"), @"\D", "");
                     }
                     var resp = await HttpService.PostRequest<ResponseModel<List<UserModel>>, List<string>>("user/find", numbers,true);
+                    var now = DateTime.Now;
                     if (resp.Response != null)
                         foreach (var user in resp.Response)
                         {
                             user.NextWorkDay = DateTimeOffset.FromUnixTimeSeconds(user.FirstWork).DateTime;
-                            user.Workstoday = user.WorksToday();
+                            user.Workstoday = user.Schedule.Find(x => x.Month == now.Month && x.DayOfMonth == now.Day).Workday;
                             Device.BeginInvokeOnMainThread(() => FoundUsers.Add(user));
                         }
                     IsBusy = false;
