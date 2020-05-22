@@ -15,6 +15,7 @@ namespace Workflow
             DependencyService.Register<HttpService>();
             DependencyService.Register<ISetStatusBarColor>();
             DependencyService.Register<IFirebaseTokenObtainer>();
+            DependencyService.Register<IFirebaseAuth>();
             try
             {
                 var token = Application.Current.Properties["Token"];
