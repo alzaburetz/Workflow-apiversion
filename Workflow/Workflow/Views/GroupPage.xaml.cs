@@ -51,6 +51,11 @@ namespace Workflow.Views
                           await Navigation.PopAsync();
                       }
                   }, ToolbarItemOrder.Secondary));
+
+                this.ToolbarItems.Add(new ToolbarItem("Редактировать", "", async () =>
+                {
+                    await Navigation.PushAsync(new CreateGroupPage(this.Navigation, viewModel.Group));
+                }, ToolbarItemOrder.Secondary));
             }
         }
 
