@@ -12,7 +12,28 @@ namespace Workflow.ViewModels
 {
     public class CreateGroupViewModel:BaseViewModel
     {
+        GroupModel _group;
+        public GroupModel Group
+        {
+            get => _group;
+            set
+            {
+                _group = value;
+                OnPropertyChanged("Group");
+            }
+        }
+        string buttonText;
+        public string ButtonText
+        {
+            get => buttonText;
+            set
+            {
+                buttonText = value;
+                OnPropertyChanged("ButtonText");
+            }
+        }
         public Command CreateGroupCommand { get; set; }
+        public Command EditGroupCommand { get; set; }
         readonly INavigation Navigation;
         public CreateGroupViewModel(INavigation nav)
         {
@@ -30,6 +51,18 @@ namespace Workflow.ViewModels
                     {
                         Device.BeginInvokeOnMainThread(async () => await Application.Current.MainPage.DisplayAlert("Ошибка", ListStringifyer.StringifyList(response.Errors), "OK"));
                     }
+                });
+            });
+
+            EditGroupCommand = new Command(() =>
+            {
+                IsBusy = true;
+                Task.Run(async () =>
+                {
+                    var response = await HttpService.PutRequest<ResponseModel<GroupModel>, GroupModel>($"groups/{Group.ID}/update", Group);
+                    IsBusy = false;
+                    MessagingCenter.Send<CreateGroupViewModel, GroupModel>(this, "UpdateGroup", Group);
+                    Device.BeginInvokeOnMainThread(async () => await Navigation.PopAsync());
                 });
             });
         }
