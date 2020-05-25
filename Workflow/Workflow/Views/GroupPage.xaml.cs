@@ -16,7 +16,7 @@ namespace Workflow.Views
     public partial class GroupPage : ContentPage
     {
         GroupPageViewModel viewModel { get; set; }
-        public GroupPage(GroupPageViewModel vm)
+        public GroupPage(GroupPageViewModel vm, bool createMenu = false)
         {
             InitializeComponent();
             BindingContext = viewModel = vm;
@@ -38,6 +38,20 @@ namespace Workflow.Views
                     }
                 }
             };
+
+            if (createMenu)
+            {
+                this.ToolbarItems.Add(new ToolbarItem("Удалить", "", async () =>
+                  {
+                      var shouldDelete = await DisplayAlert(null, "Удалить группу", "Да", "Нет");
+                      if (shouldDelete)
+                      {
+                          viewModel.DeleteGroup.Execute(null);
+                          MessagingCenter.Send<GroupPage, string>(this, "RemoveGroup", viewModel.Group.ID);
+                          await Navigation.PopAsync();
+                      }
+                  }, ToolbarItemOrder.Secondary));
+            }
         }
 
         protected override void OnAppearing()
