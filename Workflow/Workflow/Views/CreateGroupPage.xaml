@@ -17,6 +17,7 @@
                        x:Name="GroupName"
                        Keyboard="Text"
                        TextColor="White"
+                       Text="{Binding Group.Name}"
                        PlaceholderColor="White"/>
                 <controls:CustomEditor x:Name="Description"
                                        Background="White"
@@ -25,9 +26,10 @@
                                        TextColor="Black"
                         VerticalOptions="FillAndExpand"
                         Keyboard="Text"
+                        Text="{Binding Group.Description}"
                         Placeholder="Описание"/>
-                <controls:GradientButton Text="Создать группу"
-                                         Clicked="CreateGroup"/>
+                <controls:GradientButton Text="{Binding ButtonText}"
+                                         x:Name="Submit"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>
