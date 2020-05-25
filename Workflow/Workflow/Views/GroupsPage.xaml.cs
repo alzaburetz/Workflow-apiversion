@@ -40,7 +40,7 @@ namespace Workflow.Views
         {
             try
             {
-                await Navigation.PushAsync(new GroupPage(new GroupPageViewModel(args.CurrentSelection[0] as GroupModel, User)));
+                await Navigation.PushAsync(new GroupPage(new GroupPageViewModel(args.CurrentSelection[0] as GroupModel, User), true));
                 ((CollectionView)sender).SelectedItem = null;
             }
             catch
