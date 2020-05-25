@@ -21,6 +21,7 @@ namespace Workflow.ViewModels
         public Command CreatePost { get; set; }
         public Command LikePost { get; set; }
         public Command EnterOrLeaveGroup { get; set; }
+        public Command DeleteGroup { get; set; }
         string _entergrouptext;
         public string EnterGroupText
         {
@@ -112,7 +113,7 @@ namespace Workflow.ViewModels
                 {
                     if (CanEnter)
                     {
-                        await HttpService.PostRequest<ResponseModel<string>, Object>($"groups/{Group.ID}/enter", null, true);
+                        var a = await HttpService.PostRequest<ResponseModel<string>, Object>($"groups/{Group.ID}/enter", null, true);
                     }
                     else
                     {
@@ -121,6 +122,10 @@ namespace Workflow.ViewModels
                     CanEnter = !CanEnter;
                     IsBusy = false;
                 });
+            });
+            DeleteGroup = new Command(async () =>
+            {
+                await Task.Delay(TimeSpan.FromSeconds(1.0f));
             });
         }
     }
