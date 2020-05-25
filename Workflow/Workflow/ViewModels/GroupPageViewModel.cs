@@ -14,7 +14,16 @@ namespace Workflow.ViewModels
 {
     public class GroupPageViewModel:BaseViewModel
     {
-        public GroupModel Group { get; set; }
+        GroupModel _group;
+        public GroupModel Group
+        {
+            get => _group;
+            set
+            {
+                _group = value;
+                OnPropertyChanged("Group");
+            }
+        }
         public ObservableCollection<PostModel> Posts { get; set; }
         public ObservableCollection<string> Tags { get; set; }
         public Command LoadPosts { get; set; }
@@ -53,6 +62,10 @@ namespace Workflow.ViewModels
         {
             Group = group;
             Tags = new ObservableCollection<string>();
+            MessagingCenter.Subscribe<CreateGroupViewModel, GroupModel>(this, "UpdateGroup", (sender, gr) =>
+            {
+                this.Group = gr;
+            });
             LikePost = new Command<PostModel>((post) =>
             {
                 post.Liked = !post.Liked;
