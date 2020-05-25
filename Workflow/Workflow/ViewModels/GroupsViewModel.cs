@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using Workflow.Models;
 
+using System.Linq;
 using System.Threading.Tasks;
 using Workflow.Utils;
 
@@ -97,6 +98,11 @@ namespace Workflow.ViewModels
                     }
                     IsBusy = false;
                 });
+            });
+
+            MessagingCenter.Subscribe<Workflow.Views.GroupPage, string>(this, "RemoveGroup", (sender, id) =>
+            {
+                MyGroups.Remove(MyGroups.First(x => x.ID == id));
             });
         }
     }
