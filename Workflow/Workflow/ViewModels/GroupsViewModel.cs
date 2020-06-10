@@ -104,6 +104,8 @@ namespace Workflow.ViewModels
             {
                 MyGroups.Remove(MyGroups.First(x => x.ID == id));
             });
+
+            MessagingCenter.Subscribe<CreateGroupViewModel, GroupModel>(this, "AddNewGroup", (sender, group) => MyGroups.Add(group));
         }
     }
 }
