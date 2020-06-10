@@ -47,9 +47,15 @@ namespace Workflow.Services
             }
             catch { }
         }
-        public Task<T> DeleteRequest<T>(string endpoint)
+        public async Task<T> DeleteRequest<T>(string endpoint)
         {
-            throw new NotImplementedException();
+            if (!this.Client.DefaultRequestHeaders.Contains("Token"))
+            {
+                this.Client.DefaultRequestHeaders.Add("Token", this.Token);
+            }
+            var response = await Client.DeleteAsync(string.Concat("api/", endpoint));
+            var body = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<T>(body);
         }
 
         public async Task<T> GetRequest<T>(string endpoint)
