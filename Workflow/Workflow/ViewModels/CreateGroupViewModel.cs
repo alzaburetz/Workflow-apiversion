@@ -45,8 +45,9 @@ namespace Workflow.ViewModels
                 var response = await HttpService.PostRequest<ResponseModel<GroupModel>, GroupModel>("groups/create", group, true);
                 if (response.Code == 200)
                 {
+                    MessagingCenter.Send<CreateGroupViewModel, GroupModel>(this, "AddNewGroup", response.Response);
                     Device.BeginInvokeOnMainThread(async () => await Navigation.PopAsync());
-                 }
+                }
                     else
                     {
                         Device.BeginInvokeOnMainThread(async () => await Application.Current.MainPage.DisplayAlert("Ошибка", ListStringifyer.StringifyList(response.Errors), "OK"));
@@ -59,6 +60,7 @@ namespace Workflow.ViewModels
                 IsBusy = true;
                 Task.Run(async () =>
                 {
+                    Group.Description = Group.Description.Replace("\n", "\n ");
                     var response = await HttpService.PutRequest<ResponseModel<GroupModel>, GroupModel>($"groups/{Group.ID}/update", Group);
                     IsBusy = false;
                     MessagingCenter.Send<CreateGroupViewModel, GroupModel>(this, "UpdateGroup", Group);
