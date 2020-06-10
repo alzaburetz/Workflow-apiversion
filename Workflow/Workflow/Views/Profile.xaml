@@ -54,6 +54,46 @@
                        VerticalOptions="StartAndExpand"/>
                 </StackLayout>
                 <StackLayout Grid.ColumnSpan="2"
+                             Grid.Row="1">
+                    <Frame CornerRadius="20"
+                           Padding="10">
+                        <Label TextColor="Black"
+                               VerticalTextAlignment="Start">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="{x:Static font:FontAwesomeIcons.Google}"
+                                              FontSize="Large"
+                                              FontFamily="{x:StaticResource FontAwesomeBrands}"/>
+                                        <Span Text="  "/>
+                                        <Span Text="{Binding User.Email}"
+                                              FontSize="Large"/>
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Frame>
+
+                    <Frame CornerRadius="20"
+                           Padding="10">
+                        <Label TextColor="Black"
+                               VerticalTextAlignment="Start">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="{x:Static font:FontAwesomeIcons.PhoneAlt}"
+                                              FontSize="Large"
+                                              FontFamily="{x:StaticResource FontAwesomeSolid}"/>
+                                        <Span Text="  "/>
+                                        <Span Text="{Binding User.Phone}"
+                                              FontSize="Large"/>
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Frame>
+                </StackLayout>
+                <StackLayout Grid.ColumnSpan="2"
                              IsVisible="False"
                          Grid.Row="1">
                     <Label Text="Первый рабочий день:"
