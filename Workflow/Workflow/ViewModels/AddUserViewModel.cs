@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Linq;
 
+
 namespace Workflow.ViewModels
 {
     public class AddUserViewModel : BaseViewModel
@@ -98,7 +99,7 @@ namespace Workflow.ViewModels
 
                     if (string.IsNullOrEmpty(user.Email))
                     {
-                        user.Email = "temp@email";
+                        user.Email = (new Guid()).ToString();
                     }
                     if (user.Phone.Length == 0)
                     {
