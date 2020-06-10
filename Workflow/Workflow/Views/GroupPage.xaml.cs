@@ -25,6 +25,8 @@ namespace Workflow.Views
                 PostName.Text = "";
                 Body.Text = "";
             });
+
+            MessagingCenter.Subscribe<GroupsPage>(this, "LoadPosts", (sender) => viewModel.LoadPosts.Execute(null));
             Body.TextChanged += (sender, args) =>
             {
                 if (!string.IsNullOrEmpty(args.NewTextValue))
@@ -62,18 +64,24 @@ namespace Workflow.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            viewModel.LoadPosts.Execute(null);
         }
 
-        void CreatePost(object sender, EventArgs args)
+        async void CreatePost(object sender, EventArgs args)
         {
-            var post = new PostModel()
+            if (!string.IsNullOrEmpty(Body.Text) && !string.IsNullOrEmpty(PostName.Text))
             {
-                Name = PostName.Text,
-                Body = Body.Text
-            };
+                var post = new PostModel()
+                {
+                    Name = PostName.Text,
+                    Body = Body.Text
+                };
 
-            viewModel.CreatePost.Execute(post);
+                viewModel.CreatePost.Execute(post);
+            }
+            else
+            {
+                await DisplayAlert(null, "Введите верные данные. Тело и название поста не должно быть пустым", "OK");
+            }
         }
 
         async void OpenPost(object sender, EventArgs args)
