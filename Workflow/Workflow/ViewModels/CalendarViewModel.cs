@@ -13,6 +13,7 @@ using System.Linq;
 
 using Rg.Plugins.Popup.Extensions;
 using Workflow.Views.Popups;
+using System.ComponentModel;
 
 namespace Workflow.ViewModels
 {
@@ -77,7 +78,14 @@ namespace Workflow.ViewModels
                     if (User.Schedule[21].Month == DateTime.Now.Month)
                         list = User.Schedule;
                     else
+                    {
                         list = CalculateCalendarMethod();
+                        Task.Run(async () =>
+                        {
+                            this.User.Schedule = list;
+                            await HttpService.PutRequest<ResponseModel<UserModel>, UserModel>("user/update", this.User);
+                        });
+                    }
                     foreach (var day in list)
                     {
                         var d = new CalendarModel();
@@ -153,10 +161,11 @@ namespace Workflow.ViewModels
             {
                 var calendar = new CalendarModel();
                 calendar.DayOfMonth = day.Day;
-                calendar.DayOfWeek = (int)day.DayOfWeek == 0 ? 6 : (int)day.DayOfWeek - 1;
+                calendar.DayOfWeek = (int)day.DayOfWeek == 0 ? 7 : (int)day.DayOfWeek;
                 calendar.IsThisMonth = day.Month == today.Month;
                 calendar.Workday = this.User.WorksDayOf(day);
                 calendar.NumberOfWeek = i / 7;
+                calendar.Month = day.Month;
                 result.Add(calendar);
                 i++;
                 day = new DateTime(day.Year, day.Month, day.Day).AddDays(1);
