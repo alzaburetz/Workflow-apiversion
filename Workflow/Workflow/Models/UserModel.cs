@@ -89,6 +89,30 @@ namespace Workflow.Models
             return result;
         }
 
+        public void CalculateCalendar()
+        {
+            var result = new List<CalendarModel>(42);
+            var today = DateTime.Now;
+            var firstday = new DateTime(today.Year, today.Month, 1);
+            var startofweek = new DateTime(today.Year, 1, 1).AddDays(firstday.DayOfYear - (int)firstday.DayOfWeek);
+            int i = 0;
+            var day = startofweek;
+            while (i < result.Capacity)
+            {
+                var calendar = new CalendarModel();
+                calendar.DayOfMonth = day.Day;
+                calendar.DayOfWeek = (int)day.DayOfWeek == 0 ? 7 : (int)day.DayOfWeek;
+                calendar.IsThisMonth = day.Month == today.Month;
+                calendar.Workday = this.WorksDayOf(day);
+                calendar.NumberOfWeek = i / 7;
+                calendar.Month = day.Month;
+                result.Add(calendar);
+                i++;
+                day = new DateTime(day.Year, day.Month, day.Day).AddDays(1);
+            }
+            this.Schedule = result;
+        }
+
         public object Clone()
         {
             return this.MemberwiseClone();
