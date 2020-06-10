@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace Workflow.ViewModels
 {
-    public class GroupPageViewModel:BaseViewModel
+    public class GroupPageViewModel : BaseViewModel
     {
         GroupModel _group;
         public GroupModel Group
@@ -91,11 +91,16 @@ namespace Workflow.ViewModels
                     var resp = await HttpService.GetRequest<ResponseModel<List<PostModel>>>($"groups/{Group.ID}/posts");
                     if (resp.Code == 200)
                     {
+                        Posts.Clear();
                         if (resp.Response.Count > 0)
-                        foreach (var post in resp.Response)
                         {
-                            Device.BeginInvokeOnMainThread(() => Posts.Add(post));
+                                foreach (var post in resp.Response)
+                                {
+                                    Device.BeginInvokeOnMainThread(() => Posts.Add(post));
+                                }
+
                         }
+
                     }
                 });
                 IsBusy = false;
@@ -108,6 +113,7 @@ namespace Workflow.ViewModels
             {
                 if (Tags.Count > 0)
                 {
+                    p.Tags = (new List<string>());
                     p.Tags.AddRange(Tags.ToList());
                 }
                 var resp = await HttpService.PostRequest<ResponseModel<PostModel>, PostModel>($"groups/{Group.ID}/posts/add", p, true);
@@ -138,7 +144,7 @@ namespace Workflow.ViewModels
             });
             DeleteGroup = new Command(async () =>
             {
-                await Task.Delay(TimeSpan.FromSeconds(1.0f));
+                await HttpService.DeleteRequest<ResponseModel<string>>($"groups/{this.Group.ID}/delete");
             });
         }
     }
