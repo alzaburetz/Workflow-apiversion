@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 
 using Newtonsoft.Json;
+using Workflow.ViewModels;
 
 namespace Workflow.Models
 {
     [Serializable]
-    public class GroupModel
+    public class GroupModel:BaseViewModel
     {
         [JsonProperty("creator")]
         public UserModel Creator { get; set; }
@@ -18,7 +19,16 @@ namespace Workflow.Models
         [JsonProperty("description")]
         public string Description { get; set; }
         [JsonProperty("usercount")]
-        public int UserCount { get; set; }
+        public int UserCount
+        {
+            get => _userCount;
+            set
+            {
+                _userCount = value;
+                OnPropertyChanged(nameof(UserCount));
+            }
+        }
+        private int _userCount;
 
         public GroupModel() { }
         public GroupModel(string name, string description)
