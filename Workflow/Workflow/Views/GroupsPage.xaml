@@ -57,7 +57,7 @@
                                        FontAttributes="Bold"
                                        TextColor="Black"
                                        FontSize="Large"/>
-                                <Label Text="{Binding Description}"
+                                <Label Text="{Binding Description, Converter={x:StaticResource ShortDesc}}"
                                        FontSize="Micro"/>
                                 <Label Text="{Binding UserCount, StringFormat='Количество учасников: {0}'}"/>
                             </StackLayout>

@@ -34,7 +34,7 @@
 
                             <Label d:Text="is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
                            BackgroundColor="White"
-                           FormattedText="{Binding Group.Description, Converter={StaticResource Txt}, ConverterParameter={Binding Group.Description}}"/>
+                           FormattedText="{Binding Group.Description, Converter={StaticResource Txt}}"/>
                         </StackLayout>
                     </Frame>
                     <controls:GradientButton Text="{Binding EnterGroupText}"
@@ -172,7 +172,6 @@
                                         <FlexLayout Grid.Row="3"
                                                     Grid.ColumnSpan="3"
                                                     AlignItems="Stretch"
-                                                    Wrap="Wrap"
                                                     BindableLayout.ItemsSource="{Binding Tags}">
                                             <BindableLayout.ItemTemplate>
                                                 <DataTemplate>
