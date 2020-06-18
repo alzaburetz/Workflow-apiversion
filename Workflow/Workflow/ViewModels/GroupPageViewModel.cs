@@ -123,6 +123,7 @@ namespace Workflow.ViewModels
                     //Posts.Add(resp.Response);
                     Posts.Insert(0, resp.Response);
                     MessagingCenter.Send<GroupPageViewModel>(this, "ClearEntries");
+                    Tags.Clear();
                 }
             });
             EnterOrLeaveGroup = new Command(() =>
@@ -133,10 +134,13 @@ namespace Workflow.ViewModels
                     if (CanEnter)
                     {
                         var a = await HttpService.PostRequest<ResponseModel<string>, Object>($"groups/{Group.ID}/enter", null, true);
+                        MessagingCenter.Send<Object, string>(this, "AddGroupID", this.Group.ID);
                     }
                     else
                     {
                         var resp = await HttpService.PostRequest<ResponseModel<string>, Object>($"groups/{Group.ID}/exit", null, true);
+                        MessagingCenter.Send<Object, string>(this, "RemoveGroup", this.Group.ID);
+                        MessagingCenter.Send<Object, string>(this, "RemoveGroupID", this.Group.ID);
                     }
                     CanEnter = !CanEnter;
                     IsBusy = false;
