@@ -26,6 +26,12 @@ namespace Workflow.ViewModels
                 IsBusy = true;
                 string phone = await Application.Current.MainPage.DisplayPromptAsync(null, "Для продолжения введите номер телефона", "OK", null, "Номер телефона", 12, Keyboard.Telephone);
                 usr.Phone = phone;
+                if (string.IsNullOrEmpty(phone) || phone.Length < 11)
+                {
+                    await Application.Current.MainPage.DisplayAlert(null, "Введите номер для продолжения", "ОК");
+                    IsBusy = false;
+                    return;
+                }
                 var response = await HttpService.PostRequest<ResponseModel<SocialToken>, UserAuthModel>("user/login/social", usr);
                 if (response.Code == 200)
                 {
@@ -33,6 +39,14 @@ namespace Workflow.ViewModels
                         Application.Current.Properties.Add("Token", response.Response.Token);
                     else
                         Application.Current.Properties["Token"] = response.Response.Token;
+                    try
+                    {
+                        Application.Current.Properties.Add("GoogleLogin", true);
+                    }
+                    catch
+                    {
+                        Application.Current.Properties["GoogleLogin"] = true;
+                    }
                     await Application.Current.SavePropertiesAsync();
                     HttpService.Token = response.Response.Token;
                     if (response.Response.Logged)
@@ -50,6 +64,7 @@ namespace Workflow.ViewModels
                         };
                         await Navigation.PushModalAsync(new CreateProfile(new CreateProfileViewModel(User)));
                     }
+                    
                 }
                 else
                 {
