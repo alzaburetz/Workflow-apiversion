@@ -75,7 +75,7 @@ namespace Workflow.ViewModels
                     this.Month = DateTime.Now.ToString("MMMM");
                     var list = new List<CalendarModel>();
                     this.User.Schedule = User.SortCalendar();
-                    if (User.Schedule[21].Month == DateTime.Now.Month)
+                    if (User.Schedule[21].Month == DateTime.Now.Month && User.Schedule.Count == 42)
                         list = User.Schedule;
                     else
                     {
