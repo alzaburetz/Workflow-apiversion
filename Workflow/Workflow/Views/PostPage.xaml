@@ -7,9 +7,15 @@
              xmlns:controls="clr-namespace:Workflow.Controls" 
              xmlns:circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              xmlns:font="clr-namespace:FontAwesome"
+             xmlns:convertrs="clr-namespace:Workflow.Converters"
              d:Title="POST"
              Title="{Binding Post.Title}"
              x:Class="Workflow.Views.PostPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <convertrs:GroupDescriptionConverter x:Key="TextConvert"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -29,7 +35,7 @@
                                 <ColumnDefinition Width="0.8*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="80"/>
+                                <RowDefinition Height="30"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <circle:CircleImage Source="{Binding Post.Author.Avatar, Converter={StaticResource Placeholder}}"/>
@@ -50,7 +56,7 @@
                             </Label>
                             <StackLayout Grid.Row="1"
                                    Grid.ColumnSpan="2">
-                                <Label Text="{Binding Post.Body}"
+                                <Label FormattedText="{Binding Post.Body, Converter={x:StaticResource TextConvert}}"
                                 d:Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
                                 <FlexLayout AlignItems="Stretch"
                                         BindableLayout.ItemsSource="{Binding Post.Tags}">
