@@ -41,6 +41,7 @@
             <converters:WeekDayConverter x:Key="WeekDay"/>
             <converters:BoolInverter x:Key="InvertBool"/>
             <converters:HasNoteConverter x:Key="HasNote"/>
+            <converters:ShortDescriptionConverter x:Key="ShortDesc"/>
             <OnPlatform x:TypeArguments="x:String" x:Key="Regular">
                 <On Platform="Android">OswaldRegular.ttf#Oswald</On>
             </OnPlatform>
