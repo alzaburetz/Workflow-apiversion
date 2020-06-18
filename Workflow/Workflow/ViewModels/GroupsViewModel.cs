@@ -100,12 +100,12 @@ namespace Workflow.ViewModels
                 });
             });
 
-            MessagingCenter.Subscribe<Workflow.Views.GroupPage, string>(this, "RemoveGroup", (sender, id) =>
+            MessagingCenter.Subscribe<Object, string>(this, "RemoveGroup", (sender, id) =>
             {
                 MyGroups.Remove(MyGroups.First(x => x.ID == id));
             });
 
-            MessagingCenter.Subscribe<CreateGroupViewModel, GroupModel>(this, "AddNewGroup", (sender, group) => MyGroups.Add(group));
+            MessagingCenter.Subscribe<Object, GroupModel>(this, "AddNewGroup", (sender, group) => MyGroups.Add(group));
         }
     }
 }
