@@ -29,6 +29,16 @@ namespace Workflow.Views
             {
                 User = user;
             });
+            MessagingCenter.Subscribe<Object, string>(this, "RemoveGroupID", (sender, id) => User.Groups.Remove(id));
+            MessagingCenter.Subscribe<Object, string>(this, "AddGroupID", (sender, id) =>
+            {
+                User.Groups.Add(id);
+                try
+                {
+                    viewModel.MyGroups.Where(x => x.ID == id).SingleOrDefault().UserCount++;
+                }
+                catch { }
+            });
         }
 
         async void CreateGroup(object sender, EventArgs args)
