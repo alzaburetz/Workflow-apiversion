@@ -15,36 +15,67 @@
             <controls:GradientBox StartColor="{StaticResource DarkColor}"
                                   EndColor="#FF9D9D"
                                   Opacity="0.5"/>
-            <StackLayout Padding="60" Spacing="30">
+            <StackLayout Padding="60" Spacing="0">
                 <StackLayout>
                     <Image Source="logo"/>
                 </StackLayout>
-                <Frame BackgroundColor="LightBlue"
+                <StackLayout Margin="0,40"
+                             Padding="10"
+                             Spacing="20">
+                    <Frame BackgroundColor="LightBlue"
                        VerticalOptions="CenterAndExpand"
-                       HorizontalOptions="CenterAndExpand"
+                       HorizontalOptions="FillAndExpand"
                        CornerRadius="20"
                        Padding="10">
-                    <Label FontSize="Medium"
+                        <Label FontSize="Medium"
                            HorizontalOptions="FillAndExpand"
                            VerticalTextAlignment="End"
                            HorizontalTextAlignment="Center"
                            VerticalOptions="FillAndExpand">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <FormattedString.Spans>
-                                    <Span Text="{x:Static font:FontAwesomeIcons.Google}"
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="{x:Static font:FontAwesomeIcons.Google}"
                                           FontSize="Large"
                                           FontFamily="{StaticResource FontAwesomeBrands}"/>
-                                    <Span Text="  Войти с помощью Google"
+                                        <Span Text="  Войти с помощью Google"
                                           />
-                                </FormattedString.Spans>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="Button_Clicked"/>
-                    </Frame.GestureRecognizers>
-                </Frame>
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Button_Clicked"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Frame BackgroundColor="LightBlue"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="FillAndExpand"
+                       CornerRadius="20"
+                       Padding="10">
+                        <Label FontSize="Medium"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalTextAlignment="End"
+                           HorizontalTextAlignment="Start"
+                           VerticalOptions="FillAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="&#xf189;"
+                                          FontSize="Large"
+                                          FontFamily="{StaticResource FontAwesomeBrands}"/>
+                                        <Span Text="  Войти с помощью VK"
+                                          />
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Frame.GestureRecognizers>
+                            
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                </StackLayout>
                 <Entry Placeholder="Номер телефона"
                        IsVisible="False"
                    PlaceholderColor="White"
