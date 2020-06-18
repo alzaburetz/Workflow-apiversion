@@ -20,6 +20,22 @@ namespace Workflow.ViewModels
                 OnPropertyChanged("User");
             }
         }
+        public bool GoogleLogin
+        {
+            get
+            {
+                try
+                {
+                    var ggl = Application.Current.Properties["GoogleLogin"];
+                    return Convert.ToBoolean(ggl);
+                } 
+                catch 
+                {
+                    return false;
+                }
+            }
+                
+        }
         public ProfileViewModel()
         {
             Title = "Профиль";
