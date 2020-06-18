@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:controls="clr-namespace:Workflow.Controls"
+             xmlns:font="clr-namespace:FontAwesome"
              x:Name="CalEdit"
              x:Class="Workflow.Views.CalendarEdit">
     <ContentPage.Resources>
@@ -18,9 +19,8 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Grid>
-                
+        <Grid>
+
                 <BoxView Color="{DynamicResource DarkColor}"/>
                 <controls:GradientBox 
                                     StartColor="Transparent"
@@ -36,7 +36,7 @@
                        Padding="15"
                        Margin="20"
                        BackgroundColor="White"
-                       VerticalOptions="CenterAndExpand"
+                       VerticalOptions="StartAndExpand"
                        HorizontalOptions="CenterAndExpand">
                         <StackLayout>
                             <Grid
@@ -124,11 +124,36 @@
                                IsRunning="{Binding IsBusy}"
                                IsVisible="{Binding IsBusy}"/>
                 </Grid>
-            </Grid>
-            <controls:GradientButton Text="Обновить календарь"
+                <StackLayout VerticalOptions="End">
+                    <Label FontSize="Micro"
+                   VerticalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span Text="{x:Static font:FontAwesomeIcons.HandPointUp}"
+                                  FontFamily="{x:StaticResource FontAwesomeSolid}"/>
+                                    <Span Text=" Свайп дня наверх - добавление заметки"/>
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label FontSize="Micro"
+                   VerticalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span Text="{x:Static font:FontAwesomeIcons.HandPointUp}"
+                                  FontFamily="{x:StaticResource FontAwesomeSolid}"/>
+                                    <Span Text=" Нажатие на день - смена состояния дня (рабочий/нерабочий)"/>
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <controls:GradientButton Text="Обновить календарь"
                                      Command="{Binding UpdateCalendar}"
-                                     Margin="40"/>
-        </StackLayout>
-        
+                                     Margin="40,20"/>
+                </StackLayout>
+            </Grid>
+
     </ContentPage.Content>
 </ContentPage>
