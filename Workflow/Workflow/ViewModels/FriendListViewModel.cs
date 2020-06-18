@@ -58,7 +58,16 @@ namespace Workflow.ViewModels
                         foreach (var user in resp.Response)
                         {
                             user.NextWorkDay = DateTimeOffset.FromUnixTimeSeconds(user.FirstWork).DateTime;
-                            user.Workstoday = user.Schedule.Find(x => x.Month == now.Month && x.DayOfMonth == now.Day).Workday;
+                            try
+                            {
+                                user.Workstoday = user.Schedule.Find(x => x.Month == now.Month && x.DayOfMonth == now.Day).Workday;
+                            }
+                            catch 
+                            {
+                                user.CalculateCalendar();
+                                user.Workstoday = user.Schedule.Find(x => x.Month == now.Month && x.DayOfMonth == now.Day).Workday;
+                            }
+                            
                             Device.BeginInvokeOnMainThread(() => FoundUsers.Add(user));
                         }
                     IsBusy = false;
