@@ -80,6 +80,9 @@
     <PackageReference Include="Xamarin.GooglePlayServices.Base">
       <Version>71.1610.1</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.VKontakte.Android">
+      <Version>1.6.7</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FirebaseAuthentication.cs" />
