@@ -9,7 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.iOS", "Workflow\Wo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workflow", "Workflow\Workflow\Workflow.csproj", "{9915154C-F3BC-42E3-9B43-311E29A7A610}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Test", "Workflow.Test\Workflow.Test.csproj", "{5F899D1D-2BF1-4FF3-9546-4B6FA044BC60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workflow.Test", "Workflow.Test\Workflow.Test.csproj", "{5F899D1D-2BF1-4FF3-9546-4B6FA044BC60}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{486E6818-1CC3-44D6-A42A-02E4F13101AF}"
+	ProjectSection(SolutionItems) = preProject
+		appcenter-pre-build.sh = appcenter-pre-build.sh
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
