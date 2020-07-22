@@ -1,7 +1,7 @@
 ﻿#!/usr/bin/env bash
 
 APP_DISPLAY_NAME="test"
-ANDROID_MAINACTIVITY_FILE=${APPCENTER_SOURCE_DIRECTORY}/Workflow.Droid/MainActivity.cs
+ANDROID_MAINACTIVITY_FILE=${APPCENTER_SOURCE_DIRECTORY}/Workflow/Workflow.Droid/MainActivity.cs
 
 echo "##[section][Pre-Build Action] Variable from env TEST = ${TEST}"
 
