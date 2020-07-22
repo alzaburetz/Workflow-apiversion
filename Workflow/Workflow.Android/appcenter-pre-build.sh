@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-ACTIVITY=${APPCENTER_SOURCE_DIRECTORY}/Workflow/Workflow.Droid/MainActivity.cs
+ACTIVITY=${APPCENTER_SOURCE_DIRECTORY}/Workflow/Workflow.Android/MainActivity.cs
 # ACTIVITY=MainActivity.cs
-MANIFEST=${APPCENTER_SOURCE_DIRECTORY}/Workflow/Workflow.Droid/Properties/AndroidManifest.xml
+MANIFEST=${APPCENTER_SOURCE_DIRECTORY}/Workflow/Workflow.Android/Properties/AndroidManifest.xml
 LABEL_VAR=${LABEL}
 PACKAGE=${PACKAGE_NAME}
 # MANIFEST=Properties/AndroidManifest.xml
