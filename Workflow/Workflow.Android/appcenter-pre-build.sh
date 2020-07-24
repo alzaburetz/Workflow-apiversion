@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-ACTIVITY=${APPCENTER_SOURCE_DIRECTORY}/Workflow/Workflow.Android/MainActivity.cs
-# ACTIVITY=MainActivity.cs
-MANIFEST=${APPCENTER_SOURCE_DIRECTORY}/Workflow/Workflow.Android/Properties/AndroidManifest.xml
+# ACTIVITY=${APPCENTER_SOURCE_DIRECTORY}/Workflow/Workflow.Android/MainActivity.cs
+ACTIVITY=MainActivity.cs
+# MANIFEST=${APPCENTER_SOURCE_DIRECTORY}/Workflow/Workflow.Android/Properties/AndroidManifest.xml
 LABEL_VAR=${LABEL}
 PACKAGE=${PACKAGE_NAME}
-# MANIFEST=Properties/AndroidManifest.xml
+MANIFEST=Properties/AndroidManifest.xml
 ICON=Resources/drawable
 
-sed -i.bak "s/Label = \"[а-яА-Я]*\"s/Label = \"${LABEL_VAR}\"/"  $ACTIVITY
+sed -i.bak "s/Label = \"[А-Яа-я]*\"/Label = \"${LABEL_VAR}\"/"  $ACTIVITY
 rm -f ${ACTIVITY}.bak
 echo ${LABEL_VAR}
 cat ${ACTIVITY}
