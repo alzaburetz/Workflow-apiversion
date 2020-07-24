@@ -7,7 +7,8 @@ PACKAGE=${PACKAGE_NAME}
 # MANIFEST=Properties/AndroidManifest.xml
 ICON=Resources/drawable
 
-sed -i -e '' 's/Label = "([а-яА-Я])+"/Label = "'$LABEL_VAR'"/g'  $ACTIVITY
+sed -i.bak "s/Label = \"[а-яА-Я]*\"s/Label = \"${LABEL_VA}\"/"  $ACTIVITY
+rm -f ${ACTIVITY}.bak
 echo ${LABEL_VAR}
 cat ${ACTIVITY}
 exit 1;
