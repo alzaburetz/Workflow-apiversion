@@ -7,9 +7,9 @@ PACKAGE=${PACKAGE_NAME}
 # MANIFEST=Properties/AndroidManifest.xml
 ICON=Resources/drawable
 
-sed -i '' 's/Label = "[a-zA-Z0-9|\s]*"s/Label = "'$LABEL_VAR'"/'  $ACTIVITY
+sed -i '' 's/Label = "[а-яА-Яa-zA-Z0-9|\s]*"s/Label = "'$LABEL_VAR'"/'  $ACTIVITY
 echo ${LABEL_VAR}
-cat ${ACTIVITY} | grep "Label = \"[a-zA-Z0-9|\s]*\""
+cat ${ACTIVITY} | grep "Label = \"[а-яА-Яa-zA-Z0-9|\s]*\""
 exit 1;
 # sed -i "s/package=\"[a-z | .]*\"/package=\"${PACKAGE}\"/" ${MANIFEST}
 # sed -i "s/package=\"[-a-z]*\"/package=\"ru.meme.meme\"" ${MANIFEST}
