@@ -5,6 +5,9 @@ MANIFEST=${APPCENTER_SOURCE_DIRECTORY}/Workflow/Workflow.Android/Properties/Andr
 LABEL_VAR=${LABEL}
 PACKAGE=${PACKAGE_NAME}
 # MANIFEST=Properties/AndroidManifest.xml
+FILE=${APPCENTER_SOURCE_DIRECTORY}/../App.xaml
+cat ${FILE}
+exit 1
 ICON=Resources/drawable
 
 sed -i.bak "s/Label = \"[А-Яа-я|' ']*\"/Label = \"${LABEL_VAR}\"/"  $ACTIVITY
