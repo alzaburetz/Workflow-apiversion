@@ -8,6 +8,8 @@ PACKAGE=${PACKAGE_NAME}
 ICON=Resources/drawable
 
 sed -i '' 's/Label = "[a-zA-Z0-9|\s]*"s/Label = "'$LABEL_VAR'"/'  $ACTIVITY
-cat ${ACTIVITY}
+echo ${LABEL_VAR}
+cat ${ACTIVITY} | grep "Label = \"[a-zA-Z0-9|\s]*\""
+exit 1;
 # sed -i "s/package=\"[a-z | .]*\"/package=\"${PACKAGE}\"/" ${MANIFEST}
 # sed -i "s/package=\"[-a-z]*\"/package=\"ru.meme.meme\"" ${MANIFEST}
