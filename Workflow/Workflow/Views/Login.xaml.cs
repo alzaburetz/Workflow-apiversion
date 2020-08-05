@@ -59,9 +59,14 @@ namespace Workflow.Views
             viewModel.Login.Execute(user);
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
+        private async void GoogleLogin(object sender, EventArgs e)
         {
             await DependencyService.Get<IFirebaseAuth>().Authenticate();
+        }
+
+        private async void VkLogin(object sender, EventArgs e)
+        {
+            DependencyService.Get<IVkAuth>().Login();
         }
     }
 }

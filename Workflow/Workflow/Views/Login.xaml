@@ -7,6 +7,7 @@
              xmlns:behaviors="clr-namespace:Workflow.Behaviors"
              xmlns:controls="clr-namespace:Workflow.Controls"
              xmlns:font="clr-namespace:FontAwesome"
+             NavigationPage.HasNavigationBar="False"
              x:Class="Workflow.Views.Login">
     <ContentPage.Content>
         <Grid>
@@ -45,7 +46,7 @@
                             </Label.FormattedText>
                         </Label>
                         <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="Button_Clicked"/>
+                            <TapGestureRecognizer Tapped="GoogleLogin"/>
                         </Frame.GestureRecognizers>
                     </Frame>
                     <Frame BackgroundColor="LightBlue"
@@ -71,7 +72,7 @@
                             </Label.FormattedText>
                         </Label>
                         <Frame.GestureRecognizers>
-                            
+                            <TapGestureRecognizer Tapped="VkLogin"/>
                         </Frame.GestureRecognizers>
                     </Frame>
 
@@ -103,7 +104,7 @@
                 </Label>
                 <Button Text="Gooogelle"
                         IsVisible="False"
-                        Clicked="Button_Clicked"/>
+                        Clicked="GoogleLogin"/>
                 <controls:GradientButton Text="ВОЙТИ"
                                          IsVisible="False"
                                          Clicked="ExecuteLogin"/>
