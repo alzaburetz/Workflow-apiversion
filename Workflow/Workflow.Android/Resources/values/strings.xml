@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <integer name="com_vk_sdk_AppId">7559603</integer>
+  <string name="vk_data_theme">vk7559603</string>
+</resources>

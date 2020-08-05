@@ -20,6 +20,7 @@ using Android.Content;
 using Android.Gms.Tasks;
 using Xamarin.Forms;
 using Workflow.Models;
+using VKontakte;
 
 
 
@@ -37,7 +38,7 @@ namespace Workflow.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-
+            VKSdk.CustomInitialize(this, 7559603, "5.52");
             base.OnCreate(savedInstanceState);
             global::Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
 
@@ -59,6 +60,8 @@ namespace Workflow.Droid
 
             googleApiClient.Connect();
             FireAuth = GetFirebaseAuth();
+            
+            
         }
         public void SignInClick()
         {
@@ -79,6 +82,12 @@ namespace Workflow.Droid
                     LoginWithFirebaseAccount(account);
                 }
             }
+            bool res = false;
+
+            var vk = VKSdk.OnActivityResult(requestCode, resultCode, data, token => 
+            {
+                
+            });
         }
 
         void LoginWithFirebaseAccount(GoogleSignInAccount acc)

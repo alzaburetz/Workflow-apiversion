@@ -19,6 +19,14 @@
         <category android:name="${applicationId}" />
       </intent-filter>
     </receiver>
+    <activity android:name="ru.alzaburetz.workflow.MainActivity" android:exported="true">
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="vk7559603" />
+      </intent-filter>
+    </activity>
 	</application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.CAMERA" />
